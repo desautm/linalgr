@@ -6,8 +6,9 @@ mat <- function(A,
 
   if (!is.matrix(A)) stop("A n'est pas une matrice.")
 
-  if (missing(style)) style = "frac"
-  else style <- match.arg(style, c("inline", "frac", "sfrac", "decimal"))
+  if (missing(style)  &&  missing(digits)) style = "frac"
+  else if (missing(style)  &&  !missing(digits)) style = "decimal"
+  else style = match.arg(style, c("inline", "frac", "sfrac", "decimal"))
 
   if (missing(bracket)) bracket = "crochet"
   else bracket <- match.arg(bracket, c("parenthese", "crochet", "determinant"))
@@ -15,6 +16,10 @@ mat <- function(A,
   if (bracket == "parenthese") cat('\\left(\n')
   else if (bracket == "crochet") cat('\\left[\n')
   else if (bracket == "determinant") cat('\\left|\n')
+
+  if (!is.null(attr(A, "style"))) style = attr(A, "style")
+  if (!is.null(attr(A, "bracket"))) bracket = attr(A, "bracket")
+  if (!is.null(attr(A, "digits"))) digits = attr(A, "digits")
 
   if (!missing(B)){
     cat(paste(c("\\begin{array}{",rep("r",nrow(A)),"|",rep("r",nrow(B)),"}\n"), collapse = ""))

@@ -1,9 +1,31 @@
+#' Affichage LaTeX d'une fraction
+#'
+#' \code{frac} affiche le code LaTeX sous forme de fraction de tous les nombres
+#' présents dans \code{x}
+#'
+#' Cette fonction est surtout utile pour les autres fonctions de la librairie. Elle est appelée lorsque nous faisons
+#' l'affichage de matrices à l'aide la fonction \code{mat}.
+#'
+#' @param x Une liste de nombre décimaux
+#' @param style Un choix entre quatre façons de représenter la fraction
+#'              \code{"inline"}; permet d'écrire la fraction sous la forme a/b
+#'              \code{"frac"}; permet d'écrire la fraction sous la forme \frac{a}{b}
+#'              \code{"sfrac"}; permet d'écrire la fraction sous la forme \sfrac{a}{b}
+#'              \code{"decimal"}; permet d'écrire la fraction sous la forme décimale 0.34...
+#' @return out Une liste contenant la représentation sous forme de fraction LaTeX de \code{x}
+#' @examples
+#' frac(4)
+#' frac(3/7)
+#' frac(3/7, style = "sfrac")
+#' frac(-3/7, style = "inline")
+#' frac(3/7, digits = 2)
 frac <- function(x,
                  style = c("inline", "frac", "sfrac", "decimal"),
                  digits = 2,
                  tol = sqrt(.Machine$double.eps)){
 
-  if (missing(style)) style = "frac"
+  if (missing(style)  &&  missing(digits)) style = "frac"
+  else if (missing(style)  &&  !missing(digits)) style = "decimal"
   else style = match.arg(style, c("inline", "frac", "sfrac", "decimal"))
 
   if (!missing(digits)) options(digits = digits)
