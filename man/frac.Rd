@@ -8,24 +8,26 @@ frac(x, style = c("inline", "frac", "sfrac", "decimal"), digits = 2,
   tol = sqrt(.Machine$double.eps))
 }
 \arguments{
-\item{x}{Une liste de nombre décimaux}
+\item{x}{Une liste de nombre decimaux}
 
-\item{style}{Un choix entre quatre façons de représenter la fraction
-\code{"inline"}; permet d'écrire la fraction sous la forme a/b
-\code{"frac"}; permet d'écrire la fraction sous la forme \frac{a}{b}
-\code{"sfrac"}; permet d'écrire la fraction sous la forme \sfrac{a}{b}
-\code{"decimal"}; permet d'écrire la fraction sous la forme décimale 0.34...}
+\item{style}{Un choix entre quatre facons de representer la fraction
+\code{"inline"}; permet d'ecrire la fraction sous la forme a/b
+\code{"frac"}; permet d'ecrire la fraction sous la forme \frac\{a\}\{b\}
+\code{"sfrac"}; permet d'ecrire la fraction sous la forme \sfrac\{a\}\{b\}
+\code{"decimal"}; permet d'ecrire la fraction sous la forme decimale 0.34...}
+
+\item{digits}{Permet de choisir le nombre de chiffres significatifs a afficher.}
 }
 \value{
-out Une liste contenant la représentation sous forme de fraction LaTeX de \code{x}
+out Une liste contenant la representation sous forme de fraction LaTeX de \code{x}
 }
 \description{
 \code{frac} affiche le code LaTeX sous forme de fraction de tous les nombres
-présents dans \code{x}
+presents dans \code{x}
 }
 \details{
-Cette fonction est surtout utile pour les autres fonctions de la librairie. Elle est appelée lorsque nous faisons
-l'affichage de matrices à l'aide la fonction \code{mat}.
+Cette fonction est surtout utile pour les autres fonctions de la librairie. Elle est appelee lorsque nous faisons
+l'affichage de matrices a l'aide la fonction \code{mat}.
 }
 \examples{
 frac(4)

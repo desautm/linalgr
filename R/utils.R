@@ -1,18 +1,20 @@
 #' Affichage LaTeX d'une fraction
 #'
 #' \code{frac} affiche le code LaTeX sous forme de fraction de tous les nombres
-#' présents dans \code{x}
+#' presents dans \code{x}
 #'
-#' Cette fonction est surtout utile pour les autres fonctions de la librairie. Elle est appelée lorsque nous faisons
-#' l'affichage de matrices à l'aide la fonction \code{mat}.
+#' Cette fonction est surtout utile pour les autres fonctions de la librairie. Elle est appelee lorsque nous faisons
+#' l'affichage de matrices a l'aide la fonction \code{mat}.
 #'
-#' @param x Une liste de nombre décimaux
-#' @param style Un choix entre quatre façons de représenter la fraction
-#'              \code{"inline"}; permet d'écrire la fraction sous la forme a/b
-#'              \code{"frac"}; permet d'écrire la fraction sous la forme \frac{a}{b}
-#'              \code{"sfrac"}; permet d'écrire la fraction sous la forme \sfrac{a}{b}
-#'              \code{"decimal"}; permet d'écrire la fraction sous la forme décimale 0.34...
-#' @return out Une liste contenant la représentation sous forme de fraction LaTeX de \code{x}
+#' @param x Une liste de nombre decimaux
+#' @param style Un choix entre quatre facons de representer la fraction
+#'              \code{"inline"}; permet d'ecrire la fraction sous la forme a/b
+#'              \code{"frac"}; permet d'ecrire la fraction sous la forme \frac\{a\}\{b\}
+#'              \code{"sfrac"}; permet d'ecrire la fraction sous la forme \sfrac\{a\}\{b\}
+#'              \code{"decimal"}; permet d'ecrire la fraction sous la forme decimale 0.34...
+#' @param digits Permet de choisir le nombre de chiffres significatifs a afficher.
+#' @return out Une liste contenant la representation sous forme de fraction LaTeX de \code{x}
+#' @export
 #' @examples
 #' frac(4)
 #' frac(3/7)
@@ -30,25 +32,25 @@ frac <- function(x,
 
   if (!missing(digits)) options(digits = digits)
 
-  # Numérateur et dénominateur du nombre décimal x
+  # Numerateur et denominateur du nombre decimal x
   n <- fractional::numerators(x)
   d <- fractional::denominators(x)
 
   out <- x
 
   for (i in (1:length(n))){
-    # Dénominateur est égal à 1
+    # Denominateur est egal a 1
     if (abs(d[i] - 1) <= tol){
       out[i] <- n[i]
     }
     else{
-      # Numérateur est égal à 0
+      # Numerateur est egal a 0
       if (abs(n[i]) <= tol){
         out[i] <- 0
       }
-      # Numérateur est différent de 0
+      # Numerateur est different de 0
       else{
-        # Numérateur est positif
+        # Numerateur est positif
         if (n[i] > 0){
           if (style == "inline"){
             out[i] <- paste(c(n[i],"/",d[i]), collapse = "")
@@ -60,7 +62,7 @@ frac <- function(x,
             out[i] <- paste(c("\\sfrac{",n[i],"}{",d[i],"}"), collapse = "")
           }
         }
-        # Numérateur est négatif
+        # Numerateur est negatif
         else{
           if (style == "inline"){
             out[i] <- paste(c(n[i],"/",d[i]), collapse = "")

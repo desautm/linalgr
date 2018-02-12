@@ -1,31 +1,31 @@
 rref <- function(A,
                  echelon = FALSE,
                  tol = sqrt(.Machine$double.eps)){
-  if (!is.matrix(A)) stop("A doit être une matrice.")
+  if (!is.matrix(A)) stop("A doit etre une matrice.")
   row <- nrow(A)
   col <- ncol(A)
 
   i <- j <- 1
   while ((i <= row) && (j <= col)){
-    # Trouver la valeur et l'indice du plus grand élément dans le reste de la colonne j
+    # Trouver la valeur et l'indice du plus grand element dans le reste de la colonne j
     p <- max(abs(A[(i:row), j]))
     k <- which.max(abs(A[(i:row), j]))
     k <- k + i -1
     if (p <= tol){
-      # La colonne est négligable, on la transforme en zéro
+      # La colonne est negligable, on la transforme en zero
       A[(i:row), j] <- 0
       j <- j + 1
     }
     else{
-      # On échange les lignes i et k
+      # On echange les lignes i et k
       A[c(i, k), (j:col)] <- A[c(k, i), (j:col)]
       # On divise la ligne du pivot par le pivot
       A[i, (j:col)] <- A[i, (j:col)]/A[i, j]
       # On soustrait des multiples de la ligne pivot des autres lignes
       # La variable sequence est une liste que nous devons traverser pour
       # parcourir toutes les lignes de la matrice
-      # Nous devons séparer le problème de cette façon car R produit des listes
-      # décroissantes par défaut.
+      # Nous devons separer le probleme de cette façon car R produit des listes
+      # decroissantes par defaut.
       # Par exemple, 5:2 produit 5, 4, 3, 2 et j'ai besoin qu'elle produise NULL
       if (echelon){
         if (i == 1) sequence <- 2:row
@@ -58,12 +58,12 @@ inverse <- function(A,
   row <- nrow(A)
   col <- ncol(A)
 
-  if (row != col) stop("La matrice A doit être carrée.")
+  if (row != col) stop("La matrice A doit etre carree.")
 
   inv <- rref(cbind(A,diag(row)))
 
   if (any(apply(abs(inv[,1:col]) <= sqrt(.Machine$double.eps), 1, all)))
-    stop ("A est singulière")
+    stop ("A est singuliere")
 
   return(inv[,(col+1):(2*col)])
 }
