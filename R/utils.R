@@ -9,8 +9,8 @@
 #' @param x Une liste de nombre decimaux
 #' @param style Un choix entre quatre facons de representer la fraction
 #'              \code{"inline"}; permet d'ecrire la fraction sous la forme a/b
-#'              \code{"frac"}; permet d'ecrire la fraction sous la forme \frac\{a\}\{b\}
-#'              \code{"sfrac"}; permet d'ecrire la fraction sous la forme \sfrac\{a\}\{b\}
+#'              \code{"frac"}; permet d'ecrire la fraction sous la forme frac\{a\}\{b\}
+#'              \code{"sfrac"}; permet d'ecrire la fraction sous la forme sfrac\{a\}\{b\}
 #'              \code{"decimal"}; permet d'ecrire la fraction sous la forme decimale 0.34...
 #' @param digits Permet de choisir le nombre de chiffres significatifs a afficher.
 #' @return out Une liste contenant la representation sous forme de fraction LaTeX de \code{x}

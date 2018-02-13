@@ -8,8 +8,8 @@
 #' @param A une matrice
 #' @param B une matrice
 #' @param style; Permet de choisir le style d'affichage des fractions. \code{"inline"}; permet d'ecrire la fraction sous la forme a/b.
-#'   \code{"frac"}; permet d'ecrire la fraction sous la forme \frac\{a\}\{b\}. \code{"sfrac"}; permet d'ecrire la fraction sous la
-#'   forme \sfrac\{a\}\{b\}. \code{"decimal"}; permet d'ecrire la fraction sous la forme decimale 0.34...
+#'   \code{"frac"}; permet d'ecrire la fraction sous la forme frac\{a\}\{b\}. \code{"sfrac"}; permet d'ecrire la fraction sous la
+#'   forme sfrac\{a\}\{b\}. \code{"decimal"}; permet d'ecrire la fraction sous la forme decimale 0.34...
 #' @param bracket; Permet de choisir la facon d'encadrer les matrices. \code{parenthese}; encadre la matrice de parentheses.
 #'   \code{crochet}; encadre la matrice de crochets. \code{determinant}; encadre la matrice de valeurs absolues
 #' @param digits Permet de choisir le nombre de chiffres significatifs a afficher.

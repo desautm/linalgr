@@ -4,7 +4,7 @@
 \alias{mat}
 \title{Affichage LaTeX d'une matrice}
 \usage{
-mat(A, B, style = c("inline", "frac", "sfrac", "decimal"),
+mat(A, B = NULL, style = c("inline", "frac", "sfrac", "decimal"),
   bracket = c("parenthese", "crochet", "determinant"), digits = 2)
 }
 \arguments{
@@ -15,8 +15,8 @@ mat(A, B, style = c("inline", "frac", "sfrac", "decimal"),
 \item{digits}{Permet de choisir le nombre de chiffres significatifs a afficher.}
 
 \item{style;}{Permet de choisir le style d'affichage des fractions. \code{"inline"}; permet d'ecrire la fraction sous la forme a/b.
-\code{"frac"}; permet d'ecrire la fraction sous la forme \frac\{a\}\{b\}. \code{"sfrac"}; permet d'ecrire la fraction sous la
-forme \sfrac\{a\}\{b\}. \code{"decimal"}; permet d'ecrire la fraction sous la forme decimale 0.34...}
+\code{"frac"}; permet d'ecrire la fraction sous la forme frac\{a\}\{b\}. \code{"sfrac"}; permet d'ecrire la fraction sous la
+forme sfrac\{a\}\{b\}. \code{"decimal"}; permet d'ecrire la fraction sous la forme decimale 0.34...}
 
 \item{bracket;}{Permet de choisir la facon d'encadrer les matrices. \code{parenthese}; encadre la matrice de parentheses.
 \code{crochet}; encadre la matrice de crochets. \code{determinant}; encadre la matrice de valeurs absolues}

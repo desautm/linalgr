@@ -1,3 +1,4 @@
+#' @export
 rref <- function(A,
                  echelon = FALSE,
                  tol = sqrt(.Machine$double.eps)){
@@ -47,11 +48,13 @@ rref <- function(A,
   return(A)
 }
 
+#' @export
 echelon <- function(A,
                     tol = sqrt(.Machine$double.eps)){
   return(rref(A, echelon = TRUE))
 }
 
+#' @export
 inverse <- function(A,
                     tol = sqrt(.Machine$double.eps)){
 

@@ -12,8 +12,8 @@ frac(x, style = c("inline", "frac", "sfrac", "decimal"), digits = 2,
 
 \item{style}{Un choix entre quatre facons de representer la fraction
 \code{"inline"}; permet d'ecrire la fraction sous la forme a/b
-\code{"frac"}; permet d'ecrire la fraction sous la forme \frac\{a\}\{b\}
-\code{"sfrac"}; permet d'ecrire la fraction sous la forme \sfrac\{a\}\{b\}
+\code{"frac"}; permet d'ecrire la fraction sous la forme frac\{a\}\{b\}
+\code{"sfrac"}; permet d'ecrire la fraction sous la forme sfrac\{a\}\{b\}
 \code{"decimal"}; permet d'ecrire la fraction sous la forme decimale 0.34...}
 
 \item{digits}{Permet de choisir le nombre de chiffres significatifs a afficher.}
