@@ -1,0 +1,63 @@
+---
+title: "Linear Algebra"
+author: "Marc-AndrÃ© DÃ©sautels"
+date: "15 fÃ©vrier 2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Utilisation de `R` pour produire du code LaTeX en algèbre linéaire
+
+## Initialisation de la librairie
+
+Nous devons installer la librairie. Si vous n'avez pas la librairie `devtools`, vous devez l'installer.
+
+```{r, eval=FALSE}
+install.packages("devtools")
+```
+
+Vous installer ensuite la librairie à l'aide de la commande suivante:
+```{r, eval=FALSE}
+devtools::install_github("desautm/linalgr")
+```
+
+Vous pouvez charger la librairie:
+```{r}
+library(linalgr)
+```
+
+## Affichage de matrices
+
+Nous allons définir quelques matrice:
+```{r}
+m <- 5
+n <- 5
+A <- matrix(sample(-10:10, m*n, replace = TRUE), m, n)
+B <- matrix(sample(-10:10, m, replace = TRUE), m, 1)
+```
+
+Voici l'affichage directement avec `R`:
+```{r}
+A
+B
+```
+
+Voici l'affichage en utilisant la librairie:
+```{r}
+cat(mat(A))
+cat(mat(B))
+```
+
+Nous pouvons forcer l'affichage en $\LaTeX$ de la façon suivante:
+```{r results='asis', echo=FALSE}
+cat("$$")
+cat(mat(A))
+cat("$$")
+```
+
+

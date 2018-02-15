@@ -2,6 +2,7 @@
 rref <- function(A,
                  echelon = FALSE,
                  tol = sqrt(.Machine$double.eps)){
+
   if (!is.matrix(A)) stop("A doit etre une matrice.")
   row <- nrow(A)
   col <- ncol(A)

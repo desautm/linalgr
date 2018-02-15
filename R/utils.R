@@ -30,8 +30,6 @@ frac <- function(x,
   else if (missing(style)  &&  !missing(digits)) style = "decimal"
   else style = match.arg(style, c("inline", "frac", "sfrac", "decimal"))
 
-  if (!missing(digits)) options(digits = digits)
-
   # Numerateur et denominateur du nombre decimal x
   n <- fractional::numerators(x)
   d <- fractional::denominators(x)
@@ -41,12 +39,14 @@ frac <- function(x,
   for (i in (1:length(n))){
     # Denominateur est egal a 1
     if (abs(d[i] - 1) <= tol){
-      out[i] <- n[i]
+      if (style != "decimal") out[i] <- n[i]
+      else out[i] <- specify_decimal(x[i], digits)
     }
     else{
       # Numerateur est egal a 0
       if (abs(n[i]) <= tol){
-        out[i] <- 0
+        if (style != "decimal") out[i] <- 0
+        else out[i] <- specify_decimal(x[i], digits)
       }
       # Numerateur est different de 0
       else{
@@ -61,6 +61,9 @@ frac <- function(x,
           else if (style == "sfrac"){
             out[i] <- paste(c("\\sfrac{",n[i],"}{",d[i],"}"), collapse = "")
           }
+          else if (style == "decimal"){
+            out[i] <- format(specify_decimal(x[i], digits), nsmall = digits)
+          }
         }
         # Numerateur est negatif
         else{
@@ -73,11 +76,23 @@ frac <- function(x,
           else if (style == "sfrac"){
             out[i] <- paste(c("-\\sfrac{",abs(n[i]),"}{",d[i],"}"), collapse = "")
           }
+          else if (style == "decimal"){
+            out[i] <- format(specify_decimal(x[i], digits), nsmall = digits)
+          }
         }
       }
     }
   }
-
   return(out)
 
+}
+
+specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k))
+
+#' @export
+to_latex <- function(str){
+  cat("$$\n")
+  cat(str)
+  cat("$$")
+  return(NULL)
 }

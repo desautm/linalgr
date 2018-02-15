@@ -32,9 +32,11 @@ mat <- function(A,
   if (missing(bracket)) bracket = "crochet"
   else bracket <- match.arg(bracket, c("parenthese", "crochet", "determinant"))
 
-  if (bracket == "parenthese") cat('\\left(\n')
-  else if (bracket == "crochet") cat('\\left[\n')
-  else if (bracket == "determinant") cat('\\left|\n')
+  out <- ""
+
+  if (bracket == "parenthese") out <- paste(c(out, "\\left(\n"), collapse = "") #cat('\\left(\n')
+  else if (bracket == "crochet") out <- paste(c(out, "\\left[\n"), collapse = "") #cat('\\left[\n')
+  else if (bracket == "determinant") out <- paste(c(out, "\\left|\n"), collapse = "") #cat('\\left|\n')
 
   if (!is.null(attr(A, "style"))) style = attr(A, "style")
   if (!is.null(attr(A, "bracket"))) bracket = attr(A, "bracket")
@@ -42,22 +44,29 @@ mat <- function(A,
 
   if (!missing(B) & !is.matrix(B)) stop("B n'est pas une matrice.")
   if (!missing(B)){
-    cat(paste(c("\\begin{array}{",rep("r",nrow(A)),"|",rep("r",nrow(B)),"}\n"), collapse = ""))
+    out  <- paste(c(out, "\\begin{array}{",rep("r",nrow(A)),"|",rep("r",nrow(B)),"}\n"), collapse = "")
+    #cat(paste(c("\\begin{array}{",rep("r",nrow(A)),"|",rep("r",nrow(B)),"}\n"), collapse = ""))
     A <- cbind(A, B)
   }
   else{
-    cat(paste(c("\\begin{array}{",rep("r",nrow(A)),"}\n"), collapse = ""))
+    out <- paste(c(out, "\\begin{array}{",rep("r",nrow(A)),"}\n"), collapse = "")
+    #cat(paste(c("\\begin{array}{",rep("r",nrow(A)),"}\n"), collapse = ""))
   }
 
   for (i in (1:nrow(A))){
-    cat(frac(A[i, ], style = style, digits = digits), sep = " & ")
-    cat(" \\\\ \n")
+    out_temp <- paste(frac(A[i, ], style = style, digits = digits), collapse = " & ")
+    out <- paste(c(out,out_temp), collapse = "")
+    out <- paste(c(out, " \\\\ \n"))
+    #cat(frac(A[i, ], style = style, digits = digits), sep = " & ")
+    #cat(" \\\\ \n")
   }
 
-  cat("\\end{array}\n")
+  out <- paste(c(out, "\\end{array}\n"))
+  #cat("\\end{array}\n")
 
-  if (bracket == "parenthese") cat('\\right)\n')
-  else if (bracket == "crochet") cat('\\right]\n')
-  else if (bracket == "determinant") cat('\\right|\n')
+  if (bracket == "parenthese") out <- paste(c(out, "\\right)\n"), collapse = "") #cat('\\left(\n')
+  else if (bracket == "crochet") out <- paste(c(out, "\\right]\n"), collapse = "") #cat('\\left[\n')
+  else if (bracket == "determinant") out <- paste(c(out, "\\right|\n"), collapse = "") #cat('\\left|\n')
 
+  return(out)
 }

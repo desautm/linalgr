@@ -34,73 +34,69 @@ print_sel <- function(A,
   }
 
   if (sel){
-    if (concise){
-      cat(paste(c("\\begin{array}{",rep("c",2*strip_zeros(A)+2),"}\n"), collapse = ""))
-    }
-    else{
-      cat(paste(c("\\begin{array}{",rep("c",2*ncol(A)+2),"}\n"), collapse = ""))
-      for (i in (1:nrow(A))){
-        id <- which.max(abs(A[i,])>0)
-        for (j in (1:ncol(A))){
-          if (id == j){
-            if (A[i, j] == 0) {
-              cat(" & ")
-            }
-            else if (A[i, j] == 1){
-              if (variables == "x" || variables == "a") cat(c(" & ",sequence[j]," "))
-              else cat(" & x_{",j,"} ", sep ="")
-            }
-            else if (A[i, j] == -1){
-              if (variables == "x" || variables == "a") cat(c(" & -",sequence[j]," "))
-              else cat(" & -x_{",j,"} ", sep = "")
-            }
-            else{
-              if (variables == "x" || variables == "a") cat(c(" & ",frac(A[i, j]),sequence[j]," "), sep = "")
-              else {
-                cat(" & ")
-                cat(frac(A[i, j], style = style, digits = digits))
-                cat(c("x_{",j,"}"), sep = "")
-              }
-            }
+    if (concise) cat(paste(c("\\begin{array}{",rep("c",2*strip_zeros(A)+2),"}\n"), collapse = ""))
+    else cat(paste(c("\\begin{array}{",rep("c",2*ncol(A)+2),"}\n"), collapse = ""))
+    for (i in (1:nrow(A))){
+      id <- which.max(abs(A[i,])>0)
+      for (j in (1:ncol(A))){
+        if (id == j){
+          if (A[i, j] == 0) {
+            cat(" & ")
+          }
+          else if (A[i, j] == 1){
+            if (variables == "x" || variables == "a") cat(c(" & ",sequence[j]," "))
+            else cat(" & x_{",j,"} ", sep ="")
+          }
+          else if (A[i, j] == -1){
+            if (variables == "x" || variables == "a") cat(c(" & -",sequence[j]," "))
+            else cat(" & -x_{",j,"} ", sep = "")
           }
           else{
-            if (A[i, j] < 0){
-              if (A[i, j] != -1){
-                if (variables == "x" || variables == "a") cat(c(" & - & ",frac(abs(A[i, j])),sequence[j]," "), sep = "")
-                else{
-                  cat(" & - & ")
-                  cat(frac(abs(A[i, j]), style = style, digits = digits))
-                  cat(c("x_{",j,"}"), sep = "")
-                }
-              }
-              else{
-                if (variables == "x" || variables == "a") cat(c(" & - & ",sequence[j]," "), sep = "")
-                else cat(c(" & - & x_{",j,"} "), sep = "")
-              }
-            }
-            else if (A[i, j] > 0){
-              if (A[i, j] != 1){
-                if (variables == "x" || variables == "a") cat(c(" & + & ",frac(abs(A[i, j])),sequence[j]," "), sep = "")
-                else{
-                  cat(" & + & ")
-                  cat(frac(abs(A[i, j]), style = style, digits = digits))
-                  cat(c("x_{",j,"}"), sep = "")
-                }
-              }
-              else{
-                if (variables == "x" || variables == "a") cat(c(" & + & ",sequence[j]," "), sep = "")
-                else cat(c(" & + & x_{",j,"} "), sep = "")
-              }
-            }
-            else{
-              cat("& &")
+            if (variables == "x" || variables == "a") cat(c(" & ",frac(A[i, j]),sequence[j]," "), sep = "")
+            else {
+              cat(" & ")
+              cat(frac(A[i, j], style = style, digits = digits))
+              cat(c("x_{",j,"}"), sep = "")
             }
           }
         }
-        cat("& = &")
-        cat(B[i,1])
-        cat("\\\\\n")
+        else{
+          if (A[i, j] < 0){
+            if (A[i, j] != -1){
+              if (variables == "x" || variables == "a") cat(c(" & - & ",frac(abs(A[i, j])),sequence[j]," "), sep = "")
+              else{
+                cat(" & - & ")
+                cat(frac(abs(A[i, j]), style = style, digits = digits))
+                cat(c("x_{",j,"}"), sep = "")
+              }
+            }
+            else{
+              if (variables == "x" || variables == "a") cat(c(" & - & ",sequence[j]," "), sep = "")
+              else cat(c(" & - & x_{",j,"} "), sep = "")
+            }
+          }
+          else if (A[i, j] > 0){
+            if (A[i, j] != 1){
+              if (variables == "x" || variables == "a") cat(c(" & + & ",frac(abs(A[i, j])),sequence[j]," "), sep = "")
+              else{
+                cat(" & + & ")
+                cat(frac(abs(A[i, j]), style = style, digits = digits))
+                cat(c("x_{",j,"}"), sep = "")
+              }
+            }
+            else{
+              if (variables == "x" || variables == "a") cat(c(" & + & ",sequence[j]," "), sep = "")
+              else cat(c(" & + & x_{",j,"} "), sep = "")
+            }
+          }
+          else{
+            if (!concise) cat("& &")
+          }
+        }
       }
+      cat("& = &")
+      cat(B[i,1])
+      cat("\\\\\n")
     }
     cat("\\end{array}\n")
   }
