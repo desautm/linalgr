@@ -1,10 +1,12 @@
 ---
 title: "Linear Algebra"
-author: "Marc-AndrÃ© DÃ©sautels"
-date: "15 fÃ©vrier 2018"
+author: "Marc-André Désautels"
+date: "15 février 2018"
 output:
+  pdf_document: 
+    keep_tex: yes
+    latex_engine: xelatex
   html_document: default
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -29,6 +31,7 @@ devtools::install_github("desautm/linalgr")
 Vous pouvez charger la librairie:
 ```{r}
 library(linalgr)
+library(printr)
 ```
 
 ## Affichage de matrices
@@ -53,11 +56,7 @@ cat(mat(A))
 cat(mat(B))
 ```
 
-Nous pouvons forcer l'affichage en $\LaTeX$ de la façon suivante:
-```{r results='asis', echo=FALSE}
-cat("$$")
-cat(mat(A))
-cat("$$")
-```
+Nous pouvons forcer l'affichage de la façon suivante:
+
 
 

@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Marc-AndrÃ© DÃ©sautels" />
+<meta name="author" content="Marc-André Désautels" />
 
 
 <title>Linear Algebra</title>
@@ -119,8 +119,8 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Linear Algebra</h1>
-<h4 class="author"><em>Marc-AndrÃ© DÃ©sautels</em></h4>
-<h4 class="date"><em>15 fÃ©vrier 2018</em></h4>
+<h4 class="author"><em>Marc-André Désautels</em></h4>
+<h4 class="date"><em>15 février 2018</em></h4>
 
 </div>
 
@@ -134,7 +134,8 @@ $(document).ready(function () {
 <p>Vous installer ensuite la librairie à l’aide de la commande suivante:</p>
 <pre class="r"><code>devtools::install_github(&quot;desautm/linalgr&quot;)</code></pre>
 <p>Vous pouvez charger la librairie:</p>
-<pre class="r"><code>library(linalgr)</code></pre>
+<pre class="r"><code>library(linalgr)
+library(printr)</code></pre>
 </div>
 <div id="affichage-de-matrices" class="section level2">
 <h2>Affichage de matrices</h2>
@@ -145,50 +146,89 @@ A &lt;- matrix(sample(-10:10, m*n, replace = TRUE), m, n)
 B &lt;- matrix(sample(-10:10, m, replace = TRUE), m, 1)</code></pre>
 <p>Voici l’affichage directement avec <code>R</code>:</p>
 <pre class="r"><code>A</code></pre>
-<pre><code>##      [,1] [,2] [,3] [,4] [,5]
-## [1,]   -9    6  -10    6    0
-## [2,]   -2    3    6    5   -1
-## [3,]    1   -9    1    0    1
-## [4,]   10   -6   -3   -1    5
-## [5,]   -2    2   -6    3    6</code></pre>
+<table>
+<tbody>
+<tr class="odd">
+<td align="right">-3</td>
+<td align="right">-8</td>
+<td align="right">-1</td>
+<td align="right">4</td>
+<td align="right">7</td>
+</tr>
+<tr class="even">
+<td align="right">-3</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
+<td align="right">-1</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">-8</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">-3</td>
+<td align="right">-9</td>
+<td align="right">6</td>
+<td align="right">9</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>B</code></pre>
-<pre><code>##      [,1]
-## [1,]   -2
-## [2,]   -7
-## [3,]   -3
-## [4,]   -2
-## [5,]   10</code></pre>
+<pre><code>## Warning in kable_markdown(x, padding = padding, ...): The table should have
+## a header (column names)</code></pre>
+<table>
+<tbody>
+<tr class="odd">
+<td align="right">-8</td>
+</tr>
+<tr class="even">
+<td align="right">-7</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td align="right">-1</td>
+</tr>
+</tbody>
+</table>
 <p>Voici l’affichage en utilisant la librairie:</p>
 <pre class="r"><code>cat(mat(A))</code></pre>
 <pre><code>## \left[
 ## \begin{array}{rrrrr}
-## -9 &amp; 6 &amp; -10 &amp; 6 &amp; 0 \\ 
-## -2 &amp; 3 &amp; 6 &amp; 5 &amp; -1 \\ 
-## 1 &amp; -9 &amp; 1 &amp; 0 &amp; 1 \\ 
-## 10 &amp; -6 &amp; -3 &amp; -1 &amp; 5 \\ 
-## -2 &amp; 2 &amp; -6 &amp; 3 &amp; 6 \\ 
+## -3 &amp; -8 &amp; -1 &amp; 4 &amp; 7 \\ 
+## -3 &amp; 0 &amp; 3 &amp; 2 &amp; 4 \\ 
+## 6 &amp; 6 &amp; 6 &amp; 1 &amp; 9 \\ 
+## -1 &amp; 8 &amp; 2 &amp; -8 &amp; 1 \\ 
+## 5 &amp; -3 &amp; -9 &amp; 6 &amp; 9 \\ 
 ## \end{array}
 ## \right]</code></pre>
 <pre class="r"><code>cat(mat(B))</code></pre>
 <pre><code>## \left[
 ## \begin{array}{rrrrr}
-## -2 \\ 
+## -8 \\ 
 ## -7 \\ 
-## -3 \\ 
-## -2 \\ 
 ## 10 \\ 
+## 9 \\ 
+## -1 \\ 
 ## \end{array}
 ## \right]</code></pre>
-<p>Nous pouvons forcer l’affichage en <span class="math inline">\(\LaTeX\)</span> de la façon suivante: <span class="math display">\[\left[
-\begin{array}{rrrrr}
--9 &amp; 6 &amp; -10 &amp; 6 &amp; 0 \\ 
--2 &amp; 3 &amp; 6 &amp; 5 &amp; -1 \\ 
-1 &amp; -9 &amp; 1 &amp; 0 &amp; 1 \\ 
-10 &amp; -6 &amp; -3 &amp; -1 &amp; 5 \\ 
--2 &amp; 2 &amp; -6 &amp; 3 &amp; 6 \\ 
-\end{array}
-\right]
-\]</span></p>
+<p>Nous pouvons forcer l’affichage en <span class="math inline">\(\LaTeX\)</span> de la façon suivante:</p>
 </div>
 </div>
 

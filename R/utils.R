@@ -22,13 +22,13 @@
 #' frac(-3/7, style = "inline")
 #' frac(3/7, digits = 2)
 frac <- function(x,
-                 style = c("inline", "frac", "sfrac", "decimal"),
+                 style = c("inline", "frac", "sfrac", "tfrac", "decimal"),
                  digits = 2,
                  tol = sqrt(.Machine$double.eps)){
 
   if (missing(style)  &&  missing(digits)) style = "frac"
   else if (missing(style)  &&  !missing(digits)) style = "decimal"
-  else style = match.arg(style, c("inline", "frac", "sfrac", "decimal"))
+  else style = match.arg(style, c("inline", "frac", "sfrac", "tfrac", "decimal"))
 
   # Numerateur et denominateur du nombre decimal x
   n <- fractional::numerators(x)
@@ -61,6 +61,9 @@ frac <- function(x,
           else if (style == "sfrac"){
             out[i] <- paste(c("\\sfrac{",n[i],"}{",d[i],"}"), collapse = "")
           }
+          else if (style == "tfrac"){
+            out[i] <- paste(c("\\tfrac{",n[i],"}{",d[i],"}"), collapse = "")
+          }
           else if (style == "decimal"){
             out[i] <- format(specify_decimal(x[i], digits), nsmall = digits)
           }
@@ -72,6 +75,9 @@ frac <- function(x,
           }
           else if (style == "frac"){
             out[i] <- paste(c("-\\frac{",abs(n[i]),"}{",d[i],"}"), collapse = "")
+          }
+          else if (style == "sfrac"){
+            out[i] <- paste(c("-\\sfrac{",abs(n[i]),"}{",d[i],"}"), collapse = "")
           }
           else if (style == "sfrac"){
             out[i] <- paste(c("-\\sfrac{",abs(n[i]),"}{",d[i],"}"), collapse = "")
@@ -94,5 +100,4 @@ to_latex <- function(str){
   cat("$$\n")
   cat(str)
   cat("$$")
-  return(NULL)
 }
