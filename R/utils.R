@@ -101,3 +101,13 @@ to_latex <- function(str){
   cat(str)
   cat("$$")
 }
+
+# Nombre de chiffres apres la virgule a afficher
+ndigits <- function(A, zap = getOption("digits")){
+  v <- zapsmall(abs(A-floor(A)), zap)
+  if (any(v > 0)){
+    dec <- max(nchar(v))-2
+  }
+  else dec <- 0
+  return(dec)
+}
