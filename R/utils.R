@@ -111,9 +111,6 @@ var2latex <- function(col,
                       bracket,
                       variables){
 
-  if (col > 26 && variables == "a") stop("La matrice possede trop de colonnes pour utiliser l'option a, b, c, ...")
-  if (col > 4 && variables == "x") stop("La matrice possede trop de colonnes pour utiliser l'option w, x, y, z.")
-
   toprint <- paste("x_{",(1:col),"} \\\\", collapse = " \n", sep = "")
 
   begin <- "\\begin{array}{c} \n"
@@ -134,6 +131,18 @@ var2latex <- function(col,
   }
   toprint <- paste0(c(bra, toprint, ket), collapse = "")
 
+  toprint <- convert_var(toprint, col, variables)
+
+  return(toprint)
+
+}
+
+# Convertit les variables x_{i} à a, b, c, ... ou alors w, x, y et z
+convert_var <- function(string,
+                        col,
+                        variables){
+
+  toprint <- string
   if (variables == "a"){
     toprint <- gsub("x_\\{1\\}","a",toprint)
     toprint <- gsub("x_\\{2\\}","b",toprint)
@@ -163,9 +172,30 @@ var2latex <- function(col,
     toprint <- gsub("x_\\{26\\}","z",toprint)
   }
   else if (variables == "x"){
-
+    if (col < 4){
+      toprint <- gsub("x_\\{1\\}","x",toprint)
+      toprint <- gsub("x_\\{2\\}","y",toprint)
+      toprint <- gsub("x_\\{3\\}","z",toprint)
+    }
+    else{
+      toprint <- gsub("x_\\{1\\}","w",toprint)
+      toprint <- gsub("x_\\{2\\}","x",toprint)
+      toprint <- gsub("x_\\{3\\}","y",toprint)
+      toprint <- gsub("x_\\{4\\}","z",toprint)
+    }
   }
-
   return(toprint)
+}
+
+# Fonction qui permet de nettoyer les SEL en enlevant les 1 x_{i}, etc.
+sanitize <- function(string){
+
+  temp <- string
+
+  temp <- gsub("1(\\s)x_\\{(\\d+)\\}", "x_\\{\\2\\}", temp) # 1 x_{i} devient x_{i}
+  temp <- gsub("0(\\s)x_\\{(\\d+)\\}", "", temp) # 0 x_{i} devient ""
+  temp <- gsub("[+](\\s+)&(\\s+)[-]", "- & ", temp)
+
+  return(temp)
 
 }

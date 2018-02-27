@@ -10,8 +10,6 @@ sel2latex <- function(A,
                       copy2clip = FALSE,
                       digits = 2){
 
-  toprint = NULL
-
   if ((!is.matrix(A)) || (!is.numeric(A)))
     stop("A doit etre une matrice numerique.")
   if ((!is.matrix(B)) || (!is.numeric(B)))
@@ -20,6 +18,9 @@ sel2latex <- function(A,
   style <- match.arg(style, c("decimal", "inline", "frac", "sfrac", "tfrac", "dfrac"))
   bracket <- match.arg(bracket, c("crochet", "parenthese", "determinant"))
   variables <- match.arg(variables, c("x", "a", "xi"))
+
+  if (ncol(A) > 26 && variables == "a") stop("La matrice possede trop de colonnes pour utiliser l'option a, b, c, ...")
+  if (ncol(A) > 4 && variables == "x") stop("La matrice possede trop de colonnes pour utiliser l'option w, x, y, z.")
 
   # Attributs aux matrices pour simplifier le code
   attr(A, "style") <- style
@@ -35,7 +36,15 @@ sel2latex <- function(A,
 
 
   if (sel){
-
+    toprint <- rep("", nrow(A))
+    begin <- paste0(c("\\begin{array}{", rep("r", 2*ncol(A)+1),"}\n"), collapse = "")
+    end <- c("\\end{array}")
+    var <- paste("x_{",(1:ncol(A)),"}", sep = "")
+    for (i in (1:nrow(A))){
+      toprint[i] <- paste(paste(A[i, ], var, collapse = " & + & "), " & = & ", B[i, ], "\\\\ \n")
+    }
+    toprint <- paste0(c(begin, toprint, end), collapse = "")
+    toprint <- convert_var(toprint, ncol(A), variables)
   }
   else{
     latexA <- mat2latex(A)
