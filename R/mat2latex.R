@@ -17,6 +17,7 @@
 #' @param verbose Si \code{TRUE} nous affichons le code LaTeX, si \code{FALSE} nous retournons le vecteur de caracteres. \code{TRUE} par defaut.
 #' @param copy2clip Si \code{TRUE} nous copions le resultat dans le presse papier. Par defaut \code{FALSE}.
 #' @return Le vecteur de caracteres contenant le code LaTeX de la matrice
+#' @importFrom MASS fractions
 #' @export
 #' @examples
 #' A <- matrix(c(2, -4, 5,
@@ -39,14 +40,22 @@ mat2latex <- function(A,
                       copy2clip = FALSE,
                       digits = 2){
 
-  if (!is.matrix(A)) stop("A doit etre une matrice.")
+  if ((!is.matrix(A)) || (!is.numeric(A)))
+    stop("A doit etre une matrice numerique.")
 
   style <- match.arg(style, c("decimal", "inline", "frac", "sfrac", "tfrac", "dfrac"))
   bracket <- match.arg(bracket, c("crochet", "parenthese", "determinant"))
 
+  if (!is.null(attr(A, "bracket"))) bracket <- attr(A, "bracket")
+  if (!is.null(attr(A, "style"))) style <- attr(A, "style")
+  if (!is.null(attr(A, "verbose"))) verbose <- attr(A, "verbose")
+  if (!is.null(attr(A, "copy2clip"))) copy2clip <- attr(A, "copy2clip")
+  if (!is.null(attr(A, "digits"))) digits <- attr(A, "digits")
+
   # Creation de l'environnement array avec le bon nombre de {rrr...r}
   if (!is.null(B)){
-    if (!is.matrix(B)) stop("B doit etre une matrice.")
+    if ((!is.matrix(B)) || (!is.numeric(B)))
+      stop("B doit etre une matrice numerique.")
     if (nrow(A) != nrow(B)) stop("Le nombre de lignes de A doit etre egal au nombre de lignes de B.")
     begin <- paste0(c("\\begin{array}{", rep("r", ncol(A)),"|", rep("r", ncol(B)),"}\n"), collapse = "")
     A <- cbind(A,B)

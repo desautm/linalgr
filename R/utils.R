@@ -105,3 +105,67 @@ ndigits <- function(A, zap = getOption("digits")){
   else dec <- 0
   return(dec)
 }
+
+# Retourne le vecteur permettant d'afficher une colonne de variables
+var2latex <- function(col,
+                      bracket,
+                      variables){
+
+  if (col > 26 && variables == "a") stop("La matrice possede trop de colonnes pour utiliser l'option a, b, c, ...")
+  if (col > 4 && variables == "x") stop("La matrice possede trop de colonnes pour utiliser l'option w, x, y, z.")
+
+  toprint <- paste("x_{",(1:col),"} \\\\", collapse = " \n", sep = "")
+
+  begin <- "\\begin{array}{c} \n"
+  end <- "\n\\end{array}"
+  toprint <- paste0(c(begin, toprint, end), collapse = "")
+
+  if (bracket == "crochet"){
+    bra <- "\\left[\n"
+    ket <- "\n\\right]"
+  }
+  else if (bracket == "parenthese"){
+    bra <- "\\left(\n"
+    ket <- "\n\\right)"
+  }
+  else{
+    bra <- "\\left|\n"
+    ket <- "\n\\right|"
+  }
+  toprint <- paste0(c(bra, toprint, ket), collapse = "")
+
+  if (variables == "a"){
+    toprint <- gsub("x_\\{1\\}","a",toprint)
+    toprint <- gsub("x_\\{2\\}","b",toprint)
+    toprint <- gsub("x_\\{3\\}","c",toprint)
+    toprint <- gsub("x_\\{4\\}","d",toprint)
+    toprint <- gsub("x_\\{5\\}","e",toprint)
+    toprint <- gsub("x_\\{6\\}","f",toprint)
+    toprint <- gsub("x_\\{7\\}","g",toprint)
+    toprint <- gsub("x_\\{8\\}","h",toprint)
+    toprint <- gsub("x_\\{9\\}","i",toprint)
+    toprint <- gsub("x_\\{10\\}","j",toprint)
+    toprint <- gsub("x_\\{11\\}","k",toprint)
+    toprint <- gsub("x_\\{12\\}","l",toprint)
+    toprint <- gsub("x_\\{13\\}","m",toprint)
+    toprint <- gsub("x_\\{14\\}","n",toprint)
+    toprint <- gsub("x_\\{15\\}","o",toprint)
+    toprint <- gsub("x_\\{16\\}","p",toprint)
+    toprint <- gsub("x_\\{17\\}","q",toprint)
+    toprint <- gsub("x_\\{18\\}","r",toprint)
+    toprint <- gsub("x_\\{19\\}","s",toprint)
+    toprint <- gsub("x_\\{20\\}","t",toprint)
+    toprint <- gsub("x_\\{21\\}","u",toprint)
+    toprint <- gsub("x_\\{22\\}","v",toprint)
+    toprint <- gsub("x_\\{23\\}","w",toprint)
+    toprint <- gsub("x_\\{24\\}","x",toprint)
+    toprint <- gsub("x_\\{25\\}","y",toprint)
+    toprint <- gsub("x_\\{26\\}","z",toprint)
+  }
+  else if (variables == "x"){
+
+  }
+
+  return(toprint)
+
+}
