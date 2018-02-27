@@ -4,8 +4,8 @@
 \alias{frac}
 \title{Affichage LaTeX d'une fraction}
 \usage{
-frac(x, style = c("inline", "frac", "sfrac", "decimal"), digits = 2,
-  tol = sqrt(.Machine$double.eps))
+frac(x, style = c("inline", "frac", "sfrac", "tfrac", "decimal"),
+  digits = 2, tol = sqrt(.Machine$double.eps))
 }
 \arguments{
 \item{x}{Une liste de nombre decimaux}

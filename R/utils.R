@@ -93,14 +93,8 @@ frac <- function(x,
 
 }
 
+# Permet d'afficher un nombre precis de nombre a droite de la virgule
 specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k))
-
-#' @export
-to_latex <- function(str){
-  cat("$$\n")
-  cat(str)
-  cat("$$")
-}
 
 # Nombre de chiffres apres la virgule a afficher
 ndigits <- function(A, zap = getOption("digits")){
