@@ -193,8 +193,9 @@ sanitize <- function(string){
   temp <- string
 
   temp <- gsub("1(\\s)x_\\{(\\d+)\\}", "x_\\{\\2\\}", temp) # 1 x_{i} devient x_{i}
-  temp <- gsub("0(\\s)x_\\{(\\d+)\\}", "", temp) # 0 x_{i} devient ""
-  temp <- gsub("[+](\\s+)&(\\s+)[-]", "- & ", temp)
+  temp <- gsub("0(\\s)x_\\{(\\d+)\\}(\\s)", "", temp) # 0 x_{i} devient " "
+  temp <- gsub("&(\\s)[+](\\s)&", "& &", temp) # & + & devient "& &"
+  #temp <- gsub("[+](\\s+)&(\\s+)[-]", "- & ", temp) # +- devient -
 
 
   return(temp)

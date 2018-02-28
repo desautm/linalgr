@@ -41,7 +41,7 @@ sel2latex <- function(A,
     end <- c("\\end{array}")
     var <- paste("x_{",(1:ncol(A)),"}", sep = "")
     for (i in (1:nrow(A))){
-      toprint[i] <- paste(paste(A[i, ], var, collapse = " & + & "), " & = & ", B[i, ], "\\\\ \n")
+      toprint[i] <- paste0(paste(A[i, ], var, collapse = " & + & "), " & = & ", B[i, ], "\\\\ \n")
     }
     toprint <- paste0(c(begin, toprint, end), collapse = "")
     toprint <- convert_var(toprint, ncol(A), variables)
