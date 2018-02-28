@@ -7,6 +7,7 @@ sel2latex <- function(A,
                       style = c("decimal", "inline", "frac", "sfrac", "tfrac", "dfrac"),
                       bracket = c("crochet", "parenthese", "determinant"),
                       verbose = TRUE,
+                      concise = FALSE,
                       copy2clip = FALSE,
                       digits = 2){
 
@@ -34,15 +35,33 @@ sel2latex <- function(A,
   attr(A, "digits") <- digits
   attr(B, "digits") <- digits
 
-
   if (sel){
-    toprint <- rep("", nrow(A))
+    toprint <- vector("character", length = nrow(A))
     begin <- paste0(c("\\begin{array}{", rep("r", 2*ncol(A)+1),"}\n"), collapse = "")
     end <- c("\\end{array}")
     var <- paste("x_{",(1:ncol(A)),"}", sep = "")
     for (i in (1:nrow(A))){
-      toprint[i] <- paste0(paste(A[i, ], var, collapse = " & + & "), " & = & ", B[i, ], "\\\\ \n")
+      toprint[i] <- paste0(paste(A[i, ], var, collapse = " & + & "), " & = & ", B[i, ], " \\\\ \n")
     }
+
+    # Sanitize en nettoyant la matrice
+    toprint <- gsub("(\\s|[-]|^)1(\\s)x_\\{(\\d+)\\}", "\\1x_\\{\\3\\}", toprint) # "1 x_{i}" devient x_{i}
+
+    toprint <- gsub("^0(\\s)x_\\{(\\d+)\\}(\\s)", " ", toprint)
+    toprint <- gsub("(\\s)0(\\s)x_\\{(\\d+)\\}(\\s)", " 0 ", toprint) # " 0 x_{i} " devient "0 "
+
+    toprint <- gsub("[+](\\s+)&(\\s+)[-]", "- & ", toprint) # +- devient -
+    toprint <- gsub("[+](\\s)&(\\s)0", " & ", toprint) # "+ & 0" devient " & "
+    toprint <- gsub("&\\s\\s", "& ", toprint) # "&  " devient "& "
+
+    toprint <- gsub("^0(\\s)&(\\s)", " & ", toprint) # Au debut de la ligne, "0 & " devient " & "
+    toprint <- gsub("^((\\s&\\s)+)[+]", "\\1", toprint) # Enleve le + si au début de la ligne
+
+
+    if (concise){
+      # Mettre un code pour enlever les "&" excedentaires et avoir un SEL plus petit a afficher
+    }
+
     toprint <- paste0(c(begin, toprint, end), collapse = "")
     toprint <- convert_var(toprint, ncol(A), variables)
   }
@@ -65,7 +84,11 @@ sel2latex <- function(A,
   attr(A, "digits") <- NULL
   attr(B, "digits") <- NULL
 
-  if (copy2clip) writeClipboard(toprint)
+  if (copy2clip){
+    test2clip <- writeClipboard(toprint)
+    if (test2clip) message("Le SEL a ete correctement copie dans le presse-papier.")
+    else message("Le SEL n'a pas ete copie dans le presse-papier.")
+  }
 
   if (verbose){
     cat(toprint)
