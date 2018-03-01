@@ -52,11 +52,11 @@ sel2latex <- function(A,
 
     toprint <- gsub("[+](\\s+)&(\\s+)[-]", "- & ", toprint) # +- devient -
     toprint <- gsub("[+](\\s)&(\\s)0", " & ", toprint) # "+ & 0" devient " & "
-    toprint <- gsub("&\\s\\s", "& ", toprint) # "&  " devient "& "
 
     toprint <- gsub("^0(\\s)&(\\s)", " & ", toprint) # Au debut de la ligne, "0 & " devient " & "
     toprint <- gsub("^((\\s&\\s)+)[+]", "\\1", toprint) # Enleve le + si au début de la ligne
 
+    toprint <- gsub("&(\\s+)", "& ", toprint) # "&  " devient "& "
 
     if (concise){
       # Mettre un code pour enlever les "&" excedentaires et avoir un SEL plus petit a afficher
