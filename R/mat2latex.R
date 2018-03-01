@@ -38,6 +38,7 @@ mat2latex <- function(A,
                       bracket = c("crochet", "parenthese", "determinant"),
                       verbose = TRUE,
                       copy2clip = FALSE,
+                      envir = TRUE,
                       digits = 2){
 
   if ((!is.matrix(A)) || (!is.numeric(A)))
@@ -51,6 +52,7 @@ mat2latex <- function(A,
   if (!is.null(attr(A, "verbose"))) verbose <- attr(A, "verbose")
   if (!is.null(attr(A, "copy2clip"))) copy2clip <- attr(A, "copy2clip")
   if (!is.null(attr(A, "digits"))) digits <- attr(A, "digits")
+  if (!is.null(attr(A, "envir"))) envir <- attr(A, "envir")
 
   # Creation de l'environnement array avec le bon nombre de {rrr...r}
   if (!is.null(B)){
@@ -66,7 +68,7 @@ mat2latex <- function(A,
   end <- c("\\end{array}")
 
   # Creation d'un vecteur vide
-  toprint <- rep("", nrow(A))
+  toprint <- vector("character", length = nrow(A))
 
   # Creation de la matrice
   tempA <- A
@@ -84,11 +86,6 @@ mat2latex <- function(A,
   for (i in (1:nrow(A))){
     toprint[i] <- paste(tempA[i, ], collapse = " & ")
   }
-  toprint <- paste(toprint, collapse = " \\\\ \n")
-  toprint <- paste(toprint, "\\\\ \n")
-
-  # Encadrement de la sortie dans l'environnement array
-  toprint <- paste0(c(begin, toprint, end), collapse = "")
 
   # Encadrement de la sortie entre crochet, parenthese, determinant
   if (bracket == "crochet"){
@@ -103,7 +100,18 @@ mat2latex <- function(A,
     bra <- "\\left|\n"
     ket <- "\n\\right|"
   }
-  toprint <- paste0(c(bra, toprint, ket), collapse = "")
+
+  # Encadrement de la sortie dans l'environnement array et bracket
+  if (envir){
+    toprint <- paste(toprint, collapse = " \\\\ \n")
+    toprint <- paste(toprint, "\\\\ \n")
+    toprint <- paste0(c(begin, toprint, end), collapse = "")
+    toprint <- paste0(c(bra, toprint, ket), collapse = "")
+  }
+  else{
+    toprint <- NULL
+    toprint <- tempA
+  }
 
   if (copy2clip) writeClipboard(toprint)
 
