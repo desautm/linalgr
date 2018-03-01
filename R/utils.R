@@ -187,19 +187,14 @@ convert_var <- function(string,
   return(toprint)
 }
 
-# Fonction qui permet de nettoyer les SEL en enlevant les 1 x_{i}, etc.
-sanitize <- function(string){
-
-  temp <- string
-
-  temp <- gsub("1(\\s)x_\\{(\\d+)\\}", "x_\\{\\2\\}", temp) # 1 x_{i} devient x_{i}
-  #temp <- gsub("0(\\s)x_\\{(\\d+)\\}(\\s)", "0 ", temp) # 0 x_{i} devient " "
-  temp <- gsub("[+](\\s)&(\\s)&", "& &", temp) # & + & devient "& &"
-  temp <- gsub("[+](\\s+)&(\\s+)[-]", "- & ", temp) # +- devient -
-  #temp <- gsub("0(\\s)&(\\s)[+]", " & ", temp) # "0 + & " devient " & "
-  #temp <- gsub("0(\\s)&(\\s)[-]", " & ", temp) # "0 - & " devient " & "
-
-
-  return(temp)
-
+# Fonction permettant de creer une matrice tridiagonale
+tridiag <- function(upper, lower, main){
+  out <- matrix(0,length(main),length(main))
+  diag(out) <- main
+  indx <- seq.int(length(upper))
+  out[cbind(indx+1,indx)] <- lower
+  out[cbind(indx,indx+1)] <- upper
+  return(out)
 }
+
+

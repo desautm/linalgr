@@ -5,14 +5,22 @@ date: "15 février 2018"
 header-includes:
    - \usepackage{xfrac}
 output:
+  html_document: default
   pdf_document: 
     keep_tex: yes
     latex_engine: xelatex
-  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+tridiag <- function(upper, lower, main){
+  out <- matrix(0,length(main),length(main))
+  diag(out) <- main
+  indx <- seq.int(length(upper))
+  out[cbind(indx+1,indx)] <- lower
+  out[cbind(indx,indx+1)] <- upper
+  return(out)
+}
 ```
 
 # Utilisation de `R` pour produire du code LaTeX en algèbre linéaire
@@ -51,7 +59,11 @@ A
 B
 ```
 
-Voici l'affichage en utilisant la librairie:
+## Affichage avec la librairie `linalgr`
+
+Pour afficher, il faut utiliser l'option `results = 'asis'` dans le bloc de code `R`.
+
+Voici l'affichage en utilisant la librairie. 
 ```{r, results=FALSE, collapse=TRUE}
 mat2latex(A)
 mat2latex(B)
@@ -64,7 +76,8 @@ mat2latex(B)
 
 # Affichage de SEL
 
-Nous pouvons afficher des SEL
+## Avec des nombres entiers
+
 ```{r, results=FALSE, collapse=TRUE}
 sel2latex(A,B, variables = "xi")
 ```
@@ -72,6 +85,8 @@ sel2latex(A,B, variables = "xi")
 ```{r, echo=FALSE, results='asis'}
 sel2latex(A,B, variables = "xi")
 ```
+
+## Avec d'autres variables
 
 ```{r, results=FALSE, collapse=TRUE}
 sel2latex(A,B, sel = FALSE, variables = "a")
@@ -81,7 +96,7 @@ sel2latex(A,B, sel = FALSE, variables = "a")
 sel2latex(A,B, sel = FALSE, variables = "a")
 ```
 
-Avec des fractions décimales
+## Avec des fractions décimales
 
 ```{r, results=FALSE, collapse=TRUE}
 sel2latex(A/3,B, variables = "xi", digits = 3)
@@ -91,7 +106,9 @@ sel2latex(A/3,B, variables = "xi", digits = 3)
 sel2latex(A/3,B, variables = "xi", digits = 3)
 ```
 
-Avec des fractions ordinaires
+## Avec des fractions ordinaires
+
+### Mode en ligne
 
 ```{r, results=FALSE, collapse=TRUE}
 sel2latex(A/3,B, variables = "xi", style = "inline")
@@ -101,10 +118,28 @@ sel2latex(A/3,B, variables = "xi", style = "inline")
 sel2latex(A/3,B, variables = "xi", style = "inline")
 ```
 
+### Mode commande frac
+
 ```{r, results=FALSE, collapse=TRUE}
-sel2latex(A/3,B, variables = "xi", style = "sfrac")
+sel2latex(A/3,B, variables = "xi", style = "frac")
 ```
 
 ```{r, echo=FALSE, results='asis'}
-sel2latex(A/3,B, variables = "xi", style = "sfrac")
+sel2latex(A/3,B, variables = "xi", style = "frac")
 ```
+
+
+### Matrices creuses
+
+```{r}
+p <- 8
+C <- tridiag(sample(-10:10, p-1, replace = TRUE),
+             sample(-10:10, p-1, replace = TRUE),
+             sample(-10:10, p, replace = TRUE))
+D <- matrix(sample(-10:10, p, replace = TRUE),p,1)
+```
+
+```{r echo=FALSE, results='asis'}
+sel2latex(C, D, variables = "xi")
+```
+
