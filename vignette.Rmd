@@ -2,6 +2,8 @@
 title: "Linear Algebra"
 author: "Marc-André Désautels"
 date: "15 février 2018"
+header-includes:
+   - \usepackage{xfrac}
 output:
   pdf_document: 
     keep_tex: yes
@@ -31,12 +33,11 @@ devtools::install_github("desautm/linalgr")
 Vous pouvez charger la librairie:
 ```{r}
 library(linalgr)
-library(printr)
 ```
 
 ## Affichage de matrices
 
-Nous allons définir quelques matrice:
+Nous allons définir quelques matrices:
 ```{r}
 m <- 5
 n <- 5
@@ -51,12 +52,59 @@ B
 ```
 
 Voici l'affichage en utilisant la librairie:
-```{r}
-cat(mat(A))
-cat(mat(B))
+```{r, results=FALSE, collapse=TRUE}
+mat2latex(A)
+mat2latex(B)
 ```
 
-Nous pouvons forcer l'affichage de la façon suivante:
+```{r, echo=FALSE, results='asis'}
+mat2latex(A)
+mat2latex(B)
+```
 
+# Affichage de SEL
 
+Nous pouvons afficher des SEL
+```{r, results=FALSE, collapse=TRUE}
+sel2latex(A,B, variables = "xi")
+```
 
+```{r, echo=FALSE, results='asis'}
+sel2latex(A,B, variables = "xi")
+```
+
+```{r, results=FALSE, collapse=TRUE}
+sel2latex(A,B, sel = FALSE, variables = "a")
+```
+
+```{r, echo=FALSE, results='asis'}
+sel2latex(A,B, sel = FALSE, variables = "a")
+```
+
+Avec des fractions décimales
+
+```{r, results=FALSE, collapse=TRUE}
+sel2latex(A/3,B, variables = "xi", digits = 3)
+```
+
+```{r, echo=FALSE, results='asis'}
+sel2latex(A/3,B, variables = "xi", digits = 3)
+```
+
+Avec des fractions ordinaires
+
+```{r, results=FALSE, collapse=TRUE}
+sel2latex(A/3,B, variables = "xi", style = "inline")
+```
+
+```{r, echo=FALSE, results='asis'}
+sel2latex(A/3,B, variables = "xi", style = "inline")
+```
+
+```{r, results=FALSE, collapse=TRUE}
+sel2latex(A/3,B, variables = "xi", style = "sfrac")
+```
+
+```{r, echo=FALSE, results='asis'}
+sel2latex(A/3,B, variables = "xi", style = "sfrac")
+```

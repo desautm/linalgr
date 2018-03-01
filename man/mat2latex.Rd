@@ -6,7 +6,7 @@
 \usage{
 mat2latex(A, B = NULL, style = c("decimal", "inline", "frac", "sfrac",
   "tfrac", "dfrac"), bracket = c("crochet", "parenthese", "determinant"),
-  verbose = TRUE, copy2clip = FALSE, digits = 2)
+  verbose = TRUE, copy2clip = FALSE, envir = TRUE, digits = 2)
 }
 \arguments{
 \item{A}{une matrice}

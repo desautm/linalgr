@@ -1,5 +1,4 @@
 #' @export
-
 sel2latex <- function(A,
                       B,
                       sel = TRUE,
@@ -9,12 +8,14 @@ sel2latex <- function(A,
                       verbose = TRUE,
                       concise = FALSE,
                       copy2clip = FALSE,
+                      tolatex = TRUE,
                       digits = 2){
 
   if ((!is.matrix(A)) || (!is.numeric(A)))
     stop("A doit etre une matrice numerique.")
   if ((!is.matrix(B)) || (!is.numeric(B)))
     stop("B doit etre une matrice numerique.")
+  if (ncol(B) > 1) stop("B doit posseder une seule colonne")
 
   style <- match.arg(style, c("decimal", "inline", "frac", "sfrac", "tfrac", "dfrac"))
   bracket <- match.arg(bracket, c("crochet", "parenthese", "determinant"))
@@ -36,15 +37,15 @@ sel2latex <- function(A,
   attr(B, "digits") <- digits
 
   if (sel){
-    matA <- mat2latex(A, envir = FALSE)
-    matB <- mat2latex(B, envir = FALSE)
+    matA <- mat2latex(A, envir = FALSE, tolatex = FALSE)
+    matB <- mat2latex(B, envir = FALSE, tolatex = FALSE)
 
     toprint <- vector("character", length = nrow(A))
     begin <- paste0(c("\\begin{array}{", rep("r", 2*ncol(A)+1),"}\n"), collapse = "")
     end <- c("\\end{array}")
     var <- paste("x_{",(1:ncol(A)),"}", sep = "")
     for (i in (1:nrow(A))){
-      toprint[i] <- paste0(paste(matA[i], var, collapse = " & + & "), " & = & ", matB[i], " \\\\ \n")
+      toprint[i] <- paste0(paste(matA[i, ], var, collapse = " & + & "), " & = & ", matB[i, ], " \\\\ \n")
     }
 
     # Sanitize en nettoyant la matrice
@@ -70,8 +71,8 @@ sel2latex <- function(A,
       toprint <- gsub("^(\\s)*&(\\s)*", "", toprint) # Enleve les espaces au debut de la ligne
     }
 
-    #toprint <- paste0(c(begin, toprint, end), collapse = "")
-    #toprint <- convert_var(toprint, ncol(A), variables)
+    toprint <- paste0(c(begin, toprint, end), collapse = "")
+    toprint <- convert_var(toprint, ncol(A), variables)
   }
   else{
     latexA <- mat2latex(A)
@@ -79,6 +80,8 @@ sel2latex <- function(A,
     latexB <- mat2latex(B)
     toprint <- c(latexA, latexVar, "=", latexB)
   }
+
+  if (tolatex) toprint <- paste0(c("$$\n",toprint,"\n$$"))
 
   # On enleve les attributs aux matrices
   attr(A, "style") <- NULL

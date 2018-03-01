@@ -16,6 +16,9 @@
 #' @param digits Le nombre de chiffres a droite de la virgule a afficher. Nous affichons 2 chiffres par defaut.
 #' @param verbose Si \code{TRUE} nous affichons le code LaTeX, si \code{FALSE} nous retournons le vecteur de caracteres. \code{TRUE} par defaut.
 #' @param copy2clip Si \code{TRUE} nous copions le resultat dans le presse papier. Par defaut \code{FALSE}.
+#' @param envir Si \code{TRUE}, nous encadrons le resultat dans un array et un bracket. Si \code{FALSE}, on ne retourne que la matrice. Utile
+#'   pour la fonction \code{sel2latex}.
+#' @param tolatex Si \code{TRUE} nous encadrons le resultat par "$$ resultat $$".
 #' @return Le vecteur de caracteres contenant le code LaTeX de la matrice
 #' @importFrom MASS fractions
 #' @export
@@ -39,6 +42,7 @@ mat2latex <- function(A,
                       verbose = TRUE,
                       copy2clip = FALSE,
                       envir = TRUE,
+                      tolatex = TRUE,
                       digits = 2){
 
   if ((!is.matrix(A)) || (!is.numeric(A)))
@@ -53,6 +57,7 @@ mat2latex <- function(A,
   if (!is.null(attr(A, "copy2clip"))) copy2clip <- attr(A, "copy2clip")
   if (!is.null(attr(A, "digits"))) digits <- attr(A, "digits")
   if (!is.null(attr(A, "envir"))) envir <- attr(A, "envir")
+  if (!is.null(attr(A, "tolatex"))) tolatex <- attr(A, "tolatex")
 
   # Creation de l'environnement array avec le bon nombre de {rrr...r}
   if (!is.null(B)){
@@ -112,6 +117,8 @@ mat2latex <- function(A,
     toprint <- NULL
     toprint <- tempA
   }
+
+  if (tolatex && envir) toprint <- paste0(c("$$\n",toprint,"\n$$"))
 
   if (copy2clip) writeClipboard(toprint)
 
