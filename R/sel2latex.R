@@ -49,27 +49,7 @@ sel2latex <- function(A,
     }
 
     # Sanitize en nettoyant la matrice
-    toprint <- gsub("(\\s|[-]|^)1(\\s)x_\\{(\\d+)\\}", "\\1x_\\{\\3\\}", toprint) # "1 x_{i}" devient x_{i}
-
-    toprint <- gsub("^0(\\s)x_\\{(\\d+)\\}(\\s)", " ", toprint)
-    toprint <- gsub("(\\s)0(\\s)x_\\{(\\d+)\\}\\s", " 0 ", toprint) # " 0 x_{i} " devient "0 "
-    toprint <- gsub("(^|\\s)0.(0)+\\sx_\\{(\\d+)\\}\\s", " 0 ", toprint)
-
-    toprint <- gsub("[+](\\s+)&(\\s+)[-]", "- & ", toprint) # +- devient -
-    toprint <- gsub("[+](\\s)&(\\s)0[^.]", " & ", toprint) # "+ & 0" devient " & "
-
-    toprint <- gsub("^0(\\s)&(\\s)", " & ", toprint) # Au debut de la ligne, "0 & " devient " & "
-    toprint <- gsub("^(\\s)*0\\s", " ", toprint)
-    toprint <- gsub("^((\\s&\\s)+)[+]", "\\1", toprint) # Enleve le + si au début de la ligne
-
-    toprint <- gsub("&(\\s+)", "& ", toprint) # "&  " devient "& "
-    toprint <- gsub("^(\\s)*", "", toprint)
-
-    if (concise){
-      # Mettre un code pour enlever les "&" excedentaires et avoir un SEL plus petit a afficher
-      toprint <- gsub("&(\\s&)*\\s", "& ", toprint) # Enleve les & excedentaires
-      toprint <- gsub("^(\\s)*&(\\s)*", "", toprint) # Enleve les espaces au debut de la ligne
-    }
+    toprint <- sanitize(toprint, concise)
 
     toprint <- paste0(c(begin, toprint, end), collapse = "")
     toprint <- convert_var(toprint, ncol(A), variables)
