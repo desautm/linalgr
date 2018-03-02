@@ -201,7 +201,7 @@ sanitize <- function(string, concise){
   toprint <- gsub("[+]\\s&\\s0\\sx_\\{(\\d+)\\}", "&", toprint)
 
   # 0 x_{i} au debut de la ligne devient ""
-  toprint <- gsub("0\\sx_\\{(\\d+)\\}\\s", "", toprint)
+  toprint <- gsub("^0\\sx_\\{(\\d+)\\}\\s", "", toprint)
 
   # Enleve un + si le premier de la ligne
   toprint <- gsub("^((&\\s)+)[+]\\s", "\\1", toprint)
@@ -222,11 +222,11 @@ sanitize <- function(string, concise){
   # toprint <- gsub("&(\\s+)", "& ", toprint) # "&  " devient "& "
   # toprint <- gsub("^(\\s)*", "", toprint)
   #
-  # if (concise){
-  #   # Mettre un code pour enlever les "&" excedentaires et avoir un SEL plus petit a afficher
-  #   toprint <- gsub("&(\\s&)*\\s", "& ", toprint) # Enleve les & excedentaires
-  #   toprint <- gsub("^(\\s)*&(\\s)*", "", toprint) # Enleve les espaces au debut de la ligne
-  # }
+  if (concise){
+    # Mettre un code pour enlever les "&" excedentaires et avoir un SEL plus petit a afficher
+    toprint <- gsub("&(\\s&)*\\s", "& ", toprint) # Enleve les & excedentaires
+    toprint <- gsub("^(\\s)*&(\\s)*", "", toprint) # Enleve les espaces au debut de la ligne
+  }
 
   return(toprint)
 }
