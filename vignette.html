@@ -331,18 +331,18 @@ B &lt;- matrix(sample(-10:10, m, replace = TRUE), m, 1)</code></pre>
 <p>Voici l’affichage directement avec <code>R</code>:</p>
 <pre class="r"><code>A</code></pre>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
-## [1,]   -1   -2    6   -3    7
-## [2,]    0   -6    8   -3    5
-## [3,]   -5   -1   -7   -5   -2
-## [4,]    9   -5   -7   -5  -10
-## [5,]    8    4    4    5  -10</code></pre>
+## [1,]    2    9    7    3    3
+## [2,]   -9   -7    0   -8  -10
+## [3,]    9   -6   -6    8    3
+## [4,]    9   -5    9    6    4
+## [5,]   -9   -4   -7   -7   -3</code></pre>
 <pre class="r"><code>B</code></pre>
 <pre><code>##      [,1]
-## [1,]    4
-## [2,]    2
-## [3,]    2
+## [1,]    1
+## [2,]    8
+## [3,]   -1
 ## [4,]   -2
-## [5,]    5</code></pre>
+## [5,]    7</code></pre>
 </section>
 <section id="affichage-avec-la-librairie-linalgr" class="level2">
 <h2>Affichage avec la librairie <code>linalgr</code></h2>
@@ -353,21 +353,21 @@ mat2latex(B)</code></pre>
 <p><span class="math display">\[
  \left[
 \begin{array}{rrrrr}
--1 &amp; -2 &amp; 6 &amp; -3 &amp; 7 \\ 
-0 &amp; -6 &amp; 8 &amp; -3 &amp; 5 \\ 
--5 &amp; -1 &amp; -7 &amp; -5 &amp; -2 \\ 
-9 &amp; -5 &amp; -7 &amp; -5 &amp; -10 \\ 
-8 &amp; 4 &amp; 4 &amp; 5 &amp; -10 \\ 
+2 &amp; 9 &amp; 7 &amp; 3 &amp; 3 \\ 
+-9 &amp; -7 &amp; 0 &amp; -8 &amp; -10 \\ 
+9 &amp; -6 &amp; -6 &amp; 8 &amp; 3 \\ 
+9 &amp; -5 &amp; 9 &amp; 6 &amp; 4 \\ 
+-9 &amp; -4 &amp; -7 &amp; -7 &amp; -3 \\ 
 \end{array}
 \right] 
 \]</span><span class="math display">\[
  \left[
 \begin{array}{r}
-4 \\ 
-2 \\ 
-2 \\ 
+1 \\ 
+8 \\ 
+-1 \\ 
 -2 \\ 
-5 \\ 
+7 \\ 
 \end{array}
 \right] 
 \]</span></p>
@@ -375,45 +375,82 @@ mat2latex(B)</code></pre>
 </section>
 <section id="affichage-de-sel" class="level1">
 <h1>Affichage de SEL</h1>
-<section id="avec-des-nombres-entiers" class="level2">
-<h2>Avec des nombres entiers</h2>
+<section id="affichage-de-systemes-dequations-lineaires" class="level2">
+<h2>Affichage de systèmes d’équations linéaires</h2>
 <pre class="r"><code>sel2latex(A,B, variables = &quot;xi&quot;)</code></pre>
 <p><span class="math display">\[
- \begin{array}{rrrrrrrrrrr}
--x_{1} &amp; - &amp; 2 x_{2} &amp; + &amp; 6 x_{3} &amp; - &amp; 3 x_{4} &amp; + &amp; 7 x_{5} &amp; = &amp; 4 \\ 
-&amp; - &amp; 6 x_{2} &amp; + &amp; 8 x_{3} &amp; - &amp; 3 x_{4} &amp; + &amp; 5 x_{5} &amp; = &amp; 2 \\ 
--5 x_{1} &amp; - &amp; x_{2} &amp; - &amp; 7 x_{3} &amp; - &amp; 5 x_{4} &amp; - &amp; 2 x_{5} &amp; = &amp; 2 \\ 
-9 x_{1} &amp; - &amp; 5 x_{2} &amp; - &amp; 7 x_{3} &amp; - &amp; 5 x_{4} &amp; - &amp; 10 x_{5} &amp; = &amp; -2 \\ 
-8 x_{1} &amp; + &amp; 4 x_{2} &amp; + &amp; 4 x_{3} &amp; + &amp; 5 x_{4} &amp; - &amp; 10 x_{5} &amp; = &amp; 5 \\ 
-\end{array} 
-\]</span></p>
-</section>
-<section id="avec-dautres-variables" class="level2">
-<h2>Avec d’autres variables</h2>
-<pre class="r"><code>sel2latex(A,B, sel = FALSE, variables = &quot;a&quot;)</code></pre>
-<p><span class="math display">\[
- \]</span>  <span class="math display">\[ \left[
-\begin{array}{c} 
-a \\ 
-b \\ 
-c \\ 
-d \\ 
-e \\
+\begin{array}{rrrrrrrrrrr}
+2 x_{1} &amp; + &amp; 9 x_{2} &amp; + &amp; 7 x_{3} &amp; + &amp; 3 x_{4} &amp; + &amp; 3 x_{5} &amp; = &amp; 1 \\ 
+-9 x_{1} &amp; - &amp; 7 x_{2} &amp; &amp; &amp; - &amp; 8 x_{4} &amp; - &amp; 10 x_{5} &amp; = &amp; 8 \\ 
+9 x_{1} &amp; - &amp; 6 x_{2} &amp; - &amp; 6 x_{3} &amp; + &amp; 8 x_{4} &amp; + &amp; 3 x_{5} &amp; = &amp; -1 \\ 
+9 x_{1} &amp; - &amp; 5 x_{2} &amp; + &amp; 9 x_{3} &amp; + &amp; 6 x_{4} &amp; + &amp; 4 x_{5} &amp; = &amp; -2 \\ 
+-9 x_{1} &amp; - &amp; 4 x_{2} &amp; - &amp; 7 x_{3} &amp; - &amp; 7 x_{4} &amp; - &amp; 3 x_{5} &amp; = &amp; 7 \\ 
 \end{array}
-\right] = \]</span>  <span class="math display">\[ 
 \]</span></p>
 </section>
-<section id="avec-des-fractions-decimales" class="level2">
-<h2>Avec des fractions décimales</h2>
+<section id="affichage-de-systemes-matriciels" class="level2">
+<h2>Affichage de systèmes matriciels</h2>
+<pre class="r"><code>sel2latex(A,B, sel = FALSE, variables = &quot;xi&quot;)</code></pre>
+<p><span class="math display">\[
+\left[
+\begin{array}{rrrrr}
+2 &amp; 9 &amp; 7 &amp; 3 &amp; 3 \\ 
+-9 &amp; -7 &amp; 0 &amp; -8 &amp; -10 \\ 
+9 &amp; -6 &amp; -6 &amp; 8 &amp; 3 \\ 
+9 &amp; -5 &amp; 9 &amp; 6 &amp; 4 \\ 
+-9 &amp; -4 &amp; -7 &amp; -7 &amp; -3 \\ 
+\end{array}
+\right]\left[
+\begin{array}{c} 
+x_{1} \\ 
+x_{2} \\ 
+x_{3} \\ 
+x_{4} \\ 
+x_{5} \\
+\end{array}
+\right]=\left[
+\begin{array}{r}
+1 \\ 
+8 \\ 
+-1 \\ 
+-2 \\ 
+7 \\ 
+\end{array}
+\right]
+\]</span></p>
+</section>
+<section id="nous-pouvons-changer-les-variables-utilisees" class="level2">
+<h2>Nous pouvons changer les variables utilisées</h2>
+<pre class="r"><code>sel2latex(A,B, variables = &quot;a&quot;)</code></pre>
+<p><span class="math display">\[
+\begin{array}{rrrrrrrrrrr}
+2 a &amp; + &amp; 9 b &amp; + &amp; 7 c &amp; + &amp; 3 d &amp; + &amp; 3 e &amp; = &amp; 1 \\ 
+-9 a &amp; - &amp; 7 b &amp; &amp; &amp; - &amp; 8 d &amp; - &amp; 10 e &amp; = &amp; 8 \\ 
+9 a &amp; - &amp; 6 b &amp; - &amp; 6 c &amp; + &amp; 8 d &amp; + &amp; 3 e &amp; = &amp; -1 \\ 
+9 a &amp; - &amp; 5 b &amp; + &amp; 9 c &amp; + &amp; 6 d &amp; + &amp; 4 e &amp; = &amp; -2 \\ 
+-9 a &amp; - &amp; 4 b &amp; - &amp; 7 c &amp; - &amp; 7 d &amp; - &amp; 3 e &amp; = &amp; 7 \\ 
+\end{array}
+\]</span></p>
+<p>ou alors…</p>
+<pre class="r"><code>sel2latex(matrix(sample(-10:10,4),2,2),matrix(sample(-10:10,4),2,1), variables = &quot;x&quot;)</code></pre>
+<p><span class="math display">\[
+\begin{array}{rrrrr}
+-6 x &amp; - &amp; 10 y &amp; = &amp; -1 \\ 
+2 x &amp; + &amp; 4 y &amp; = &amp; 7 \\ 
+\end{array}
+\]</span></p>
+</section>
+<section id="affichage-avec-des-fractions-decimales-et-controle-du-nombre-de-chiffres-a-droite-de-la-virgule" class="level2">
+<h2>Affichage avec des fractions décimales et contrôle du nombre de chiffres à droite de la virgule</h2>
 <pre class="r"><code>sel2latex(A/3,B, variables = &quot;xi&quot;, digits = 3)</code></pre>
 <p><span class="math display">\[
- \begin{array}{rrrrrrrrrrr}
--0.333 x_{1} &amp; - &amp; 0.667 x_{2} &amp; + &amp; 2.000 x_{3} &amp; - &amp; 1.000 x_{4} &amp; + &amp; 2.333 x_{5} &amp; = &amp; 4 \\ 
-&amp; - &amp; 2.000 x_{2} &amp; + &amp; 2.667 x_{3} &amp; - &amp; 1.000 x_{4} &amp; + &amp; 1.667 x_{5} &amp; = &amp; 2 \\ 
--1.667 x_{1} &amp; - &amp; 0.333 x_{2} &amp; - &amp; 2.333 x_{3} &amp; - &amp; 1.667 x_{4} &amp; - &amp; 0.667 x_{5} &amp; = &amp; 2 \\ 
-3.000 x_{1} &amp; - &amp; 1.667 x_{2} &amp; - &amp; 2.333 x_{3} &amp; - &amp; 1.667 x_{4} &amp; - &amp; 3.333 x_{5} &amp; = &amp; -2 \\ 
-2.667 x_{1} &amp; + &amp; 1.333 x_{2} &amp; + &amp; 1.333 x_{3} &amp; + &amp; 1.667 x_{4} &amp; - &amp; 3.333 x_{5} &amp; = &amp; 5 \\ 
-\end{array} 
+\begin{array}{rrrrrrrrrrr}
+0.667 x_{1} &amp; + &amp; 3.000 x_{2} &amp; + &amp; 2.333 x_{3} &amp; + &amp; 1.000 x_{4} &amp; + &amp; 1.000 x_{5} &amp; = &amp; 1 \\ 
+-3.000 x_{1} &amp; - &amp; 2.333 x_{2} &amp; + &amp; 0.000 x_{3} &amp; - &amp; 2.667 x_{4} &amp; - &amp; 3.333 x_{5} &amp; = &amp; 8 \\ 
+3.000 x_{1} &amp; - &amp; 2.000 x_{2} &amp; - &amp; 2.000 x_{3} &amp; + &amp; 2.667 x_{4} &amp; + &amp; 1.000 x_{5} &amp; = &amp; -1 \\ 
+3.000 x_{1} &amp; - &amp; 1.667 x_{2} &amp; + &amp; 3.000 x_{3} &amp; + &amp; 2.000 x_{4} &amp; + &amp; 1.333 x_{5} &amp; = &amp; -2 \\ 
+-3.000 x_{1} &amp; - &amp; 1.333 x_{2} &amp; - &amp; 2.333 x_{3} &amp; - &amp; 2.333 x_{4} &amp; - &amp; 1.000 x_{5} &amp; = &amp; 7 \\ 
+\end{array}
 \]</span></p>
 </section>
 <section id="avec-des-fractions-ordinaires" class="level2">
@@ -422,26 +459,26 @@ e \\
 <h3>Mode en ligne</h3>
 <pre class="r"><code>sel2latex(A/3,B, variables = &quot;xi&quot;, style = &quot;inline&quot;)</code></pre>
 <p><span class="math display">\[
- \begin{array}{rrrrrrrrrrr}
--1/3 x_{1} &amp; - &amp; 2/3 x_{2} &amp; + &amp; 2 x_{3} &amp; - &amp; x_{4} &amp; + &amp; 7/3 x_{5} &amp; = &amp; 4 \\ 
-&amp; - &amp; 2 x_{2} &amp; + &amp; 8/3 x_{3} &amp; - &amp; x_{4} &amp; + &amp; 5/3 x_{5} &amp; = &amp; 2 \\ 
--5/3 x_{1} &amp; - &amp; 1/3 x_{2} &amp; - &amp; 7/3 x_{3} &amp; - &amp; 5/3 x_{4} &amp; - &amp; 2/3 x_{5} &amp; = &amp; 2 \\ 
-3 x_{1} &amp; - &amp; 5/3 x_{2} &amp; - &amp; 7/3 x_{3} &amp; - &amp; 5/3 x_{4} &amp; - &amp; 10/3 x_{5} &amp; = &amp; -2 \\ 
-8/3 x_{1} &amp; + &amp; 4/3 x_{2} &amp; + &amp; 4/3 x_{3} &amp; + &amp; 5/3 x_{4} &amp; - &amp; 10/3 x_{5} &amp; = &amp; 5 \\ 
-\end{array} 
+\begin{array}{rrrrrrrrrrr}
+2/3 x_{1} &amp; + &amp; 3 x_{2} &amp; + &amp; 7/3 x_{3} &amp; + &amp; x_{4} &amp; + &amp; x_{5} &amp; = &amp; 1 \\ 
+-3 x_{1} &amp; - &amp; 7/3 x_{2} &amp; &amp; &amp; - &amp; 8/3 x_{4} &amp; - &amp; 10/3 x_{5} &amp; = &amp; 8 \\ 
+3 x_{1} &amp; - &amp; 2 x_{2} &amp; - &amp; 2 x_{3} &amp; + &amp; 8/3 x_{4} &amp; + &amp; x_{5} &amp; = &amp; -1 \\ 
+3 x_{1} &amp; - &amp; 5/3 x_{2} &amp; + &amp; 3 x_{3} &amp; + &amp; 2 x_{4} &amp; + &amp; 4/3 x_{5} &amp; = &amp; -2 \\ 
+-3 x_{1} &amp; - &amp; 4/3 x_{2} &amp; - &amp; 7/3 x_{3} &amp; - &amp; 7/3 x_{4} &amp; - &amp; x_{5} &amp; = &amp; 7 \\ 
+\end{array}
 \]</span></p>
 </section>
 <section id="mode-commande-frac" class="level3">
 <h3>Mode commande frac</h3>
 <pre class="r"><code>sel2latex(A/3,B, variables = &quot;xi&quot;, style = &quot;frac&quot;)</code></pre>
 <p><span class="math display">\[
- \begin{array}{rrrrrrrrrrr}
--\frac{1}{3} x_{1} &amp; - &amp; \frac{2}{3} x_{2} &amp; + &amp; 2 x_{3} &amp; - &amp; x_{4} &amp; + &amp; \frac{7}{3} x_{5} &amp; = &amp; 4 \\ 
-&amp; - &amp; 2 x_{2} &amp; + &amp; \frac{8}{3} x_{3} &amp; - &amp; x_{4} &amp; + &amp; \frac{5}{3} x_{5} &amp; = &amp; 2 \\ 
--\frac{5}{3} x_{1} &amp; - &amp; \frac{1}{3} x_{2} &amp; - &amp; \frac{7}{3} x_{3} &amp; - &amp; \frac{5}{3} x_{4} &amp; - &amp; \frac{2}{3} x_{5} &amp; = &amp; 2 \\ 
-3 x_{1} &amp; - &amp; \frac{5}{3} x_{2} &amp; - &amp; \frac{7}{3} x_{3} &amp; - &amp; \frac{5}{3} x_{4} &amp; - &amp; \frac{10}{3} x_{5} &amp; = &amp; -2 \\ 
-\frac{8}{3} x_{1} &amp; + &amp; \frac{4}{3} x_{2} &amp; + &amp; \frac{4}{3} x_{3} &amp; + &amp; \frac{5}{3} x_{4} &amp; - &amp; \frac{10}{3} x_{5} &amp; = &amp; 5 \\ 
-\end{array} 
+\begin{array}{rrrrrrrrrrr}
+\frac{2}{3} x_{1} &amp; + &amp; 3 x_{2} &amp; + &amp; \frac{7}{3} x_{3} &amp; + &amp; x_{4} &amp; + &amp; x_{5} &amp; = &amp; 1 \\ 
+-3 x_{1} &amp; - &amp; \frac{7}{3} x_{2} &amp; &amp; &amp; - &amp; \frac{8}{3} x_{4} &amp; - &amp; \frac{10}{3} x_{5} &amp; = &amp; 8 \\ 
+3 x_{1} &amp; - &amp; 2 x_{2} &amp; - &amp; 2 x_{3} &amp; + &amp; \frac{8}{3} x_{4} &amp; + &amp; x_{5} &amp; = &amp; -1 \\ 
+3 x_{1} &amp; - &amp; \frac{5}{3} x_{2} &amp; + &amp; 3 x_{3} &amp; + &amp; 2 x_{4} &amp; + &amp; \frac{4}{3} x_{5} &amp; = &amp; -2 \\ 
+-3 x_{1} &amp; - &amp; \frac{4}{3} x_{2} &amp; - &amp; \frac{7}{3} x_{3} &amp; - &amp; \frac{7}{3} x_{4} &amp; - &amp; x_{5} &amp; = &amp; 7 \\ 
+\end{array}
 \]</span></p>
 </section>
 <section id="matrices-creuses" class="level3">
@@ -452,16 +489,28 @@ C &lt;- tridiag(sample(-10:10, p-1, replace = TRUE),
              sample(-10:10, p, replace = TRUE))
 D &lt;- matrix(sample(-10:10, p, replace = TRUE),p,1)</code></pre>
 <p><span class="math display">\[
- \begin{array}{rrrrrrrrrrrrrrrrr}
--6 x_{1} &amp; - &amp; 5 x_{2} &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; = &amp; 1 \\ 
-8 x_{1} &amp; + &amp; 10 x_{2} &amp; - &amp; 6 x_{3} &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; = &amp; 9 \\ 
-&amp; + &amp; 4 x_{2} &amp; - &amp; 3 x_{3} &amp; - &amp; 2 x_{4} &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; = &amp; -2 \\ 
-&amp; &amp; &amp; - &amp; 7 x_{3} &amp; + &amp; 2 x_{4} &amp; + &amp; 4 x_{5} &amp; &amp; &amp; &amp; &amp; &amp; &amp; = &amp; -9 \\ 
-&amp; &amp; &amp; &amp; &amp; - &amp; 7 x_{4} &amp; - &amp; 3 x_{5} &amp; + &amp; 6 x_{6} &amp; &amp; &amp; &amp; &amp; = &amp; 10 \\ 
-&amp; &amp; &amp; &amp; &amp; &amp; &amp; + &amp; x_{5} &amp; + &amp; 2 x_{6} &amp; + &amp; 2 x_{7} &amp; &amp; &amp; = &amp; -2 \\ 
-&amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; + &amp; 2 x_{6} &amp; - &amp; 6 x_{7} &amp; - &amp; 7 x_{8} &amp; = &amp; 4 \\ 
-&amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; + &amp; 7 x_{7} &amp; - &amp; 10 x_{8} &amp; = &amp; 9 \\ 
-\end{array} 
+\begin{array}{rrrrrrrrrrrrrrrrr}
+7 x_{1} &amp; - &amp; 7 x_{2} &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; = &amp; 7 \\ 
+-3 x_{1} &amp; + &amp; x_{2} &amp; - &amp; 2 x_{3} &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; = &amp; 6 \\ 
+&amp; &amp; 4 x_{2} &amp; - &amp; 6 x_{3} &amp; + &amp; 5 x_{4} &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; = &amp; 4 \\ 
+&amp; &amp; &amp;  &amp; -8 x_{3} &amp; - &amp; 3 x_{4} &amp; - &amp; 3 x_{5} &amp; &amp; &amp; &amp; &amp; &amp; &amp; = &amp; -10 \\ 
+&amp; &amp; &amp; &amp; &amp;  &amp; -5 x_{4} &amp; + &amp; x_{5} &amp; &amp; &amp; &amp; &amp; &amp; &amp; = &amp; 5 \\ 
+&amp; &amp; &amp; &amp; &amp; &amp; &amp;  &amp; -2 x_{5} &amp; + &amp; 6 x_{6} &amp; - &amp; 3 x_{7} &amp; &amp; &amp; = &amp; -6 \\ 
+&amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; 3 x_{6} &amp; - &amp; 7 x_{7} &amp; - &amp; 7 x_{8} &amp; = &amp; -6 \\ 
+&amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp;  &amp; -x_{7} &amp; + &amp; x_{8} &amp; = &amp; -4 \\ 
+\end{array}
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{rrrrrrr}
+&amp; &amp; 7 x_{1} &amp; - &amp; 7 x_{2} &amp; = &amp; 7 \\ 
+-3 x_{1} &amp; + &amp; x_{2} &amp; - &amp; 2 x_{3} &amp; = &amp; 6 \\ 
+4 x_{2} &amp; - &amp; 6 x_{3} &amp; + &amp; 5 x_{4} &amp; = &amp; 4 \\ 
+-8 x_{3} &amp; - &amp; 3 x_{4} &amp; - &amp; 3 x_{5} &amp; = &amp; -10 \\ 
+&amp; &amp; -5 x_{4} &amp; + &amp; x_{5} &amp; = &amp; 5 \\ 
+-2 x_{5} &amp; + &amp; 6 x_{6} &amp; - &amp; 3 x_{7} &amp; = &amp; -6 \\ 
+3 x_{6} &amp; - &amp; 7 x_{7} &amp; - &amp; 7 x_{8} &amp; = &amp; -6 \\ 
+&amp; &amp; -x_{7} &amp; + &amp; x_{8} &amp; = &amp; -4 \\ 
+\end{array}
 \]</span></p>
 </section>
 </section>

@@ -9,7 +9,8 @@ sel2latex <- function(A,
                       concise = FALSE,
                       copy2clip = FALSE,
                       tolatex = TRUE,
-                      digits = 2){
+                      digits = 2,
+                      tol = sqrt(.Machine$double.eps)){
 
   if ((!is.matrix(A)) || (!is.numeric(A)))
     stop("A doit etre une matrice numerique.")
@@ -41,8 +42,6 @@ sel2latex <- function(A,
     matB <- mat2latex(B, envir = FALSE, tolatex = FALSE)
 
     toprint <- vector("character", length = nrow(A))
-    begin <- paste0(c("\\begin{array}{", rep("r", 2*ncol(A)+1),"}\n"), collapse = "")
-    end <- c("\\end{array}")
     var <- paste("x_{",(1:ncol(A)),"}", sep = "")
     for (i in (1:nrow(A))){
       toprint[i] <- paste0(paste(matA[i, ], var, collapse = " & + & "), " & = & ", matB[i, ], " \\\\ \n")
@@ -51,17 +50,33 @@ sel2latex <- function(A,
     # Sanitize en nettoyant la matrice
     toprint <- sanitize(toprint, concise)
 
+    if (concise){
+      notzero <- apply(A, 1, function(x){sum(abs(x) > tol)})
+      max_notzero <- max(notzero)
+      begin <- paste0(c("\\begin{array}{", rep("r", 2*max_notzero+1),"}\n"), collapse = "")
+      for (i in (1:nrow(A))){
+        # On ajoute des & sur les ligne ou il en manque
+        if (notzero[i] < max_notzero){
+          num_esperluette <- 2*(max_notzero - notzero[i])
+          toprint[i] <- paste0(c(rep("& ", num_esperluette), toprint[i]), collapse = "")
+        }
+      }
+    }
+    else begin <- paste0(c("\\begin{array}{", rep("r", 2*ncol(A)+1),"}\n"), collapse = "")
+
+    end <- c("\\end{array}")
+
     toprint <- paste0(c(begin, toprint, end), collapse = "")
     toprint <- convert_var(toprint, ncol(A), variables)
   }
   else{
-    latexA <- mat2latex(A)
+    latexA <- mat2latex(A, tolatex = FALSE)
     latexVar <- var2latex(ncol(A), bracket, variables)
-    latexB <- mat2latex(B)
+    latexB <- mat2latex(B, tolatex = FALSE)
     toprint <- c(latexA, latexVar, "=", latexB)
   }
 
-  if (tolatex) toprint <- paste0(c("$$\n",toprint,"\n$$"))
+  if (tolatex) toprint <- paste0(c("$$\n",toprint,"\n$$"), collapse = "")
 
   # On enleve les attributs aux matrices
   attr(A, "style") <- NULL

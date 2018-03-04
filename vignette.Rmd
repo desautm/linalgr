@@ -76,7 +76,7 @@ mat2latex(B)
 
 # Affichage de SEL
 
-## Avec des nombres entiers
+## Affichage de systèmes d'équations linéaires
 
 ```{r, results=FALSE, collapse=TRUE}
 sel2latex(A,B, variables = "xi")
@@ -86,17 +86,37 @@ sel2latex(A,B, variables = "xi")
 sel2latex(A,B, variables = "xi")
 ```
 
-## Avec d'autres variables
+## Affichage de systèmes matriciels
 
 ```{r, results=FALSE, collapse=TRUE}
-sel2latex(A,B, sel = FALSE, variables = "a")
+sel2latex(A,B, sel = FALSE, variables = "xi")
 ```
 
 ```{r, echo=FALSE, results='asis'}
-sel2latex(A,B, sel = FALSE, variables = "a")
+sel2latex(A,B, sel = FALSE, variables = "xi")
 ```
 
-## Avec des fractions décimales
+## Nous pouvons changer les variables utilisées
+
+```{r, results=FALSE, collapse=TRUE}
+sel2latex(A,B, variables = "a")
+```
+
+```{r, echo=FALSE, results='asis'}
+sel2latex(A,B, variables = "a")
+```
+
+ou alors...
+
+```{r, results=FALSE, collapse=TRUE}
+sel2latex(matrix(sample(-10:10,4),2,2),matrix(sample(-10:10,4),2,1), variables = "x")
+```
+
+```{r, echo=FALSE, results='asis'}
+sel2latex(matrix(sample(-10:10,4),2,2),matrix(sample(-10:10,4),2,1), variables = "x")
+```
+
+## Affichage avec des fractions décimales et contrôle du nombre de chiffres à droite de la virgule
 
 ```{r, results=FALSE, collapse=TRUE}
 sel2latex(A/3,B, variables = "xi", digits = 3)
@@ -128,7 +148,6 @@ sel2latex(A/3,B, variables = "xi", style = "frac")
 sel2latex(A/3,B, variables = "xi", style = "frac")
 ```
 
-
 ### Matrices creuses
 
 ```{r}
@@ -143,3 +162,6 @@ D <- matrix(sample(-10:10, p, replace = TRUE),p,1)
 sel2latex(C, D, variables = "xi")
 ```
 
+```{r echo=FALSE, results='asis'}
+sel2latex(C, D, variables = "xi", concise = TRUE)
+```

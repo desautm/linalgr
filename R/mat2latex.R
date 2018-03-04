@@ -120,7 +120,11 @@ mat2latex <- function(A,
 
   if (tolatex && envir) toprint <- paste0(c("$$\n",toprint,"\n$$"))
 
-  if (copy2clip) writeClipboard(toprint)
+  if (copy2clip){
+    test2clip <- writeClipboard(toprint)
+    if (test2clip) message("La matrice a ete correctement copiee dans le presse-papier.")
+    else message("La matrice n'a pas ete copiee dans le presse-papier.")
+  }
 
   if (verbose){
     cat(toprint)
