@@ -1,4 +1,34 @@
+#' Affichage LaTeX d'un systeme d'equations lineaires  (SEL)
+#'
+#' \code{sel2latex} retourne un vecteur de caracteres qui contient le code LaTeX permettant d'ecrire le SEL forme de la matrice \code{A}
+#' et de la matrice \code{B}.
+#' Nous pouvons choisir la facon d'afficher le SEL. Nous pouvons afficher des nombres entiers ou alors
+#' choisir le nombre de chiffres a droite de la virgule. Nous pouvons afficher le resultat sous forme de fraction. Nous pouvons
+#' afficher la fraction \code{inline} ou alors utiliser \code{frac}, \code{dfrac}, \code{sfrac} et \code{tfrac}. Le parametre \code{verbose}
+#' permet d'afficher ou non le SEL. Le parametre \code{copy2clip} permet de copier ou non le resultat dans le presse-papier. Le parametre
+#' \code{concise} permet de simplifier le SEL en enlevant les 0 lors de l'affichage du SEL
+#'
+#' @param A une matrice
+#' @param B une matrice de constantes
+#' @param sel Si \code{TRUE} nous affichons les equations et sinon nous affichons le SEL sous forme de matrices. \code{TRUE} par defaut
+#' @param style permet de choisir la facon d'afficher les elements de la matrice. Les choix possibles sont \code{inline}, \code{frac},
+#'   \code{dfrac}, \code{sfrac} et \code{tfrac}. Par defaut, nous affichons des entiers ou des nombres decimaux.
+#' @param bracket permet de choisir comment encadrer la matrice. Les choix sont des \code{crochet}s, des \code{parenthese}s ou un \code{determinant}.
+#'   Par defaut, nous encadrons entre \code{crochet}s.
+#' @param digits Le nombre de chiffres a droite de la virgule a afficher. Nous affichons 2 chiffres par defaut.
+#' @param verbose Si \code{TRUE} nous affichons le code LaTeX, si \code{FALSE} nous retournons le vecteur de caracteres. \code{TRUE} par defaut.
+#' @param copy2clip Si \code{TRUE} nous copions le resultat dans le presse papier. Par defaut \code{FALSE}.
+#' @param envir Si \code{TRUE}, nous encadrons le resultat dans un array et un bracket. Si \code{FALSE}, on ne retourne que la matrice.
+#' @param tolatex Si \code{TRUE} nous encadrons le resultat par "$$ resultat $$".
+#' @return Le vecteur de caracteres contenant le code LaTeX de la matrice
 #' @export
+#' @examples
+#' A <- matrix(c(2, -4, 0,
+#'               -3, 0, 7,
+#'               0, 0, -1), 3, 3)
+#' B <- matrix(c(0, -1, 5), 3, 1)
+#' sel2latex(A, B)
+
 sel2latex <- function(A,
                       B,
                       sel = TRUE,
