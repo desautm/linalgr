@@ -103,12 +103,12 @@ inverse_rref <- function(A,
 
   while ((i >= 1) && (j >= 1)){
     if (sum(abs(A[, j])) == 1){
-      if (i == 1) sequence <- 2:row
-      else if (i == row) sequence <- 1:(row-1)
-      else sequence <- c(1:(i-1),(i+1):row)
+      m <- which.max(A[, j])
+      if (m == 1) sequence <- 2:row
+      else if (m == row) sequence <- 1:(row-1)
+      else sequence <- c(1:(m-1),(m+1):row)
       for (k in sequence){
-        #A[k, (j:col)] <- A[k, (j:col)] + sample(c(-intervalle:-1,1:intervalle), 1)*A[i, (j:col)]
-        A[k, (j:col)] <- A[k, (j:col)] + 1*A[i, (j:col)]
+        A[k, (j:col)] <- A[k, (j:col)] + sample(c(-intervalle:-1,1:intervalle), 1)*A[m, (j:col)]
       }
       i <- i - 1
       j <- j - 1
@@ -119,5 +119,9 @@ inverse_rref <- function(A,
     m <- numbers::mGCD(A[i, ])
     if (m != 0) A[i, ] <- A[i, ]/m
   }
-  return(A)
+
+  A <- A[sample(1:row), ]
+
+  newList <- list("A" = A[, 1:(col-1)], "B" = as.matrix(A[, col]))
+  return(newList)
 }

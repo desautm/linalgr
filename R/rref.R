@@ -13,6 +13,7 @@ rref <- function(A,
     p <- max(abs(A[(i:row), j]))
     k <- which.max(abs(A[(i:row), j]))
     k <- k + i -1
+    oper <- matrix(0, row, 4)
     if (p <= tol){
       # La colonne est negligable, on la transforme en zero
       A[(i:row), j] <- 0
@@ -20,7 +21,11 @@ rref <- function(A,
     }
     else{
       # On echange les lignes i et k
-      A[c(i, k), (j:col)] <- A[c(k, i), (j:col)]
+      if (i != k){
+        A[c(i, k), (j:col)] <- A[c(k, i), (j:col)]
+        oper[i, ] <- c(1, 0, 1, 0)
+        oper[k, ] <- c(1, 0, 1, 0)
+      }
       # On divise la ligne du pivot par le pivot
       A[i, (j:col)] <- A[i, (j:col)]/A[i, j]
       # On soustrait des multiples de la ligne pivot des autres lignes
@@ -40,8 +45,10 @@ rref <- function(A,
         else sequence <- c(1:(i-1),(i+1):row)
       }
       for (k in sequence){
+        oper[k, ] <- c(1, k, -A[k, j], i)
         A[k, (j:col)] <- A[k, (j:col)] - A[k, j]*A[i, (j:col)]
       }
+      print(oper)
       i <- i + 1
       j <- j + 1
     }

@@ -173,3 +173,41 @@ sel2latex(C, D, variables = "xi", concise = TRUE)
 ```{r echo=FALSE, results='asis'}
 sel2latex(C, D, variables = "xi", concise = TRUE)
 ```
+
+# Création de SEL
+
+## Solution unique
+
+```{r results=FALSE, collapse=TRUE}
+E <- create_sel(5,5, type = "unique")
+sel2latex(E$A, E$B, variables = "xi")
+```
+
+```{r echo=FALSE, results='asis'}
+E <- create_sel(5,5, type = "unique")
+sel2latex(E$A, E$B, variables = "xi")
+```
+
+## Aucune solution
+
+```{r results=FALSE, collapse=TRUE}
+E <- create_sel(5,5, type = "aucune")
+sel2latex(E$A, E$B, variables = "xi")
+```
+
+```{r echo=FALSE, results='asis'}
+E <- create_sel(5,5, type = "aucune")
+sel2latex(E$A, E$B, variables = "xi")
+```
+
+## Infinité de solutions
+
+```{r results=FALSE, collapse=TRUE}
+E <- create_sel(5,5, type = "infinite")
+sel2latex(E$A, E$B, variables = "xi")
+```
+
+```{r echo=FALSE, results='asis'}
+E <- create_sel(5,5, type = "infinite")
+sel2latex(E$A, E$B, variables = "xi")
+```
