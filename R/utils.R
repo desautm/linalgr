@@ -230,4 +230,32 @@ tridiag <- function(upper, lower, main){
   return(out)
 }
 
+print_sel_oper <- function(A,
+                           cas = c("interchange", "combinaison", "reduit")){
 
+  toprint <- vector("character", length = nrow(A))
+  tostyle <- mat2latex(A, verbose = FALSE, envir = FALSE)
+
+  if (cas == "interchange"){
+    for (i in (1:nrow(A))){
+      if (sum(abs(A[i, ])) == 0) toprint[i] <- c("\\\\ \n")
+      else{
+        toprint[i] <- paste0(c("L_{",tostyle[i, 2],"} \\rightarrow L_{",tostyle[i, 4],"}\\\\ \n"),collapse = "")
+      }
+    }
+  }
+  else if (cas == "combinaison"){
+
+  }
+  else if (cas == "reduit"){
+
+  }
+
+  begin <- c("\\begin{array}{c}\n")
+  end <- c("\\end{array}\\\\\n")
+
+  toprint <- paste0(c(begin, toprint, end), collapse = "")
+
+  return(toprint)
+
+}

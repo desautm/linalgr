@@ -1,11 +1,33 @@
 #' @export
 rref <- function(A,
                  echelon = FALSE,
+                 style = c("decimal", "inline", "frac", "sfrac", "tfrac", "dfrac"),
+                 bracket = c("crochet", "parenthese", "determinant"),
+                 verbose = TRUE,
+                 copy2clip = FALSE,
+                 tolatex = TRUE,
+                 digits = 2,
                  tol = sqrt(.Machine$double.eps)){
 
   if (!is.matrix(A)) stop("A doit etre une matrice.")
+
+  style <- match.arg(style, c("decimal", "inline", "frac", "sfrac", "tfrac", "dfrac"))
+  bracket <- match.arg(bracket, c("crochet", "parenthese", "determinant"))
+
   row <- nrow(A)
   col <- ncol(A)
+
+  oper <- matrix(0, row, 4)
+
+  attr(A, "style") <- style
+  #attr(oper, "style") <- style
+  attr(A, "bracket") <- bracket
+  attr(A, "verbose") <- FALSE
+  #attr(oper, "verbose") <- FALSE
+  attr(A, "digits") <- digits
+  #attr(oper, "digits") <- digits
+
+  toprint <- mat2latex(A, tolatex = FALSE, verbose = FALSE)
 
   i <- j <- 1
   while ((i <= row) && (j <= col)){
@@ -22,12 +44,17 @@ rref <- function(A,
     else{
       # On echange les lignes i et k
       if (i != k){
+        oper[i, ] <- c(0, i, 0, k)
+        oper[k, ] <- c(0, k, 0, i)
+        #print_sel_oper(oper, cas =  "interchange")
+        oper[i, ] <- 0
+        oper[k, ] <- 0
         A[c(i, k), (j:col)] <- A[c(k, i), (j:col)]
-        oper[i, ] <- c(1, 0, 1, 0)
-        oper[k, ] <- c(1, 0, 1, 0)
+        toprint <- paste0(toprint, mat2latex(A, tolatex = FALSE, verbose = FALSE), collapse = "")
       }
       # On divise la ligne du pivot par le pivot
       A[i, (j:col)] <- A[i, (j:col)]/A[i, j]
+      toprint <- paste0(toprint, mat2latex(A, tolatex = FALSE, verbose = FALSE), collapse = "")
       # On soustrait des multiples de la ligne pivot des autres lignes
       # La variable sequence est une liste que nous devons traverser pour
       # parcourir toutes les lignes de la matrice
@@ -48,12 +75,19 @@ rref <- function(A,
         oper[k, ] <- c(1, k, -A[k, j], i)
         A[k, (j:col)] <- A[k, (j:col)] - A[k, j]*A[i, (j:col)]
       }
-      print(oper)
+      toprint <- paste0(toprint, mat2latex(A, tolatex = FALSE, verbose = FALSE), collapse = "")
       i <- i + 1
       j <- j + 1
     }
   }
-  return(A)
+  cat(toprint)
+
+  attr(A, "style") <- NULL
+  attr(A, "bracket") <- NULL
+  attr(A, "verbose") <- NULL
+  attr(A, "digits") <- NULL
+
+  #return(A)
 }
 
 #' @export
