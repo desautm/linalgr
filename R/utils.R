@@ -233,6 +233,8 @@ tridiag <- function(upper, lower, main){
 print_sel_oper <- function(A,
                            cas = c("interchange", "combinaison", "reduit")){
 
+  cas <- match.arg(cas, c("interchange", "combinaison", "reduit"))
+
   toprint <- vector("character", length = nrow(A))
   tostyle <- mat2latex(A, verbose = FALSE, envir = FALSE)
 
@@ -245,14 +247,26 @@ print_sel_oper <- function(A,
     }
   }
   else if (cas == "combinaison"){
-
+    for (i in (1:nrow(A))){
+      if (sum(abs(A[i, ])) == 0) toprint[i] <- c("\\\\ \n")
+      else{
+        toprint[i] <- paste0(tostyle[i, 1]," L_{",A[i,2],"} + ",tostyle[i, 3]," L_{",A[i,4],"} \\rightarrow L_{",A[i,2],"} \\\\ \n")
+        toprint[i] <- gsub("(\\s|^)1\\s","",toprint[i])
+        toprint[i] <- gsub("[+]\\s[-]","- ",toprint[i])
+      }
+    }
   }
   else if (cas == "reduit"){
-
+    for (i in (1:nrow(A))){
+      if (sum(abs(A[i, ])) == 0) toprint[i] <- c("\\\\ \n")
+      else{
+        toprint[i] <- paste0(tostyle[i, 1]," L_{",i,"} \\rightarrow L_{",i,"}\\\\ \n",collapse = "")
+      }
+    }
   }
 
-  begin <- c("\\begin{array}{c}\n")
-  end <- c("\\end{array}\\\\\n")
+  begin <- c("\\begin{array}{l}\n")
+  end <- c("\\end{array}\\\\\n \\\\\n")
 
   toprint <- paste0(c(begin, toprint, end), collapse = "")
 
