@@ -186,11 +186,11 @@ Voici l'affichage directement avec \texttt{R}:
 
 \begin{verbatim}
 ##      [,1] [,2] [,3] [,4] [,5]
-## [1,]  -10    6   -4   -9   -9
-## [2,]   -3   -5   -3   -5   -4
-## [3,]    0   -5   -6   -1  -10
-## [4,]   -7    6   -5    9   -1
-## [5,]    0    5    9  -10   -1
+## [1,]    5   -7  -10   -1   -1
+## [2,]    8   -4   -7   -2   -4
+## [3,]    5    0    5   -2   10
+## [4,]    8    5  -10   -7    4
+## [5,]   -1   10   -2    9    3
 \end{verbatim}
 
 \begin{Shaded}
@@ -201,14 +201,22 @@ Voici l'affichage directement avec \texttt{R}:
 
 \begin{verbatim}
 ##      [,1]
-## [1,]    7
-## [2,]    5
-## [3,]    0
-## [4,]    9
-## [5,]    1
+## [1,]   -2
+## [2,]    4
+## [3,]    1
+## [4,]   -6
+## [5,]    0
 \end{verbatim}
 
-Voici l'affichage en utilisant la librairie:
+\hypertarget{affichage-avec-la-librairie-linalgr}{%
+\subsection{\texorpdfstring{Affichage avec la librairie
+\texttt{linalgr}}{Affichage avec la librairie linalgr}}\label{affichage-avec-la-librairie-linalgr}}
+
+Pour afficher, il faut utiliser l'option
+\texttt{results\ =\ \textquotesingle{}asis\textquotesingle{}} dans le
+bloc de code \texttt{R}.
+
+Voici l'affichage en utilisant la librairie.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -218,31 +226,33 @@ Voici l'affichage en utilisant la librairie:
 \end{Shaded}
 
 \[
- \left[
+\left[
 \begin{array}{rrrrr}
--10 & 6 & -4 & -9 & -9 \\ 
--3 & -5 & -3 & -5 & -4 \\ 
-0 & -5 & -6 & -1 & -10 \\ 
--7 & 6 & -5 & 9 & -1 \\ 
-0 & 5 & 9 & -10 & -1 \\ 
+5 & -7 & -10 & -1 & -1 \\ 
+8 & -4 & -7 & -2 & -4 \\ 
+5 & 0 & 5 & -2 & 10 \\ 
+8 & 5 & -10 & -7 & 4 \\ 
+-1 & 10 & -2 & 9 & 3 \\ 
 \end{array}
-\right] 
+\right]
 \]\[
- \left[
+\left[
 \begin{array}{r}
-7 \\ 
-5 \\ 
-0 \\ 
-9 \\ 
+-2 \\ 
+4 \\ 
 1 \\ 
+-6 \\ 
+0 \\ 
 \end{array}
-\right] 
+\right]
 \]
 
 \hypertarget{affichage-de-sel}{%
 \section{Affichage de SEL}\label{affichage-de-sel}}
 
-Nous pouvons afficher des SEL
+\hypertarget{affichage-de-systemes-dequations-lineaires}{%
+\subsection{Affichage de systèmes d'équations
+linéaires}\label{affichage-de-systemes-dequations-lineaires}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -251,50 +261,92 @@ Nous pouvons afficher des SEL
 \end{Shaded}
 
 \[
- \begin{array}{rrrrrrrrrrr}
--10 x_{1} & + & 6 x_{2} & - & 4 x_{3} & - & 9 x_{4} & - & 9 x_{5} & = & 7 \\ 
--3 x_{1} & - & 5 x_{2} & - & 3 x_{3} & - & 5 x_{4} & - & 4 x_{5} & = & 5 \\ 
-& - & 5 x_{2} & - & 6 x_{3} & - & x_{4} & - & 10 x_{5} & = & 0 \\ 
--7 x_{1} & + & 6 x_{2} & - & 5 x_{3} & + & 9 x_{4} & - & x_{5} & = & 9 \\ 
-& & 5 x_{2} & + & 9 x_{3} & - & 10 x_{4} & - & x_{5} & = & 1 \\ 
-\end{array} 
+\begin{array}{rrrrrrrrrrr}
+5 x_{1} & - & 7 x_{2} & - & 10 x_{3} & - & x_{4} & - & x_{5} & = & -2 \\ 
+8 x_{1} & - & 4 x_{2} & - & 7 x_{3} & - & 2 x_{4} & - & 4 x_{5} & = & 4 \\ 
+5 x_{1} & & & + & 5 x_{3} & - & 2 x_{4} & + & 10 x_{5} & = & 1 \\ 
+8 x_{1} & + & 5 x_{2} & - & 10 x_{3} & - & 7 x_{4} & + & 4 x_{5} & = & -6 \\ 
+-x_{1} & + & 10 x_{2} & - & 2 x_{3} & + & 9 x_{4} & + & 3 x_{5} & = & 0 \\ 
+\end{array}
 \]
+
+\hypertarget{affichage-de-systemes-matriciels}{%
+\subsection{Affichage de systèmes
+matriciels}\label{affichage-de-systemes-matriciels}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{sel2latex}\NormalTok{(A,B, }\DataTypeTok{sel =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{variables =} \StringTok{"a"}\NormalTok{)}
+\KeywordTok{sel2latex}\NormalTok{(A,B, }\DataTypeTok{sel =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{variables =} \StringTok{"xi"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \[
- \left[
+\left[
 \begin{array}{rrrrr}
--10 & 6 & -4 & -9 & -9 \\ 
--3 & -5 & -3 & -5 & -4 \\ 
-0 & -5 & -6 & -1 & -10 \\ 
--7 & 6 & -5 & 9 & -1 \\ 
-0 & 5 & 9 & -10 & -1 \\ 
+5 & -7 & -10 & -1 & -1 \\ 
+8 & -4 & -7 & -2 & -4 \\ 
+5 & 0 & 5 & -2 & 10 \\ 
+8 & 5 & -10 & -7 & 4 \\ 
+-1 & 10 & -2 & 9 & 3 \\ 
 \end{array}
-\right] \left[
+\right]\left[
 \begin{array}{c} 
-a \\ 
-b \\ 
-c \\ 
-d \\ 
-e \\
+x_{1} \\ 
+x_{2} \\ 
+x_{3} \\ 
+x_{4} \\ 
+x_{5} \\
 \end{array}
-\right] = \left[
+\right]=\left[
 \begin{array}{r}
-7 \\ 
-5 \\ 
-0 \\ 
-9 \\ 
+-2 \\ 
+4 \\ 
 1 \\ 
+-6 \\ 
+0 \\ 
 \end{array}
-\right] 
+\right]
 \]
 
-Avec des fractions décimales
+\hypertarget{nous-pouvons-changer-les-variables-utilisees}{%
+\subsection{Nous pouvons changer les variables
+utilisées}\label{nous-pouvons-changer-les-variables-utilisees}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sel2latex}\NormalTok{(A,B, }\DataTypeTok{variables =} \StringTok{"a"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{array}{rrrrrrrrrrr}
+5 a & - & 7 b & - & 10 c & - & d & - & e & = & -2 \\ 
+8 a & - & 4 b & - & 7 c & - & 2 d & - & 4 e & = & 4 \\ 
+5 a & & & + & 5 c & - & 2 d & + & 10 e & = & 1 \\ 
+8 a & + & 5 b & - & 10 c & - & 7 d & + & 4 e & = & -6 \\ 
+-a & + & 10 b & - & 2 c & + & 9 d & + & 3 e & = & 0 \\ 
+\end{array}
+\]
+
+ou alors\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sel2latex}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{sample}\NormalTok{(}\OperatorTok{-}\DecValTok{10}\OperatorTok{:}\DecValTok{10}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{),}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{sample}\NormalTok{(}\OperatorTok{-}\DecValTok{10}\OperatorTok{:}\DecValTok{10}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{variables =} \StringTok{"x"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{array}{rrrrr}
+2 x & + & 4 y & = & 9 \\ 
+-8 x & - & 3 y & = & 5 \\ 
+\end{array}
+\]
+
+\hypertarget{affichage-avec-des-fractions-decimales-et-controle-du-nombre-de-chiffres-a-droite-de-la-virgule}{%
+\subsection{Affichage avec des fractions décimales et contrôle du nombre
+de chiffres à droite de la
+virgule}\label{affichage-avec-des-fractions-decimales-et-controle-du-nombre-de-chiffres-a-droite-de-la-virgule}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -303,16 +355,21 @@ Avec des fractions décimales
 \end{Shaded}
 
 \[
- \begin{array}{rrrrrrrrrrr}
--3.333 x_{1} & + & 2.000 x_{2} & - & 1.333 x_{3} & - & 3.000 x_{4} & - & 3.000 x_{5} & = & 7 \\ 
--1.000 x_{1} & - & 1.667 x_{2} & - & 1.000 x_{3} & - & 1.667 x_{4} & - & 1.333 x_{5} & = & 5 \\ 
-& - & 1.667 x_{2} & - & 2.000 x_{3} & - & 0.333 x_{4} & - & 3.333 x_{5} & = & 0 \\ 
--2.333 x_{1} & + & 2.000 x_{2} & - & 1.667 x_{3} & + & 3.000 x_{4} & - & 0.333 x_{5} & = & 9 \\ 
-& & 1.667 x_{2} & + & 3.000 x_{3} & - & 3.333 x_{4} & - & 0.333 x_{5} & = & 1 \\ 
-\end{array} 
+\begin{array}{rrrrrrrrrrr}
+1.667 x_{1} & - & 2.333 x_{2} & - & 3.333 x_{3} & - & 0.333 x_{4} & - & 0.333 x_{5} & = & -2 \\ 
+2.667 x_{1} & - & 1.333 x_{2} & - & 2.333 x_{3} & - & 0.667 x_{4} & - & 1.333 x_{5} & = & 4 \\ 
+1.667 x_{1} & + & 0.000 x_{2} & + & 1.667 x_{3} & - & 0.667 x_{4} & + & 3.333 x_{5} & = & 1 \\ 
+2.667 x_{1} & + & 1.667 x_{2} & - & 3.333 x_{3} & - & 2.333 x_{4} & + & 1.333 x_{5} & = & -6 \\ 
+-0.333 x_{1} & + & 3.333 x_{2} & - & 0.667 x_{3} & + & 3.000 x_{4} & + & 1.000 x_{5} & = & 0 \\ 
+\end{array}
 \]
 
-Avec des fractions ordinaires
+\hypertarget{avec-des-fractions-ordinaires}{%
+\subsection{Avec des fractions
+ordinaires}\label{avec-des-fractions-ordinaires}}
+
+\hypertarget{mode-en-ligne}{%
+\subsubsection{Mode en ligne}\label{mode-en-ligne}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -321,29 +378,967 @@ Avec des fractions ordinaires
 \end{Shaded}
 
 \[
- \begin{array}{rrrrrrrrrrr}
--10/3 x_{1} & + & 2 x_{2} & - & 4/3 x_{3} & - & 3 x_{4} & - & 3 x_{5} & = & 7 \\ 
--x_{1} & - & 5/3 x_{2} & - & x_{3} & - & 5/3 x_{4} & - & 4/3 x_{5} & = & 5 \\ 
-& - & 5/3 x_{2} & - & 2 x_{3} & - & 1/3 x_{4} & - & 10/3 x_{5} & = & 0 \\ 
--7/3 x_{1} & + & 2 x_{2} & - & 5/3 x_{3} & + & 3 x_{4} & - & 1/3 x_{5} & = & 9 \\ 
-& & 5/3 x_{2} & + & 3 x_{3} & - & 10/3 x_{4} & - & 1/3 x_{5} & = & 1 \\ 
-\end{array} 
+\begin{array}{rrrrrrrrrrr}
+5/3 x_{1} & - & 7/3 x_{2} & - & 10/3 x_{3} & - & 1/3 x_{4} & - & 1/3 x_{5} & = & -2 \\ 
+8/3 x_{1} & - & 4/3 x_{2} & - & 7/3 x_{3} & - & 2/3 x_{4} & - & 4/3 x_{5} & = & 4 \\ 
+5/3 x_{1} & & & + & 5/3 x_{3} & - & 2/3 x_{4} & + & 10/3 x_{5} & = & 1 \\ 
+8/3 x_{1} & + & 5/3 x_{2} & - & 10/3 x_{3} & - & 7/3 x_{4} & + & 4/3 x_{5} & = & -6 \\ 
+-1/3 x_{1} & + & 10/3 x_{2} & - & 2/3 x_{3} & + & 3 x_{4} & + & x_{5} & = & 0 \\ 
+\end{array}
 \]
+
+\hypertarget{mode-commande-frac}{%
+\subsubsection{Mode commande frac}\label{mode-commande-frac}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{sel2latex}\NormalTok{(A}\OperatorTok{/}\DecValTok{3}\NormalTok{,B, }\DataTypeTok{variables =} \StringTok{"xi"}\NormalTok{, }\DataTypeTok{style =} \StringTok{"sfrac"}\NormalTok{)}
+\KeywordTok{sel2latex}\NormalTok{(A}\OperatorTok{/}\DecValTok{3}\NormalTok{,B, }\DataTypeTok{variables =} \StringTok{"xi"}\NormalTok{, }\DataTypeTok{style =} \StringTok{"frac"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \[
- \begin{array}{rrrrrrrrrrr}
--\sfrac{10}{3} x_{1} & + & 2 x_{2} & - & \sfrac{4}{3} x_{3} & - & 3 x_{4} & - & 3 x_{5} & = & 7 \\ 
--x_{1} & - & \sfrac{5}{3} x_{2} & - & x_{3} & - & \sfrac{5}{3} x_{4} & - & \sfrac{4}{3} x_{5} & = & 5 \\ 
-& - & \sfrac{5}{3} x_{2} & - & 2 x_{3} & - & \sfrac{1}{3} x_{4} & - & \sfrac{10}{3} x_{5} & = & 0 \\ 
--\sfrac{7}{3} x_{1} & + & 2 x_{2} & - & \sfrac{5}{3} x_{3} & + & 3 x_{4} & - & \sfrac{1}{3} x_{5} & = & 9 \\ 
-& & \sfrac{5}{3} x_{2} & + & 3 x_{3} & - & \sfrac{10}{3} x_{4} & - & \sfrac{1}{3} x_{5} & = & 1 \\ 
-\end{array} 
+\begin{array}{rrrrrrrrrrr}
+\frac{5}{3} x_{1} & - & \frac{7}{3} x_{2} & - & \frac{10}{3} x_{3} & - & \frac{1}{3} x_{4} & - & \frac{1}{3} x_{5} & = & -2 \\ 
+\frac{8}{3} x_{1} & - & \frac{4}{3} x_{2} & - & \frac{7}{3} x_{3} & - & \frac{2}{3} x_{4} & - & \frac{4}{3} x_{5} & = & 4 \\ 
+\frac{5}{3} x_{1} & & & + & \frac{5}{3} x_{3} & - & \frac{2}{3} x_{4} & + & \frac{10}{3} x_{5} & = & 1 \\ 
+\frac{8}{3} x_{1} & + & \frac{5}{3} x_{2} & - & \frac{10}{3} x_{3} & - & \frac{7}{3} x_{4} & + & \frac{4}{3} x_{5} & = & -6 \\ 
+-\frac{1}{3} x_{1} & + & \frac{10}{3} x_{2} & - & \frac{2}{3} x_{3} & + & 3 x_{4} & + & x_{5} & = & 0 \\ 
+\end{array}
+\]
+
+\hypertarget{matrices-creuses}{%
+\subsubsection{Matrices creuses}\label{matrices-creuses}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{C <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+              \DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{-5}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+              \DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+              \DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{-1}\NormalTok{, }\DecValTok{-1}\NormalTok{, }\DecValTok{-1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+              \DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+              \DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{-6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+              \DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{,}
+              \DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{-1}\NormalTok{, }\DecValTok{4}\NormalTok{), }\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{D <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{), }\DecValTok{8}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{option-de-base}{%
+\paragraph{Option de base}\label{option-de-base}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sel2latex}\NormalTok{(C, D, }\DataTypeTok{variables =} \StringTok{"xi"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{array}{rrrrrrrrrrrrrrrrr}
+-2 x_{1} & + & 2 x_{2} & & & & & & & & & & & & & = & 1 \\ 
+3 x_{1} & + & 4 x_{2} & - & 5 x_{3} & & & & & & & & & & & = & 2 \\ 
+& & 3 x_{2} & + & x_{3} & & & & & & & & & & & = & 3 \\ 
+& & &  & -x_{3} & - & x_{4} & - & x_{5} & & & & & & & = & 4 \\ 
+& & & & & & 3 x_{4} & + & 4 x_{5} & + & 7 x_{6} & & & & & = & 5 \\ 
+& & & & & & &  & -6 x_{5} & + & 6 x_{6} & + & x_{7} & & & = & 6 \\ 
+& & & & & & & & & & x_{6} & + & x_{7} & + & x_{8} & = & 7 \\ 
+& & & & & & & & & & &  & -x_{7} & + & 4 x_{8} & = & 8 \\ 
+\end{array}
+\]
+
+\hypertarget{option-concise}{%
+\paragraph{\texorpdfstring{Option
+\texttt{concise}}{Option concise}}\label{option-concise}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sel2latex}\NormalTok{(C, D, }\DataTypeTok{variables =} \StringTok{"xi"}\NormalTok{, }\DataTypeTok{concise =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{array}{rrrrrrr}
+& & -2 x_{1} & + & 2 x_{2} & = & 1 \\ 
+3 x_{1} & + & 4 x_{2} & - & 5 x_{3} & = & 2 \\ 
+& & 3 x_{2} & + & x_{3} & = & 3 \\ 
+-x_{3} & - & x_{4} & - & x_{5} & = & 4 \\ 
+3 x_{4} & + & 4 x_{5} & + & 7 x_{6} & = & 5 \\ 
+-6 x_{5} & + & 6 x_{6} & + & x_{7} & = & 6 \\ 
+x_{6} & + & x_{7} & + & x_{8} & = & 7 \\ 
+& & -x_{7} & + & 4 x_{8} & = & 8 \\ 
+\end{array}
+\]
+
+\hypertarget{creation-de-sel}{%
+\section{Création de SEL}\label{creation-de-sel}}
+
+\hypertarget{solution-unique-matrice-echelon}{%
+\subsection{Solution unique (matrice
+échelon)}\label{solution-unique-matrice-echelon}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{E <-}\StringTok{ }\KeywordTok{create_sel}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{, }\DataTypeTok{type =} \StringTok{"unique"}\NormalTok{)}
+\KeywordTok{sel2latex}\NormalTok{(E}\OperatorTok{$}\NormalTok{A, E}\OperatorTok{$}\NormalTok{B, }\DataTypeTok{variables =} \StringTok{"xi"}\NormalTok{)}
+\KeywordTok{rref}\NormalTok{(E}\OperatorTok{$}\NormalTok{A, E}\OperatorTok{$}\NormalTok{B, }\DataTypeTok{style =} \StringTok{"inline"}\NormalTok{, }\DataTypeTok{echelon =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{rref_entier}\NormalTok{(E}\OperatorTok{$}\NormalTok{A, E}\OperatorTok{$}\NormalTok{B, }\DataTypeTok{style =} \StringTok{"inline"}\NormalTok{, }\DataTypeTok{echelon =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{array}{rrrrrrrrr}
+x_{1} & + & 5 x_{2} & - & 27 x_{3} & + & 61 x_{4} & = & 469 \\ 
+x_{1} & + & 6 x_{2} & - & 30 x_{3} & + & 69 x_{4} & = & 528 \\ 
+4 x_{1} & + & 22 x_{2} & - & 117 x_{3} & + & 264 x_{4} & = & 2024 \\ 
+-4 x_{1} & - & 19 x_{2} & + & 103 x_{3} & - & 233 x_{4} & = & -1794 \\ 
+\end{array}
+\]\[
+\begin{array}{l}
+\left[
+\begin{array}{rrrr|r}
+1 & 5 & -27 & 61 & 469 \\ 
+1 & 6 & -30 & 69 & 528 \\ 
+4 & 22 & -117 & 264 & 2024 \\ 
+-4 & -19 & 103 & -233 & -1794 \\ 
+\end{array}
+\right]\begin{array}{l}
+L_{1} \rightarrow L_{3}\\ 
+\\ 
+L_{3} \rightarrow L_{1}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+4 & 22 & -117 & 264 & 2024 \\ 
+1 & 6 & -30 & 69 & 528 \\ 
+1 & 5 & -27 & 61 & 469 \\ 
+-4 & -19 & 103 & -233 & -1794 \\ 
+\end{array}
+\right]\begin{array}{l}
+1/4 L_{1} \rightarrow L_{1}\\ 
+\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 11/2 & -117/4 & 66 & 506 \\ 
+1 & 6 & -30 & 69 & 528 \\ 
+1 & 5 & -27 & 61 & 469 \\ 
+-4 & -19 & 103 & -233 & -1794 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+ L_{2} -  L_{1} \rightarrow L_{2} \\ 
+ L_{3} -  L_{1} \rightarrow L_{3} \\ 
+ L_{4} + 4 L_{1} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 11/2 & -117/4 & 66 & 506 \\ 
+0 & 1/2 & -3/4 & 3 & 22 \\ 
+0 & -1/2 & 9/4 & -5 & -37 \\ 
+0 & 3 & -14 & 31 & 230 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+L_{2} \rightarrow L_{4}\\ 
+\\ 
+L_{4} \rightarrow L_{2}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 11/2 & -117/4 & 66 & 506 \\ 
+0 & 3 & -14 & 31 & 230 \\ 
+0 & -1/2 & 9/4 & -5 & -37 \\ 
+0 & 1/2 & -3/4 & 3 & 22 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+1/3 L_{2} \rightarrow L_{2}\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 11/2 & -117/4 & 66 & 506 \\ 
+0 & 1 & -14/3 & 31/3 & 230/3 \\ 
+0 & -1/2 & 9/4 & -5 & -37 \\ 
+0 & 1/2 & -3/4 & 3 & 22 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+ L_{3} + 1/2 L_{2} \rightarrow L_{3} \\ 
+ L_{4} - 1/2 L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 11/2 & -117/4 & 66 & 506 \\ 
+0 & 1 & -14/3 & 31/3 & 230/3 \\ 
+0 & 0 & -1/12 & 1/6 & 4/3 \\ 
+0 & 0 & 19/12 & -13/6 & -49/3 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+L_{3} \rightarrow L_{4}\\ 
+L_{4} \rightarrow L_{3}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 11/2 & -117/4 & 66 & 506 \\ 
+0 & 1 & -14/3 & 31/3 & 230/3 \\ 
+0 & 0 & 19/12 & -13/6 & -49/3 \\ 
+0 & 0 & -1/12 & 1/6 & 4/3 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+12/19 L_{3} \rightarrow L_{3}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 11/2 & -117/4 & 66 & 506 \\ 
+0 & 1 & -14/3 & 31/3 & 230/3 \\ 
+0 & 0 & 1 & -26/19 & -196/19 \\ 
+0 & 0 & -1/12 & 1/6 & 4/3 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+\\ 
+ L_{4} + 1/12 L_{3} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 11/2 & -117/4 & 66 & 506 \\ 
+0 & 1 & -14/3 & 31/3 & 230/3 \\ 
+0 & 0 & 1 & -26/19 & -196/19 \\ 
+0 & 0 & 0 & 1/19 & 9/19 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+\\ 
+19 L_{4} \rightarrow L_{4}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 11/2 & -117/4 & 66 & 506 \\ 
+0 & 1 & -14/3 & 31/3 & 230/3 \\ 
+0 & 0 & 1 & -26/19 & -196/19 \\ 
+0 & 0 & 0 & 1 & 9 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 11/2 & -117/4 & 66 & 506 \\ 
+0 & 1 & -14/3 & 31/3 & 230/3 \\ 
+0 & 0 & 1 & -26/19 & -196/19 \\ 
+0 & 0 & 0 & 1 & 9 \\ 
+\end{array}
+\right]
+\end{array}
+\]\[
+\begin{array}{l}
+\left[
+\begin{array}{rrrr|r}
+1 & 5 & -27 & 61 & 469 \\ 
+1 & 6 & -30 & 69 & 528 \\ 
+4 & 22 & -117 & 264 & 2024 \\ 
+-4 & -19 & 103 & -233 & -1794 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+ L_{2} -  L_{1} \rightarrow L_{2} \\ 
+ L_{3} - 4 L_{1} \rightarrow L_{3} \\ 
+ L_{4} + 4 L_{1} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 5 & -27 & 61 & 469 \\ 
+0 & 1 & -3 & 8 & 59 \\ 
+0 & 2 & -9 & 20 & 148 \\ 
+0 & 1 & -5 & 11 & 82 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+ L_{3} - 2 L_{2} \rightarrow L_{3} \\ 
+ L_{4} -  L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 5 & -27 & 61 & 469 \\ 
+0 & 1 & -3 & 8 & 59 \\ 
+0 & 0 & -3 & 4 & 30 \\ 
+0 & 0 & -2 & 3 & 23 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+\\ 
+3 L_{4} - 2 L_{3} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 5 & -27 & 61 & 469 \\ 
+0 & 1 & -3 & 8 & 59 \\ 
+0 & 0 & -3 & 4 & 30 \\ 
+0 & 0 & 0 & 1 & 9 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 5 & -27 & 61 & 469 \\ 
+0 & 1 & -3 & 8 & 59 \\ 
+0 & 0 & -3 & 4 & 30 \\ 
+0 & 0 & 0 & 1 & 9 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} \rightarrow L_{1}\\ 
+ L_{2} \rightarrow L_{2}\\ 
+-1/3 L_{3} \rightarrow L_{3}\\ 
+ L_{4} \rightarrow L_{4}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 5 & -27 & 61 & 469 \\ 
+0 & 1 & -3 & 8 & 59 \\ 
+0 & 0 & 1 & -4/3 & -10 \\ 
+0 & 0 & 0 & 1 & 9 \\ 
+\end{array}
+\right]
+\end{array}
+\]
+
+\hypertarget{solution-unique}{%
+\subsection{Solution unique}\label{solution-unique}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{E <-}\StringTok{ }\KeywordTok{create_sel}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{, }\DataTypeTok{type =} \StringTok{"unique"}\NormalTok{)}
+\KeywordTok{sel2latex}\NormalTok{(E}\OperatorTok{$}\NormalTok{A, E}\OperatorTok{$}\NormalTok{B, }\DataTypeTok{variables =} \StringTok{"xi"}\NormalTok{)}
+\KeywordTok{rref}\NormalTok{(E}\OperatorTok{$}\NormalTok{A,E}\OperatorTok{$}\NormalTok{B,}\DataTypeTok{style =} \StringTok{"inline"}\NormalTok{)}
+\KeywordTok{rref_entier}\NormalTok{(E}\OperatorTok{$}\NormalTok{A,E}\OperatorTok{$}\NormalTok{B,}\DataTypeTok{style =} \StringTok{"inline"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{array}{rrrrrrrrr}
+x_{1} & + & 5 x_{2} & + & 13 x_{3} & + & 31 x_{4} & = & -208 \\ 
+x_{1} & + & 6 x_{2} & + & 17 x_{3} & + & 41 x_{4} & = & -280 \\ 
+-2 x_{1} & - & 9 x_{2} & - & 23 x_{3} & - & 55 x_{4} & = & 367 \\ 
+x_{1} & & & + & 3 x_{3} & + & 12 x_{4} & = & -84 \\ 
+\end{array}
+\]\[
+\begin{array}{l}
+\left[
+\begin{array}{rrrr|r}
+1 & 5 & 13 & 31 & -208 \\ 
+1 & 6 & 17 & 41 & -280 \\ 
+-2 & -9 & -23 & -55 & 367 \\ 
+1 & 0 & 3 & 12 & -84 \\ 
+\end{array}
+\right]\begin{array}{l}
+L_{1} \rightarrow L_{3}\\ 
+\\ 
+L_{3} \rightarrow L_{1}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+-2 & -9 & -23 & -55 & 367 \\ 
+1 & 6 & 17 & 41 & -280 \\ 
+1 & 5 & 13 & 31 & -208 \\ 
+1 & 0 & 3 & 12 & -84 \\ 
+\end{array}
+\right]\begin{array}{l}
+-1/2 L_{1} \rightarrow L_{1}\\ 
+\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 9/2 & 23/2 & 55/2 & -367/2 \\ 
+1 & 6 & 17 & 41 & -280 \\ 
+1 & 5 & 13 & 31 & -208 \\ 
+1 & 0 & 3 & 12 & -84 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+ L_{2} -  L_{1} \rightarrow L_{2} \\ 
+ L_{3} -  L_{1} \rightarrow L_{3} \\ 
+ L_{4} -  L_{1} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 9/2 & 23/2 & 55/2 & -367/2 \\ 
+0 & 3/2 & 11/2 & 27/2 & -193/2 \\ 
+0 & 1/2 & 3/2 & 7/2 & -49/2 \\ 
+0 & -9/2 & -17/2 & -31/2 & 199/2 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+L_{2} \rightarrow L_{4}\\ 
+\\ 
+L_{4} \rightarrow L_{2}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 9/2 & 23/2 & 55/2 & -367/2 \\ 
+0 & -9/2 & -17/2 & -31/2 & 199/2 \\ 
+0 & 1/2 & 3/2 & 7/2 & -49/2 \\ 
+0 & 3/2 & 11/2 & 27/2 & -193/2 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+-2/9 L_{2} \rightarrow L_{2}\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 9/2 & 23/2 & 55/2 & -367/2 \\ 
+0 & 1 & 17/9 & 31/9 & -199/9 \\ 
+0 & 1/2 & 3/2 & 7/2 & -49/2 \\ 
+0 & 3/2 & 11/2 & 27/2 & -193/2 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} - 9/2 L_{2} \rightarrow L_{1} \\ 
+\\ 
+ L_{3} - 1/2 L_{2} \rightarrow L_{3} \\ 
+ L_{4} - 3/2 L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 0 & 3 & 12 & -84 \\ 
+0 & 1 & 17/9 & 31/9 & -199/9 \\ 
+0 & 0 & 5/9 & 16/9 & -121/9 \\ 
+0 & 0 & 8/3 & 25/3 & -190/3 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+L_{3} \rightarrow L_{4}\\ 
+L_{4} \rightarrow L_{3}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 0 & 3 & 12 & -84 \\ 
+0 & 1 & 17/9 & 31/9 & -199/9 \\ 
+0 & 0 & 8/3 & 25/3 & -190/3 \\ 
+0 & 0 & 5/9 & 16/9 & -121/9 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+3/8 L_{3} \rightarrow L_{3}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 0 & 3 & 12 & -84 \\ 
+0 & 1 & 17/9 & 31/9 & -199/9 \\ 
+0 & 0 & 1 & 25/8 & -95/4 \\ 
+0 & 0 & 5/9 & 16/9 & -121/9 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} - 3 L_{3} \rightarrow L_{1} \\ 
+ L_{2} - 17/9 L_{3} \rightarrow L_{2} \\ 
+\\ 
+ L_{4} - 5/9 L_{3} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 0 & 0 & 21/8 & -51/4 \\ 
+0 & 1 & 0 & -59/24 & 91/4 \\ 
+0 & 0 & 1 & 25/8 & -95/4 \\ 
+0 & 0 & 0 & 1/24 & -1/4 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+\\ 
+24 L_{4} \rightarrow L_{4}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 0 & 0 & 21/8 & -51/4 \\ 
+0 & 1 & 0 & -59/24 & 91/4 \\ 
+0 & 0 & 1 & 25/8 & -95/4 \\ 
+0 & 0 & 0 & 1 & -6 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} - 21/8 L_{4} \rightarrow L_{1} \\ 
+ L_{2} + 59/24 L_{4} \rightarrow L_{2} \\ 
+ L_{3} - 25/8 L_{4} \rightarrow L_{3} \\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 0 & 0 & 0 & 3 \\ 
+0 & 1 & 0 & 0 & 8 \\ 
+0 & 0 & 1 & 0 & -5 \\ 
+0 & 0 & 0 & 1 & -6 \\ 
+\end{array}
+\right]
+\end{array}
+\]\[
+\begin{array}{l}
+\left[
+\begin{array}{rrrr|r}
+1 & 5 & 13 & 31 & -208 \\ 
+1 & 6 & 17 & 41 & -280 \\ 
+-2 & -9 & -23 & -55 & 367 \\ 
+1 & 0 & 3 & 12 & -84 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+ L_{2} -  L_{1} \rightarrow L_{2} \\ 
+ L_{3} + 2 L_{1} \rightarrow L_{3} \\ 
+ L_{4} -  L_{1} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 5 & 13 & 31 & -208 \\ 
+0 & 1 & 4 & 10 & -72 \\ 
+0 & 1 & 3 & 7 & -49 \\ 
+0 & -5 & -10 & -19 & 124 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} - 5 L_{2} \rightarrow L_{1} \\ 
+\\ 
+ L_{3} -  L_{2} \rightarrow L_{3} \\ 
+ L_{4} + 5 L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 0 & -7 & -19 & 152 \\ 
+0 & 1 & 4 & 10 & -72 \\ 
+0 & 0 & -1 & -3 & 23 \\ 
+0 & 0 & 10 & 31 & -236 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} - 7 L_{3} \rightarrow L_{1} \\ 
+ L_{2} + 4 L_{3} \rightarrow L_{2} \\ 
+\\ 
+ L_{4} + 10 L_{3} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 0 & 0 & 2 & -9 \\ 
+0 & 1 & 0 & -2 & 20 \\ 
+0 & 0 & -1 & -3 & 23 \\ 
+0 & 0 & 0 & 1 & -6 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} - 2 L_{4} \rightarrow L_{1} \\ 
+ L_{2} + 2 L_{4} \rightarrow L_{2} \\ 
+ L_{3} + 3 L_{4} \rightarrow L_{3} \\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 0 & 0 & 0 & 3 \\ 
+0 & 1 & 0 & 0 & 8 \\ 
+0 & 0 & -1 & 0 & 5 \\ 
+0 & 0 & 0 & 1 & -6 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} \rightarrow L_{1}\\ 
+ L_{2} \rightarrow L_{2}\\ 
+- L_{3} \rightarrow L_{3}\\ 
+ L_{4} \rightarrow L_{4}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & 0 & 0 & 0 & 3 \\ 
+0 & 1 & 0 & 0 & 8 \\ 
+0 & 0 & 1 & 0 & -5 \\ 
+0 & 0 & 0 & 1 & -6 \\ 
+\end{array}
+\right]
+\end{array}
+\]
+
+\hypertarget{aucune-solution}{%
+\subsection{Aucune solution}\label{aucune-solution}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{E <-}\StringTok{ }\KeywordTok{create_sel}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{, }\DataTypeTok{type =} \StringTok{"aucune"}\NormalTok{)}
+\KeywordTok{sel2latex}\NormalTok{(E}\OperatorTok{$}\NormalTok{A, E}\OperatorTok{$}\NormalTok{B, }\DataTypeTok{variables =} \StringTok{"xi"}\NormalTok{)}
+\KeywordTok{rref}\NormalTok{(E}\OperatorTok{$}\NormalTok{A,E}\OperatorTok{$}\NormalTok{B,}\DataTypeTok{style =} \StringTok{"inline"}\NormalTok{)}
+\KeywordTok{rref_entier}\NormalTok{(E}\OperatorTok{$}\NormalTok{A,E}\OperatorTok{$}\NormalTok{B,}\DataTypeTok{style =} \StringTok{"inline"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{array}{rrrrrrr}
+5 x_{1} & + & 11 x_{2} & & & = & 30 \\ 
+5 x_{1} & + & 6 x_{2} & & & = & 24 \\ 
+x_{1} & + & 2 x_{2} & & & = & 6 \\ 
+\end{array}
+\]\[
+\begin{array}{l}
+\left[
+\begin{array}{rrr|r}
+5 & 11 & 0 & 30 \\ 
+5 & 6 & 0 & 24 \\ 
+1 & 2 & 0 & 6 \\ 
+\end{array}
+\right]\begin{array}{l}
+1/5 L_{1} \rightarrow L_{1}\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrr|r}
+1 & 11/5 & 0 & 6 \\ 
+5 & 6 & 0 & 24 \\ 
+1 & 2 & 0 & 6 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+ L_{2} - 5 L_{1} \rightarrow L_{2} \\ 
+ L_{3} -  L_{1} \rightarrow L_{3} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrr|r}
+1 & 11/5 & 0 & 6 \\ 
+0 & -5 & 0 & -6 \\ 
+0 & -1/5 & 0 & 0 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+-1/5 L_{2} \rightarrow L_{2}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrr|r}
+1 & 11/5 & 0 & 6 \\ 
+0 & 1 & 0 & 6/5 \\ 
+0 & -1/5 & 0 & 0 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} - 11/5 L_{2} \rightarrow L_{1} \\ 
+\\ 
+ L_{3} + 1/5 L_{2} \rightarrow L_{3} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrr|r}
+1 & 0 & 0 & 84/25 \\ 
+0 & 1 & 0 & 6/5 \\ 
+0 & 0 & 0 & 6/25 \\ 
+\end{array}
+\right]
+\end{array}
+\]\[
+\begin{array}{l}
+\left[
+\begin{array}{rrr|r}
+5 & 11 & 0 & 30 \\ 
+5 & 6 & 0 & 24 \\ 
+1 & 2 & 0 & 6 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+ L_{2} -  L_{1} \rightarrow L_{2} \\ 
+5 L_{3} -  L_{1} \rightarrow L_{3} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrr|r}
+5 & 11 & 0 & 30 \\ 
+0 & -5 & 0 & -6 \\ 
+0 & -1 & 0 & 0 \\ 
+\end{array}
+\right]\begin{array}{l}
+5 L_{1} + 11 L_{2} \rightarrow L_{1} \\ 
+\\ 
+5 L_{3} -  L_{2} \rightarrow L_{3} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrr|r}
+25 & 0 & 0 & 84 \\ 
+0 & -5 & 0 & -6 \\ 
+0 & 0 & 0 & 6 \\ 
+\end{array}
+\right]\begin{array}{l}
+1/25 L_{1} \rightarrow L_{1}\\ 
+-1/5 L_{2} \rightarrow L_{2}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrr|r}
+1 & 0 & 0 & 84/25 \\ 
+0 & 1 & 0 & 6/5 \\ 
+0 & 0 & 0 & 6 \\ 
+\end{array}
+\right]
+\end{array}
+\]
+
+\hypertarget{infinite-de-solutions}{%
+\subsection{Infinité de solutions}\label{infinite-de-solutions}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{E <-}\StringTok{ }\KeywordTok{create_sel}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{, }\DataTypeTok{type =} \StringTok{"infinite"}\NormalTok{)}
+\KeywordTok{sel2latex}\NormalTok{(E}\OperatorTok{$}\NormalTok{A, E}\OperatorTok{$}\NormalTok{B, }\DataTypeTok{variables =} \StringTok{"xi"}\NormalTok{)}
+\KeywordTok{rref}\NormalTok{(E}\OperatorTok{$}\NormalTok{A,E}\OperatorTok{$}\NormalTok{B,}\DataTypeTok{style =} \StringTok{"inline"}\NormalTok{)}
+\KeywordTok{rref_entier}\NormalTok{(E}\OperatorTok{$}\NormalTok{A,E}\OperatorTok{$}\NormalTok{B,}\DataTypeTok{style =} \StringTok{"inline"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\[
+\begin{array}{rrrrrrrrr}
+x_{1} & - & 7 x_{2} & - & 2 x_{3} & - & 10 x_{4} & = & 49 \\ 
+-5 x_{1} & + & 35 x_{2} & + & 11 x_{3} & + & 53 x_{4} & = & -257 \\ 
+-3 x_{1} & + & 21 x_{2} & + & 4 x_{3} & + & 25 x_{4} & = & -130 \\ 
+3 x_{1} & - & 21 x_{2} & - & x_{3} & - & 11 x_{4} & = & 59 \\ 
+\end{array}
+\]\[
+\begin{array}{l}
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & -2 & -10 & 49 \\ 
+-5 & 35 & 11 & 53 & -257 \\ 
+-3 & 21 & 4 & 25 & -130 \\ 
+3 & -21 & -1 & -11 & 59 \\ 
+\end{array}
+\right]\begin{array}{l}
+L_{1} \rightarrow L_{2}\\ 
+L_{2} \rightarrow L_{1}\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+-5 & 35 & 11 & 53 & -257 \\ 
+1 & -7 & -2 & -10 & 49 \\ 
+-3 & 21 & 4 & 25 & -130 \\ 
+3 & -21 & -1 & -11 & 59 \\ 
+\end{array}
+\right]\begin{array}{l}
+-1/5 L_{1} \rightarrow L_{1}\\ 
+\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & -11/5 & -53/5 & 257/5 \\ 
+1 & -7 & -2 & -10 & 49 \\ 
+-3 & 21 & 4 & 25 & -130 \\ 
+3 & -21 & -1 & -11 & 59 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+ L_{2} -  L_{1} \rightarrow L_{2} \\ 
+ L_{3} + 3 L_{1} \rightarrow L_{3} \\ 
+ L_{4} - 3 L_{1} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & -11/5 & -53/5 & 257/5 \\ 
+0 & 0 & 1/5 & 3/5 & -12/5 \\ 
+0 & 0 & -13/5 & -34/5 & 121/5 \\ 
+0 & 0 & 28/5 & 104/5 & -476/5 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+L_{2} \rightarrow L_{4}\\ 
+\\ 
+L_{4} \rightarrow L_{2}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & -11/5 & -53/5 & 257/5 \\ 
+0 & 0 & 28/5 & 104/5 & -476/5 \\ 
+0 & 0 & -13/5 & -34/5 & 121/5 \\ 
+0 & 0 & 1/5 & 3/5 & -12/5 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+5/28 L_{2} \rightarrow L_{2}\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & -11/5 & -53/5 & 257/5 \\ 
+0 & 0 & 1 & 26/7 & -17 \\ 
+0 & 0 & -13/5 & -34/5 & 121/5 \\ 
+0 & 0 & 1/5 & 3/5 & -12/5 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 11/5 L_{2} \rightarrow L_{1} \\ 
+\\ 
+ L_{3} + 13/5 L_{2} \rightarrow L_{3} \\ 
+ L_{4} - 1/5 L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & 0 & -17/7 & 14 \\ 
+0 & 0 & 1 & 26/7 & -17 \\ 
+0 & 0 & 0 & 20/7 & -20 \\ 
+0 & 0 & 0 & -1/7 & 1 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+7/20 L_{3} \rightarrow L_{3}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & 0 & -17/7 & 14 \\ 
+0 & 0 & 1 & 26/7 & -17 \\ 
+0 & 0 & 0 & 1 & -7 \\ 
+0 & 0 & 0 & -1/7 & 1 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 17/7 L_{3} \rightarrow L_{1} \\ 
+ L_{2} - 26/7 L_{3} \rightarrow L_{2} \\ 
+\\ 
+ L_{4} + 1/7 L_{3} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & 0 & 0 & -3 \\ 
+0 & 0 & 1 & 0 & 9 \\ 
+0 & 0 & 0 & 1 & -7 \\ 
+0 & 0 & 0 & 0 & 0 \\ 
+\end{array}
+\right]
+\end{array}
+\]\[
+\begin{array}{l}
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & -2 & -10 & 49 \\ 
+-5 & 35 & 11 & 53 & -257 \\ 
+-3 & 21 & 4 & 25 & -130 \\ 
+3 & -21 & -1 & -11 & 59 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+ L_{2} + 5 L_{1} \rightarrow L_{2} \\ 
+ L_{3} + 3 L_{1} \rightarrow L_{3} \\ 
+ L_{4} - 3 L_{1} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & -2 & -10 & 49 \\ 
+0 & 0 & 1 & 3 & -12 \\ 
+0 & 0 & -2 & -5 & 17 \\ 
+0 & 0 & 5 & 19 & -88 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 2 L_{2} \rightarrow L_{1} \\ 
+\\ 
+ L_{3} + 2 L_{2} \rightarrow L_{3} \\ 
+ L_{4} - 5 L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & 0 & -4 & 25 \\ 
+0 & 0 & 1 & 3 & -12 \\ 
+0 & 0 & 0 & 1 & -7 \\ 
+0 & 0 & 0 & 4 & -28 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 4 L_{3} \rightarrow L_{1} \\ 
+ L_{2} - 3 L_{3} \rightarrow L_{2} \\ 
+\\ 
+ L_{4} - 4 L_{3} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & 0 & 0 & -3 \\ 
+0 & 0 & 1 & 0 & 9 \\ 
+0 & 0 & 0 & 1 & -7 \\ 
+0 & 0 & 0 & 0 & 0 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} \rightarrow L_{1}\\ 
+ L_{2} \rightarrow L_{2}\\ 
+ L_{3} \rightarrow L_{3}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 & -7 & 0 & 0 & -3 \\ 
+0 & 0 & 1 & 0 & 9 \\ 
+0 & 0 & 0 & 1 & -7 \\ 
+0 & 0 & 0 & 0 & 0 \\ 
+\end{array}
+\right]
+\end{array}
 \]
 
 

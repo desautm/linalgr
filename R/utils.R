@@ -231,9 +231,9 @@ tridiag <- function(upper, lower, main){
 }
 
 print_sel_oper <- function(A,
-                           cas = c("interchange", "combinaison", "reduit")){
+                           cas = c("interchange", "combinaison", "reduit", "reduit_entier")){
 
-  cas <- match.arg(cas, c("interchange", "combinaison", "reduit"))
+  cas <- match.arg(cas, c("interchange", "combinaison", "reduit", "reduit_entier"))
 
   toprint <- vector("character", length = nrow(A))
   tostyle <- mat2latex(A, verbose = FALSE, envir = FALSE)
@@ -251,16 +251,19 @@ print_sel_oper <- function(A,
       if (sum(abs(A[i, ])) == 0) toprint[i] <- c("\\\\ \n")
       else{
         toprint[i] <- paste0(tostyle[i, 1]," L_{",A[i,2],"} + ",tostyle[i, 3]," L_{",A[i,4],"} \\rightarrow L_{",A[i,2],"} \\\\ \n")
-        toprint[i] <- gsub("(\\s|^)1\\s","",toprint[i])
-        toprint[i] <- gsub("[+]\\s[-]","- ",toprint[i])
+        toprint[i] <- gsub("[-]1\\s","- ",toprint[i]) # -1 devient -
+        toprint[i] <- gsub("(\\s|^)1\\s"," ",toprint[i]) # 1 L_{} devient L_{}
+        toprint[i] <- gsub("[+]\\s[-]","- ",toprint[i]) # + - devient -
       }
     }
   }
   else if (cas == "reduit"){
     for (i in (1:nrow(A))){
-      if (sum(abs(A[i, ])) == 0) toprint[i] <- c("\\\\ \n")
+      if (sum(abs(A[i, ])) == 0 || tostyle[i, 1] == 1) toprint[i] <- c("\\\\ \n")
       else{
         toprint[i] <- paste0(tostyle[i, 1]," L_{",i,"} \\rightarrow L_{",i,"}\\\\ \n",collapse = "")
+        toprint[i] <- gsub("[-]1\\s","- ",toprint[i]) # -1 devient -
+        toprint[i] <- gsub("(\\s|^)1\\s"," ",toprint[i]) # 1 L_{} devient L_{}
       }
     }
   }

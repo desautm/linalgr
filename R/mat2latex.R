@@ -76,16 +76,17 @@ mat2latex <- function(A,
   toprint <- vector("character", length = nrow(A))
 
   # Creation de la matrice
-  tempA <- A
-  if (ndigits(A) > 0){
-    if (style == "decimal") tempA <- specify_decimal(A, digits)
-    else{
-      tempA <- MASS::fractions(A)
-      if (style == "frac") tempA <- gsub("(\\d+)/(\\d+)", "\\\\frac{\\1}{\\2}", tempA)
-      else if (style == "tfrac") tempA <- gsub("(\\d+)/(\\d+)", "\\\\tfrac{\\1}{\\2}", tempA)
-      else if (style == "sfrac") tempA <- gsub("(\\d+)/(\\d+)", "\\\\sfrac{\\1}{\\2}", tempA)
-      else if (style == "dfrac") tempA <- gsub("(\\d+)/(\\d+)", "\\\\dfrac{\\1}{\\2}", tempA)
-    }
+  if (style == "decimal"){
+    if (ndigits(A) > 0) tempA <- specify_decimal(A, digits)
+    else tempA <- A
+  }
+  else{
+    #tempA <- MASS::fractions(A)
+    tempA <- fractional::fractional(A)
+    if (style == "frac") tempA <- gsub("(\\d+)/(\\d+)", "\\\\frac{\\1}{\\2}", tempA)
+    else if (style == "tfrac") tempA <- gsub("(\\d+)/(\\d+)", "\\\\tfrac{\\1}{\\2}", tempA)
+    else if (style == "sfrac") tempA <- gsub("(\\d+)/(\\d+)", "\\\\sfrac{\\1}{\\2}", tempA)
+    else if (style == "dfrac") tempA <- gsub("(\\d+)/(\\d+)", "\\\\dfrac{\\1}{\\2}", tempA)
   }
 
   for (i in (1:nrow(A))){
@@ -118,7 +119,7 @@ mat2latex <- function(A,
     toprint <- tempA
   }
 
-  if (tolatex && envir) toprint <- paste0(c("$$\n",toprint,"\n$$"))
+  if (tolatex && envir) toprint <- paste0(c("$$\n",toprint,"\n$$"), collapse = "")
 
   if (copy2clip){
     test2clip <- writeClipboard(toprint)
@@ -130,6 +131,6 @@ mat2latex <- function(A,
     cat(toprint)
     return(invisible(toprint))
   }
-  else return(toprint)
+  else return(invisible(toprint))
 
 }

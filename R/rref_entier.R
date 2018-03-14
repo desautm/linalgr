@@ -1,14 +1,14 @@
 #' @export
-rref <- function(A,
-                 B = NULL,
-                 echelon = FALSE,
-                 style = c("decimal", "inline", "frac", "sfrac", "tfrac", "dfrac"),
-                 bracket = c("crochet", "parenthese", "determinant"),
-                 verbose = TRUE,
-                 copy2clip = FALSE,
-                 tolatex = TRUE,
-                 digits = 2,
-                 tol = sqrt(.Machine$double.eps)){
+rref_entier <- function(A,
+                        B = NULL,
+                        echelon = FALSE,
+                        style = c("decimal", "inline", "frac", "sfrac", "tfrac", "dfrac"),
+                        bracket = c("crochet", "parenthese", "determinant"),
+                        verbose = TRUE,
+                        copy2clip = FALSE,
+                        tolatex = TRUE,
+                        digits = 2,
+                        tol = sqrt(.Machine$double.eps)){
 
   if (!is.matrix(A)) stop("A doit etre une matrice.")
 
@@ -50,7 +50,7 @@ rref <- function(A,
     }
     else{
       # On echange les lignes i et k
-      if (i != k){
+      if (abs(A[i, j]) < tol){
         oper[i, ] <- c(0, i, 0, k)
         oper[k, ] <- c(0, k, 0, i)
         toprint <- paste0(toprint, print_sel_oper(oper, cas =  "interchange"))
@@ -58,15 +58,6 @@ rref <- function(A,
         oper[k, ] <- c(0, 0, 0, 0)
         A[c(i, k), (j:col)] <- A[c(k, i), (j:col)]
         B[c(i, k)] <- B[c(k, i)]
-        toprint <- paste0(toprint, mat2latex(A, B, tolatex = FALSE, verbose = FALSE), collapse = "")
-      }
-      # On divise la ligne du pivot par le pivot
-      if (A[i, j] != 1){
-        oper[i, 1] <- 1/A[i, j]
-        toprint <- paste0(toprint, print_sel_oper(oper, cas =  "reduit"))
-        B[i, ] <- B[i, ]/A[i, j]
-        A[i, (j:col)] <- A[i, (j:col)]/A[i, j]
-        oper[i, 1] <- 0
         toprint <- paste0(toprint, mat2latex(A, B, tolatex = FALSE, verbose = FALSE), collapse = "")
       }
 
@@ -87,9 +78,19 @@ rref <- function(A,
         else sequence <- c(1:(i-1),(i+1):row)
       }
       for (k in sequence){
-        oper[k, ] <- c(1, k, -A[k, j], i)
-        B[k, ] <- B[k, ] - A[k, j]*B[i, ]
-        A[k, (j:col)] <- A[k, (j:col)] - A[k, j]*A[i, (j:col)]
+        lowestCM <- numbers::LCM(A[i, j], A[k, j])
+        M1 <- abs(lowestCM/A[i, j])
+        M2 <- abs(lowestCM/A[k, j])
+        if (lowestCM < 0){
+          oper[k, ] <- c(M2, k, M1, i)
+          B[k, ] <- M2*B[k, ] + M1*B[i, ]
+          A[k, ] <- M2*A[k, ] + M1*A[i, ]
+        }
+        else if (lowestCM > 0){
+          oper[k, ] <- c(M2, k, -M1, i)
+          B[k, ] <- M2*B[k, ] - M1*B[i, ]
+          A[k, ] <- M2*A[k, ] - M1*A[i, ]
+        }
       }
       if (sum(abs(oper)) != 0){
         toprint <- paste0(toprint, print_sel_oper(oper, cas =  "combinaison"))
@@ -100,6 +101,22 @@ rref <- function(A,
       j <- j + 1
     }
   }
+  if (!echelon){
+    for (i in (1:row)){
+      if (any(abs(A[i, ]) >= tol )){
+        id <- which(abs(A[i, ]) >= tol)
+        oper[i, 1] <- 1/A[i, id[1]]
+        B[i, ] <- B[i, ]/A[i, id[1]]
+        A[i, ] <- A[i, ]/A[i, id[1]]
+      }
+    }
+    if (sum(abs(oper)) != 0){
+      toprint <- paste0(toprint, print_sel_oper(oper, cas =  "reduit"))
+      toprint <- paste0(toprint, mat2latex(A, B, tolatex = FALSE, verbose = FALSE), collapse = "")
+      oper[i, 1] <- 0
+    }
+  }
+
   toprint <- paste0(toprint, "\n", collapse = "")
 
   attr(A, "style") <- NULL
@@ -110,6 +127,9 @@ rref <- function(A,
   attr(B, "bracket") <- NULL
   attr(B, "verbose") <- NULL
   attr(B, "digits") <- NULL
+  attr(oper, "style") <- NULL
+  attr(oper, "verbose") <- NULL
+  attr(oper, "digits") <- NULL
 
   begin <- c("\\begin{array}{l}\n")
   end <- c("\\end{array}")

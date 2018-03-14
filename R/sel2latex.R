@@ -130,6 +130,6 @@ sel2latex <- function(A,
     cat(toprint)
     return(invisible(toprint))
   }
-  else return(toprint)
+  else return(invisible(toprint))
 
 }
