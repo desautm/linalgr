@@ -34,14 +34,7 @@ create_rref <- function(neq = 3,
   A <- matrix(0, neq, nvar)
   B <- matrix(0, neq, 1)
 
-  if (type == "aucune"){
-    # Si aucune solution, on part avec une solution unique ou une infinite
-    # de solutions et on ajoute une ligne absurde
-    choix <- sample(1:2, 1)
-  }
-  else choix <- 0
-
-  if ((type == "unique") || ((type == "aucune") && (choix == 1))){
+  if ((type == "unique") || (type == "aucune")){
     if (neq < nvar)
       stop("Pour une solution unique, il doit y avoir au moins autant d'equations que d'inconnues")
     if (!missing(solution)){
@@ -50,8 +43,13 @@ create_rref <- function(neq = 3,
     }
     else B[1:nvar] <- matrix(sample(intervalle, nvar, replace = TRUE), nvar, 1)
     for (i in (1:nvar)) A[i, i] <- 1
+    if (type == "aucune"){
+      A[(1:(neq-1)), nvar] <- sample(intervalle, neq-1, replace = TRUE)
+      A[neq, nvar] <- 0
+      B[neq] <- sample(c(-max(intervalle):-1, 1:max(intervalle)),1)
+    }
   }
-  else if ((type == "infinite") || ((type == "aucune") && (choix == 2))){
+  else if ( type == "infinite" ){
     if (!missing(npivots)){
       if (npivots <= 0) stop("Le nombre de pivots doit etre un entier superieur a 0.")
       if (neq >= nvar){
@@ -62,11 +60,14 @@ create_rref <- function(neq = 3,
       }
     }
     else{
-      if (neq >= nvar){
+      if (neq > nvar){
         npivots <- sample(1:(nvar-1), 1)
       }
       else if (neq < nvar){
         npivots <- neq
+      }
+      else{
+        npivots <- neq - 1
       }
     }
     # On decide la position des pivots mais on veut un pivot a la position (1,1)
@@ -79,19 +80,7 @@ create_rref <- function(neq = 3,
     }
     B[1:npivots] <- sample(intervalle, npivots, replace = TRUE)
   }
-  if (type == "aucune"){
-    # npivots <- sample(1:min(neq, nvar), 1)
-    # ppivots <-  sort(sample(2:min(neq, nvar), npivots-1))
-    # ppivots <- c(1, ppivots)
-    # for (i in (1:npivots)){
-    #   A[i, ppivots[i]:nvar] <- sample(intervalle, nvar-ppivots[i]+1, replace = TRUE)
-    #   A[ , ppivots[i]] <- 0
-    #   A[i, ppivots[i]] <- 1
-    # }
-    # B[1:npivots] <- sample(intervalle, npivots, replace = TRUE)
-    A[neq, ] <- 0
-    B[neq] <- sample(c(-max(intervalle):-1, 1:max(intervalle)),1)
-  }
+
   newList <- list("A" = A, "B" = B)
   return(newList)
 }

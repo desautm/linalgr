@@ -333,6 +333,7 @@ $(document).ready(function () {
 <li><a href="#aucune-solution">Aucune solution</a></li>
 <li><a href="#infinite-de-solutions">Infinité de solutions</a></li>
 </ul></li>
+<li><a href="#autres-essais">Autres essais</a></li>
 </ul>
 </div>
 
@@ -357,18 +358,18 @@ B &lt;- matrix(sample(-10:10, m, replace = TRUE), m, 1)</code></pre>
 <p>Voici l’affichage directement avec <code>R</code>:</p>
 <pre class="r"><code>A</code></pre>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
-## [1,]    5   -7  -10   -1   -1
-## [2,]    8   -4   -7   -2   -4
-## [3,]    5    0    5   -2   10
-## [4,]    8    5  -10   -7    4
-## [5,]   -1   10   -2    9    3</code></pre>
+## [1,]   -5   -2   10    6    0
+## [2,]    0    0  -10    3    5
+## [3,]   -1    9    1   -2   -3
+## [4,]   -7    9   -4   -4   -6
+## [5,]    2    2   -2    5   -8</code></pre>
 <pre class="r"><code>B</code></pre>
 <pre><code>##      [,1]
-## [1,]   -2
-## [2,]    4
-## [3,]    1
-## [4,]   -6
-## [5,]    0</code></pre>
+## [1,]   -8
+## [2,]   -6
+## [3,]    6
+## [4,]    9
+## [5,]   10</code></pre>
 </section>
 <section id="affichage-avec-la-librairie-linalgr" class="level2">
 <h2>Affichage avec la librairie <code>linalgr</code></h2>
@@ -379,21 +380,21 @@ mat2latex(B)</code></pre>
 <p><span class="math display">\[
 \left[
 \begin{array}{rrrrr}
-5 &amp; -7 &amp; -10 &amp; -1 &amp; -1 \\ 
-8 &amp; -4 &amp; -7 &amp; -2 &amp; -4 \\ 
-5 &amp; 0 &amp; 5 &amp; -2 &amp; 10 \\ 
-8 &amp; 5 &amp; -10 &amp; -7 &amp; 4 \\ 
--1 &amp; 10 &amp; -2 &amp; 9 &amp; 3 \\ 
+-5 &amp; -2 &amp; 10 &amp; 6 &amp; 0 \\ 
+0 &amp; 0 &amp; -10 &amp; 3 &amp; 5 \\ 
+-1 &amp; 9 &amp; 1 &amp; -2 &amp; -3 \\ 
+-7 &amp; 9 &amp; -4 &amp; -4 &amp; -6 \\ 
+2 &amp; 2 &amp; -2 &amp; 5 &amp; -8 \\ 
 \end{array}
 \right]
 \]</span><span class="math display">\[
 \left[
 \begin{array}{r}
--2 \\ 
-4 \\ 
-1 \\ 
+-8 \\ 
 -6 \\ 
-0 \\ 
+6 \\ 
+9 \\ 
+10 \\ 
 \end{array}
 \right]
 \]</span></p>
@@ -406,11 +407,11 @@ mat2latex(B)</code></pre>
 <pre class="r"><code>sel2latex(A,B, variables = &quot;xi&quot;)</code></pre>
 <p><span class="math display">\[
 \begin{array}{rrrrrrrrrrr}
-5 x_{1} &amp; - &amp; 7 x_{2} &amp; - &amp; 10 x_{3} &amp; - &amp; x_{4} &amp; - &amp; x_{5} &amp; = &amp; -2 \\ 
-8 x_{1} &amp; - &amp; 4 x_{2} &amp; - &amp; 7 x_{3} &amp; - &amp; 2 x_{4} &amp; - &amp; 4 x_{5} &amp; = &amp; 4 \\ 
-5 x_{1} &amp; &amp; &amp; + &amp; 5 x_{3} &amp; - &amp; 2 x_{4} &amp; + &amp; 10 x_{5} &amp; = &amp; 1 \\ 
-8 x_{1} &amp; + &amp; 5 x_{2} &amp; - &amp; 10 x_{3} &amp; - &amp; 7 x_{4} &amp; + &amp; 4 x_{5} &amp; = &amp; -6 \\ 
--x_{1} &amp; + &amp; 10 x_{2} &amp; - &amp; 2 x_{3} &amp; + &amp; 9 x_{4} &amp; + &amp; 3 x_{5} &amp; = &amp; 0 \\ 
+-5 x_{1} &amp; - &amp; 2 x_{2} &amp; + &amp; 10 x_{3} &amp; + &amp; 6 x_{4} &amp; &amp; &amp; = &amp; -8 \\ 
+&amp; &amp; &amp;  &amp; -10 x_{3} &amp; + &amp; 3 x_{4} &amp; + &amp; 5 x_{5} &amp; = &amp; -6 \\ 
+-x_{1} &amp; + &amp; 9 x_{2} &amp; + &amp; x_{3} &amp; - &amp; 2 x_{4} &amp; - &amp; 3 x_{5} &amp; = &amp; 6 \\ 
+-7 x_{1} &amp; + &amp; 9 x_{2} &amp; - &amp; 4 x_{3} &amp; - &amp; 4 x_{4} &amp; - &amp; 6 x_{5} &amp; = &amp; 9 \\ 
+2 x_{1} &amp; + &amp; 2 x_{2} &amp; - &amp; 2 x_{3} &amp; + &amp; 5 x_{4} &amp; - &amp; 8 x_{5} &amp; = &amp; 10 \\ 
 \end{array}
 \]</span></p>
 </section>
@@ -420,11 +421,11 @@ mat2latex(B)</code></pre>
 <p><span class="math display">\[
 \left[
 \begin{array}{rrrrr}
-5 &amp; -7 &amp; -10 &amp; -1 &amp; -1 \\ 
-8 &amp; -4 &amp; -7 &amp; -2 &amp; -4 \\ 
-5 &amp; 0 &amp; 5 &amp; -2 &amp; 10 \\ 
-8 &amp; 5 &amp; -10 &amp; -7 &amp; 4 \\ 
--1 &amp; 10 &amp; -2 &amp; 9 &amp; 3 \\ 
+-5 &amp; -2 &amp; 10 &amp; 6 &amp; 0 \\ 
+0 &amp; 0 &amp; -10 &amp; 3 &amp; 5 \\ 
+-1 &amp; 9 &amp; 1 &amp; -2 &amp; -3 \\ 
+-7 &amp; 9 &amp; -4 &amp; -4 &amp; -6 \\ 
+2 &amp; 2 &amp; -2 &amp; 5 &amp; -8 \\ 
 \end{array}
 \right]\left[
 \begin{array}{c} 
@@ -436,11 +437,11 @@ x_{5} \\
 \end{array}
 \right]=\left[
 \begin{array}{r}
--2 \\ 
-4 \\ 
-1 \\ 
+-8 \\ 
 -6 \\ 
-0 \\ 
+6 \\ 
+9 \\ 
+10 \\ 
 \end{array}
 \right]
 \]</span></p>
@@ -450,19 +451,19 @@ x_{5} \\
 <pre class="r"><code>sel2latex(A,B, variables = &quot;a&quot;)</code></pre>
 <p><span class="math display">\[
 \begin{array}{rrrrrrrrrrr}
-5 a &amp; - &amp; 7 b &amp; - &amp; 10 c &amp; - &amp; d &amp; - &amp; e &amp; = &amp; -2 \\ 
-8 a &amp; - &amp; 4 b &amp; - &amp; 7 c &amp; - &amp; 2 d &amp; - &amp; 4 e &amp; = &amp; 4 \\ 
-5 a &amp; &amp; &amp; + &amp; 5 c &amp; - &amp; 2 d &amp; + &amp; 10 e &amp; = &amp; 1 \\ 
-8 a &amp; + &amp; 5 b &amp; - &amp; 10 c &amp; - &amp; 7 d &amp; + &amp; 4 e &amp; = &amp; -6 \\ 
--a &amp; + &amp; 10 b &amp; - &amp; 2 c &amp; + &amp; 9 d &amp; + &amp; 3 e &amp; = &amp; 0 \\ 
+-5 a &amp; - &amp; 2 b &amp; + &amp; 10 c &amp; + &amp; 6 d &amp; &amp; &amp; = &amp; -8 \\ 
+&amp; &amp; &amp;  &amp; -10 c &amp; + &amp; 3 d &amp; + &amp; 5 e &amp; = &amp; -6 \\ 
+-a &amp; + &amp; 9 b &amp; + &amp; c &amp; - &amp; 2 d &amp; - &amp; 3 e &amp; = &amp; 6 \\ 
+-7 a &amp; + &amp; 9 b &amp; - &amp; 4 c &amp; - &amp; 4 d &amp; - &amp; 6 e &amp; = &amp; 9 \\ 
+2 a &amp; + &amp; 2 b &amp; - &amp; 2 c &amp; + &amp; 5 d &amp; - &amp; 8 e &amp; = &amp; 10 \\ 
 \end{array}
 \]</span></p>
 <p>ou alors…</p>
 <pre class="r"><code>sel2latex(matrix(sample(-10:10,4),2,2),matrix(sample(-10:10,4),2,1), variables = &quot;x&quot;)</code></pre>
 <p><span class="math display">\[
 \begin{array}{rrrrr}
-2 x &amp; + &amp; 4 y &amp; = &amp; 9 \\ 
--8 x &amp; - &amp; 3 y &amp; = &amp; 5 \\ 
+3 x &amp; + &amp; 2 y &amp; = &amp; -3 \\ 
+-5 x &amp; + &amp; 6 y &amp; = &amp; -9 \\ 
 \end{array}
 \]</span></p>
 </section>
@@ -471,11 +472,11 @@ x_{5} \\
 <pre class="r"><code>sel2latex(A/3,B, variables = &quot;xi&quot;, digits = 3)</code></pre>
 <p><span class="math display">\[
 \begin{array}{rrrrrrrrrrr}
-1.667 x_{1} &amp; - &amp; 2.333 x_{2} &amp; - &amp; 3.333 x_{3} &amp; - &amp; 0.333 x_{4} &amp; - &amp; 0.333 x_{5} &amp; = &amp; -2 \\ 
-2.667 x_{1} &amp; - &amp; 1.333 x_{2} &amp; - &amp; 2.333 x_{3} &amp; - &amp; 0.667 x_{4} &amp; - &amp; 1.333 x_{5} &amp; = &amp; 4 \\ 
-1.667 x_{1} &amp; + &amp; 0.000 x_{2} &amp; + &amp; 1.667 x_{3} &amp; - &amp; 0.667 x_{4} &amp; + &amp; 3.333 x_{5} &amp; = &amp; 1 \\ 
-2.667 x_{1} &amp; + &amp; 1.667 x_{2} &amp; - &amp; 3.333 x_{3} &amp; - &amp; 2.333 x_{4} &amp; + &amp; 1.333 x_{5} &amp; = &amp; -6 \\ 
--0.333 x_{1} &amp; + &amp; 3.333 x_{2} &amp; - &amp; 0.667 x_{3} &amp; + &amp; 3.000 x_{4} &amp; + &amp; 1.000 x_{5} &amp; = &amp; 0 \\ 
+-1.667 x_{1} &amp; - &amp; 0.667 x_{2} &amp; + &amp; 3.333 x_{3} &amp; + &amp; 2.000 x_{4} &amp; + &amp; 0.000 x_{5} &amp; = &amp; -8 \\ 
+0.000 x_{1} &amp; + &amp; 0.000 x_{2} &amp; - &amp; 3.333 x_{3} &amp; + &amp; 1.000 x_{4} &amp; + &amp; 1.667 x_{5} &amp; = &amp; -6 \\ 
+-0.333 x_{1} &amp; + &amp; 3.000 x_{2} &amp; + &amp; 0.333 x_{3} &amp; - &amp; 0.667 x_{4} &amp; - &amp; 1.000 x_{5} &amp; = &amp; 6 \\ 
+-2.333 x_{1} &amp; + &amp; 3.000 x_{2} &amp; - &amp; 1.333 x_{3} &amp; - &amp; 1.333 x_{4} &amp; - &amp; 2.000 x_{5} &amp; = &amp; 9 \\ 
+0.667 x_{1} &amp; + &amp; 0.667 x_{2} &amp; - &amp; 0.667 x_{3} &amp; + &amp; 1.667 x_{4} &amp; - &amp; 2.667 x_{5} &amp; = &amp; 10 \\ 
 \end{array}
 \]</span></p>
 </section>
@@ -486,11 +487,11 @@ x_{5} \\
 <pre class="r"><code>sel2latex(A/3,B, variables = &quot;xi&quot;, style = &quot;inline&quot;)</code></pre>
 <p><span class="math display">\[
 \begin{array}{rrrrrrrrrrr}
-5/3 x_{1} &amp; - &amp; 7/3 x_{2} &amp; - &amp; 10/3 x_{3} &amp; - &amp; 1/3 x_{4} &amp; - &amp; 1/3 x_{5} &amp; = &amp; -2 \\ 
-8/3 x_{1} &amp; - &amp; 4/3 x_{2} &amp; - &amp; 7/3 x_{3} &amp; - &amp; 2/3 x_{4} &amp; - &amp; 4/3 x_{5} &amp; = &amp; 4 \\ 
-5/3 x_{1} &amp; &amp; &amp; + &amp; 5/3 x_{3} &amp; - &amp; 2/3 x_{4} &amp; + &amp; 10/3 x_{5} &amp; = &amp; 1 \\ 
-8/3 x_{1} &amp; + &amp; 5/3 x_{2} &amp; - &amp; 10/3 x_{3} &amp; - &amp; 7/3 x_{4} &amp; + &amp; 4/3 x_{5} &amp; = &amp; -6 \\ 
--1/3 x_{1} &amp; + &amp; 10/3 x_{2} &amp; - &amp; 2/3 x_{3} &amp; + &amp; 3 x_{4} &amp; + &amp; x_{5} &amp; = &amp; 0 \\ 
+-5/3 x_{1} &amp; - &amp; 2/3 x_{2} &amp; + &amp; 10/3 x_{3} &amp; + &amp; 2 x_{4} &amp; &amp; &amp; = &amp; -8 \\ 
+&amp; &amp; &amp;  &amp; -10/3 x_{3} &amp; + &amp; x_{4} &amp; + &amp; 5/3 x_{5} &amp; = &amp; -6 \\ 
+-1/3 x_{1} &amp; + &amp; 3 x_{2} &amp; + &amp; 1/3 x_{3} &amp; - &amp; 2/3 x_{4} &amp; - &amp; x_{5} &amp; = &amp; 6 \\ 
+-7/3 x_{1} &amp; + &amp; 3 x_{2} &amp; - &amp; 4/3 x_{3} &amp; - &amp; 4/3 x_{4} &amp; - &amp; 2 x_{5} &amp; = &amp; 9 \\ 
+2/3 x_{1} &amp; + &amp; 2/3 x_{2} &amp; - &amp; 2/3 x_{3} &amp; + &amp; 5/3 x_{4} &amp; - &amp; 8/3 x_{5} &amp; = &amp; 10 \\ 
 \end{array}
 \]</span></p>
 </section>
@@ -499,11 +500,11 @@ x_{5} \\
 <pre class="r"><code>sel2latex(A/3,B, variables = &quot;xi&quot;, style = &quot;frac&quot;)</code></pre>
 <p><span class="math display">\[
 \begin{array}{rrrrrrrrrrr}
-\frac{5}{3} x_{1} &amp; - &amp; \frac{7}{3} x_{2} &amp; - &amp; \frac{10}{3} x_{3} &amp; - &amp; \frac{1}{3} x_{4} &amp; - &amp; \frac{1}{3} x_{5} &amp; = &amp; -2 \\ 
-\frac{8}{3} x_{1} &amp; - &amp; \frac{4}{3} x_{2} &amp; - &amp; \frac{7}{3} x_{3} &amp; - &amp; \frac{2}{3} x_{4} &amp; - &amp; \frac{4}{3} x_{5} &amp; = &amp; 4 \\ 
-\frac{5}{3} x_{1} &amp; &amp; &amp; + &amp; \frac{5}{3} x_{3} &amp; - &amp; \frac{2}{3} x_{4} &amp; + &amp; \frac{10}{3} x_{5} &amp; = &amp; 1 \\ 
-\frac{8}{3} x_{1} &amp; + &amp; \frac{5}{3} x_{2} &amp; - &amp; \frac{10}{3} x_{3} &amp; - &amp; \frac{7}{3} x_{4} &amp; + &amp; \frac{4}{3} x_{5} &amp; = &amp; -6 \\ 
--\frac{1}{3} x_{1} &amp; + &amp; \frac{10}{3} x_{2} &amp; - &amp; \frac{2}{3} x_{3} &amp; + &amp; 3 x_{4} &amp; + &amp; x_{5} &amp; = &amp; 0 \\ 
+-\frac{5}{3} x_{1} &amp; - &amp; \frac{2}{3} x_{2} &amp; + &amp; \frac{10}{3} x_{3} &amp; + &amp; 2 x_{4} &amp; &amp; &amp; = &amp; -8 \\ 
+&amp; &amp; &amp;  &amp; -\frac{10}{3} x_{3} &amp; + &amp; x_{4} &amp; + &amp; \frac{5}{3} x_{5} &amp; = &amp; -6 \\ 
+-\frac{1}{3} x_{1} &amp; + &amp; 3 x_{2} &amp; + &amp; \frac{1}{3} x_{3} &amp; - &amp; \frac{2}{3} x_{4} &amp; - &amp; x_{5} &amp; = &amp; 6 \\ 
+-\frac{7}{3} x_{1} &amp; + &amp; 3 x_{2} &amp; - &amp; \frac{4}{3} x_{3} &amp; - &amp; \frac{4}{3} x_{4} &amp; - &amp; 2 x_{5} &amp; = &amp; 9 \\ 
+\frac{2}{3} x_{1} &amp; + &amp; \frac{2}{3} x_{2} &amp; - &amp; \frac{2}{3} x_{3} &amp; + &amp; \frac{5}{3} x_{4} &amp; - &amp; \frac{8}{3} x_{5} &amp; = &amp; 10 \\ 
 \end{array}
 \]</span></p>
 </section>
@@ -563,19 +564,19 @@ rref(E$A, E$B, style = &quot;inline&quot;, echelon = TRUE)
 rref_entier(E$A, E$B, style = &quot;inline&quot;, echelon = TRUE)</code></pre>
 <p><span class="math display">\[
 \begin{array}{rrrrrrrrr}
-x_{1} &amp; + &amp; 5 x_{2} &amp; - &amp; 27 x_{3} &amp; + &amp; 61 x_{4} &amp; = &amp; 469 \\ 
-x_{1} &amp; + &amp; 6 x_{2} &amp; - &amp; 30 x_{3} &amp; + &amp; 69 x_{4} &amp; = &amp; 528 \\ 
-4 x_{1} &amp; + &amp; 22 x_{2} &amp; - &amp; 117 x_{3} &amp; + &amp; 264 x_{4} &amp; = &amp; 2024 \\ 
--4 x_{1} &amp; - &amp; 19 x_{2} &amp; + &amp; 103 x_{3} &amp; - &amp; 233 x_{4} &amp; = &amp; -1794 \\ 
+-3 x_{1} &amp; - &amp; 16 x_{2} &amp; + &amp; 128 x_{3} &amp; - &amp; 2792 x_{4} &amp; = &amp; 6736 \\ 
+x_{1} &amp; + &amp; 10 x_{2} &amp; - &amp; 54 x_{3} &amp; + &amp; 1216 x_{4} &amp; = &amp; -3120 \\ 
+5 x_{1} &amp; + &amp; 9 x_{2} &amp; - &amp; 116 x_{3} &amp; + &amp; 2508 x_{4} &amp; = &amp; -5832 \\ 
+x_{1} &amp; + &amp; 2 x_{2} &amp; - &amp; 24 x_{3} &amp; + &amp; 520 x_{4} &amp; = &amp; -1216 \\ 
 \end{array}
 \]</span><span class="math display">\[
 \begin{array}{l}
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 5 &amp; -27 &amp; 61 &amp; 469 \\ 
-1 &amp; 6 &amp; -30 &amp; 69 &amp; 528 \\ 
-4 &amp; 22 &amp; -117 &amp; 264 &amp; 2024 \\ 
--4 &amp; -19 &amp; 103 &amp; -233 &amp; -1794 \\ 
+-3 &amp; -16 &amp; 128 &amp; -2792 &amp; 6736 \\ 
+1 &amp; 10 &amp; -54 &amp; 1216 &amp; -3120 \\ 
+5 &amp; 9 &amp; -116 &amp; 2508 &amp; -5832 \\ 
+1 &amp; 2 &amp; -24 &amp; 520 &amp; -1216 \\ 
 \end{array}
 \right]\begin{array}{l}
 L_{1} \rightarrow L_{3}\\ 
@@ -586,13 +587,13 @@ L_{3} \rightarrow L_{1}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-4 &amp; 22 &amp; -117 &amp; 264 &amp; 2024 \\ 
-1 &amp; 6 &amp; -30 &amp; 69 &amp; 528 \\ 
-1 &amp; 5 &amp; -27 &amp; 61 &amp; 469 \\ 
--4 &amp; -19 &amp; 103 &amp; -233 &amp; -1794 \\ 
+5 &amp; 9 &amp; -116 &amp; 2508 &amp; -5832 \\ 
+1 &amp; 10 &amp; -54 &amp; 1216 &amp; -3120 \\ 
+-3 &amp; -16 &amp; 128 &amp; -2792 &amp; 6736 \\ 
+1 &amp; 2 &amp; -24 &amp; 520 &amp; -1216 \\ 
 \end{array}
 \right]\begin{array}{l}
-1/4 L_{1} \rightarrow L_{1}\\ 
+1/5 L_{1} \rightarrow L_{1}\\ 
 \\ 
 \\ 
 \\ 
@@ -600,122 +601,108 @@ L_{3} \rightarrow L_{1}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 11/2 &amp; -117/4 &amp; 66 &amp; 506 \\ 
-1 &amp; 6 &amp; -30 &amp; 69 &amp; 528 \\ 
-1 &amp; 5 &amp; -27 &amp; 61 &amp; 469 \\ 
--4 &amp; -19 &amp; 103 &amp; -233 &amp; -1794 \\ 
+1 &amp; 9/5 &amp; -116/5 &amp; 2508/5 &amp; -5832/5 \\ 
+1 &amp; 10 &amp; -54 &amp; 1216 &amp; -3120 \\ 
+-3 &amp; -16 &amp; 128 &amp; -2792 &amp; 6736 \\ 
+1 &amp; 2 &amp; -24 &amp; 520 &amp; -1216 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
  L_{2} -  L_{1} \rightarrow L_{2} \\ 
- L_{3} -  L_{1} \rightarrow L_{3} \\ 
- L_{4} + 4 L_{1} \rightarrow L_{4} \\ 
+ L_{3} + 3 L_{1} \rightarrow L_{3} \\ 
+ L_{4} -  L_{1} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 11/2 &amp; -117/4 &amp; 66 &amp; 506 \\ 
-0 &amp; 1/2 &amp; -3/4 &amp; 3 &amp; 22 \\ 
-0 &amp; -1/2 &amp; 9/4 &amp; -5 &amp; -37 \\ 
-0 &amp; 3 &amp; -14 &amp; 31 &amp; 230 \\ 
+1 &amp; 9/5 &amp; -116/5 &amp; 2508/5 &amp; -5832/5 \\ 
+0 &amp; 41/5 &amp; -154/5 &amp; 3572/5 &amp; -9768/5 \\ 
+0 &amp; -53/5 &amp; 292/5 &amp; -6436/5 &amp; 16184/5 \\ 
+0 &amp; 1/5 &amp; -4/5 &amp; 92/5 &amp; -248/5 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
-L_{2} \rightarrow L_{4}\\ 
+L_{2} \rightarrow L_{3}\\ 
+L_{3} \rightarrow L_{2}\\ 
 \\ 
-L_{4} \rightarrow L_{2}\\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 11/2 &amp; -117/4 &amp; 66 &amp; 506 \\ 
-0 &amp; 3 &amp; -14 &amp; 31 &amp; 230 \\ 
-0 &amp; -1/2 &amp; 9/4 &amp; -5 &amp; -37 \\ 
-0 &amp; 1/2 &amp; -3/4 &amp; 3 &amp; 22 \\ 
+1 &amp; 9/5 &amp; -116/5 &amp; 2508/5 &amp; -5832/5 \\ 
+0 &amp; -53/5 &amp; 292/5 &amp; -6436/5 &amp; 16184/5 \\ 
+0 &amp; 41/5 &amp; -154/5 &amp; 3572/5 &amp; -9768/5 \\ 
+0 &amp; 1/5 &amp; -4/5 &amp; 92/5 &amp; -248/5 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
-1/3 L_{2} \rightarrow L_{2}\\ 
+-5/53 L_{2} \rightarrow L_{2}\\ 
 \\ 
 \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 11/2 &amp; -117/4 &amp; 66 &amp; 506 \\ 
-0 &amp; 1 &amp; -14/3 &amp; 31/3 &amp; 230/3 \\ 
-0 &amp; -1/2 &amp; 9/4 &amp; -5 &amp; -37 \\ 
-0 &amp; 1/2 &amp; -3/4 &amp; 3 &amp; 22 \\ 
-\end{array}
-\right]\begin{array}{l}
-\\ 
-\\ 
- L_{3} + 1/2 L_{2} \rightarrow L_{3} \\ 
- L_{4} - 1/2 L_{2} \rightarrow L_{4} \\ 
-\end{array}\\
- \\
-\left[
-\begin{array}{rrrr|r}
-1 &amp; 11/2 &amp; -117/4 &amp; 66 &amp; 506 \\ 
-0 &amp; 1 &amp; -14/3 &amp; 31/3 &amp; 230/3 \\ 
-0 &amp; 0 &amp; -1/12 &amp; 1/6 &amp; 4/3 \\ 
-0 &amp; 0 &amp; 19/12 &amp; -13/6 &amp; -49/3 \\ 
+1 &amp; 9/5 &amp; -116/5 &amp; 2508/5 &amp; -5832/5 \\ 
+0 &amp; 1 &amp; -292/53 &amp; 6436/53 &amp; -16184/53 \\ 
+0 &amp; 41/5 &amp; -154/5 &amp; 3572/5 &amp; -9768/5 \\ 
+0 &amp; 1/5 &amp; -4/5 &amp; 92/5 &amp; -248/5 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
 \\ 
-L_{3} \rightarrow L_{4}\\ 
-L_{4} \rightarrow L_{3}\\ 
+ L_{3} - 41/5 L_{2} \rightarrow L_{3} \\ 
+ L_{4} - 1/5 L_{2} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 11/2 &amp; -117/4 &amp; 66 &amp; 506 \\ 
-0 &amp; 1 &amp; -14/3 &amp; 31/3 &amp; 230/3 \\ 
-0 &amp; 0 &amp; 19/12 &amp; -13/6 &amp; -49/3 \\ 
-0 &amp; 0 &amp; -1/12 &amp; 1/6 &amp; 4/3 \\ 
+1 &amp; 9/5 &amp; -116/5 &amp; 2508/5 &amp; -5832/5 \\ 
+0 &amp; 1 &amp; -292/53 &amp; 6436/53 &amp; -16184/53 \\ 
+0 &amp; 0 &amp; 762/53 &amp; -14912/53 &amp; 29168/53 \\ 
+0 &amp; 0 &amp; 16/53 &amp; -312/53 &amp; 608/53 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
 \\ 
-12/19 L_{3} \rightarrow L_{3}\\ 
+53/762 L_{3} \rightarrow L_{3}\\ 
 \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 11/2 &amp; -117/4 &amp; 66 &amp; 506 \\ 
-0 &amp; 1 &amp; -14/3 &amp; 31/3 &amp; 230/3 \\ 
-0 &amp; 0 &amp; 1 &amp; -26/19 &amp; -196/19 \\ 
-0 &amp; 0 &amp; -1/12 &amp; 1/6 &amp; 4/3 \\ 
+1 &amp; 9/5 &amp; -116/5 &amp; 2508/5 &amp; -5832/5 \\ 
+0 &amp; 1 &amp; -292/53 &amp; 6436/53 &amp; -16184/53 \\ 
+0 &amp; 0 &amp; 1 &amp; -7456/381 &amp; 14584/381 \\ 
+0 &amp; 0 &amp; 16/53 &amp; -312/53 &amp; 608/53 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
 \\ 
 \\ 
- L_{4} + 1/12 L_{3} \rightarrow L_{4} \\ 
+ L_{4} - 16/53 L_{3} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 11/2 &amp; -117/4 &amp; 66 &amp; 506 \\ 
-0 &amp; 1 &amp; -14/3 &amp; 31/3 &amp; 230/3 \\ 
-0 &amp; 0 &amp; 1 &amp; -26/19 &amp; -196/19 \\ 
-0 &amp; 0 &amp; 0 &amp; 1/19 &amp; 9/19 \\ 
+1 &amp; 9/5 &amp; -116/5 &amp; 2508/5 &amp; -5832/5 \\ 
+0 &amp; 1 &amp; -292/53 &amp; 6436/53 &amp; -16184/53 \\ 
+0 &amp; 0 &amp; 1 &amp; -7456/381 &amp; 14584/381 \\ 
+0 &amp; 0 &amp; 0 &amp; 8/381 &amp; -32/381 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
 \\ 
 \\ 
-19 L_{4} \rightarrow L_{4}\\ 
+381/8 L_{4} \rightarrow L_{4}\\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 11/2 &amp; -117/4 &amp; 66 &amp; 506 \\ 
-0 &amp; 1 &amp; -14/3 &amp; 31/3 &amp; 230/3 \\ 
-0 &amp; 0 &amp; 1 &amp; -26/19 &amp; -196/19 \\ 
-0 &amp; 0 &amp; 0 &amp; 1 &amp; 9 \\ 
+1 &amp; 9/5 &amp; -116/5 &amp; 2508/5 &amp; -5832/5 \\ 
+0 &amp; 1 &amp; -292/53 &amp; 6436/53 &amp; -16184/53 \\ 
+0 &amp; 0 &amp; 1 &amp; -7456/381 &amp; 14584/381 \\ 
+0 &amp; 0 &amp; 0 &amp; 1 &amp; -4 \\ 
 \end{array}
 \right]
 \end{array}
@@ -723,52 +710,52 @@ L_{4} \rightarrow L_{3}\\
 \begin{array}{l}
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 5 &amp; -27 &amp; 61 &amp; 469 \\ 
-1 &amp; 6 &amp; -30 &amp; 69 &amp; 528 \\ 
-4 &amp; 22 &amp; -117 &amp; 264 &amp; 2024 \\ 
--4 &amp; -19 &amp; 103 &amp; -233 &amp; -1794 \\ 
+-3 &amp; -16 &amp; 128 &amp; -2792 &amp; 6736 \\ 
+1 &amp; 10 &amp; -54 &amp; 1216 &amp; -3120 \\ 
+5 &amp; 9 &amp; -116 &amp; 2508 &amp; -5832 \\ 
+1 &amp; 2 &amp; -24 &amp; 520 &amp; -1216 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
- L_{2} -  L_{1} \rightarrow L_{2} \\ 
- L_{3} - 4 L_{1} \rightarrow L_{3} \\ 
- L_{4} + 4 L_{1} \rightarrow L_{4} \\ 
+3 L_{2} + L_{1} \rightarrow L_{2} \\ 
+3 L_{3} + 5 L_{1} \rightarrow L_{3} \\ 
+3 L_{4} + L_{1} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 5 &amp; -27 &amp; 61 &amp; 469 \\ 
-0 &amp; 1 &amp; -3 &amp; 8 &amp; 59 \\ 
-0 &amp; 2 &amp; -9 &amp; 20 &amp; 148 \\ 
-0 &amp; 1 &amp; -5 &amp; 11 &amp; 82 \\ 
+-3 &amp; -16 &amp; 128 &amp; -2792 &amp; 6736 \\ 
+0 &amp; 14 &amp; -34 &amp; 856 &amp; -2624 \\ 
+0 &amp; -53 &amp; 292 &amp; -6436 &amp; 16184 \\ 
+0 &amp; -10 &amp; 56 &amp; -1232 &amp; 3088 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
 \\ 
- L_{3} - 2 L_{2} \rightarrow L_{3} \\ 
- L_{4} -  L_{2} \rightarrow L_{4} \\ 
+14 L_{3} + 53 L_{2} \rightarrow L_{3} \\ 
+7 L_{4} + 5 L_{2} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 5 &amp; -27 &amp; 61 &amp; 469 \\ 
-0 &amp; 1 &amp; -3 &amp; 8 &amp; 59 \\ 
-0 &amp; 0 &amp; -3 &amp; 4 &amp; 30 \\ 
-0 &amp; 0 &amp; -2 &amp; 3 &amp; 23 \\ 
+-3 &amp; -16 &amp; 128 &amp; -2792 &amp; 6736 \\ 
+0 &amp; 14 &amp; -34 &amp; 856 &amp; -2624 \\ 
+0 &amp; 0 &amp; 2286 &amp; -44736 &amp; 87504 \\ 
+0 &amp; 0 &amp; 222 &amp; -4344 &amp; 8496 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
 \\ 
 \\ 
-3 L_{4} - 2 L_{3} \rightarrow L_{4} \\ 
+381 L_{4} - 37 L_{3} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 5 &amp; -27 &amp; 61 &amp; 469 \\ 
-0 &amp; 1 &amp; -3 &amp; 8 &amp; 59 \\ 
-0 &amp; 0 &amp; -3 &amp; 4 &amp; 30 \\ 
-0 &amp; 0 &amp; 0 &amp; 1 &amp; 9 \\ 
+-3 &amp; -16 &amp; 128 &amp; -2792 &amp; 6736 \\ 
+0 &amp; 14 &amp; -34 &amp; 856 &amp; -2624 \\ 
+0 &amp; 0 &amp; 2286 &amp; -44736 &amp; 87504 \\ 
+0 &amp; 0 &amp; 0 &amp; 168 &amp; -672 \\ 
 \end{array}
 \right]
 \end{array}
@@ -782,19 +769,19 @@ rref(E$A,E$B,style = &quot;inline&quot;)
 rref_entier(E$A,E$B,style = &quot;inline&quot;)</code></pre>
 <p><span class="math display">\[
 \begin{array}{rrrrrrrrr}
-x_{1} &amp; + &amp; 5 x_{2} &amp; + &amp; 13 x_{3} &amp; + &amp; 31 x_{4} &amp; = &amp; -208 \\ 
-x_{1} &amp; + &amp; 6 x_{2} &amp; + &amp; 17 x_{3} &amp; + &amp; 41 x_{4} &amp; = &amp; -280 \\ 
--2 x_{1} &amp; - &amp; 9 x_{2} &amp; - &amp; 23 x_{3} &amp; - &amp; 55 x_{4} &amp; = &amp; 367 \\ 
-x_{1} &amp; &amp; &amp; + &amp; 3 x_{3} &amp; + &amp; 12 x_{4} &amp; = &amp; -84 \\ 
+3 x_{1} &amp; &amp; &amp; + &amp; 70 x_{3} &amp; + &amp; 758 x_{4} &amp; = &amp; -7594 \\ 
+x_{1} &amp; - &amp; 4 x_{2} &amp; + &amp; 42 x_{3} &amp; + &amp; 234 x_{4} &amp; = &amp; -2238 \\ 
+-4 x_{1} &amp; + &amp; 15 x_{2} &amp; - &amp; 160 x_{3} &amp; - &amp; 900 x_{4} &amp; = &amp; 8640 \\ 
+x_{1} &amp; - &amp; 3 x_{2} &amp; + &amp; 35 x_{3} &amp; + &amp; 210 x_{4} &amp; = &amp; -2040 \\ 
 \end{array}
 \]</span><span class="math display">\[
 \begin{array}{l}
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 5 &amp; 13 &amp; 31 &amp; -208 \\ 
-1 &amp; 6 &amp; 17 &amp; 41 &amp; -280 \\ 
--2 &amp; -9 &amp; -23 &amp; -55 &amp; 367 \\ 
-1 &amp; 0 &amp; 3 &amp; 12 &amp; -84 \\ 
+3 &amp; 0 &amp; 70 &amp; 758 &amp; -7594 \\ 
+1 &amp; -4 &amp; 42 &amp; 234 &amp; -2238 \\ 
+-4 &amp; 15 &amp; -160 &amp; -900 &amp; 8640 \\ 
+1 &amp; -3 &amp; 35 &amp; 210 &amp; -2040 \\ 
 \end{array}
 \right]\begin{array}{l}
 L_{1} \rightarrow L_{3}\\ 
@@ -805,13 +792,13 @@ L_{3} \rightarrow L_{1}\\
  \\
 \left[
 \begin{array}{rrrr|r}
--2 &amp; -9 &amp; -23 &amp; -55 &amp; 367 \\ 
-1 &amp; 6 &amp; 17 &amp; 41 &amp; -280 \\ 
-1 &amp; 5 &amp; 13 &amp; 31 &amp; -208 \\ 
-1 &amp; 0 &amp; 3 &amp; 12 &amp; -84 \\ 
+-4 &amp; 15 &amp; -160 &amp; -900 &amp; 8640 \\ 
+1 &amp; -4 &amp; 42 &amp; 234 &amp; -2238 \\ 
+3 &amp; 0 &amp; 70 &amp; 758 &amp; -7594 \\ 
+1 &amp; -3 &amp; 35 &amp; 210 &amp; -2040 \\ 
 \end{array}
 \right]\begin{array}{l}
--1/2 L_{1} \rightarrow L_{1}\\ 
+-1/4 L_{1} \rightarrow L_{1}\\ 
 \\ 
 \\ 
 \\ 
@@ -819,66 +806,66 @@ L_{3} \rightarrow L_{1}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 9/2 &amp; 23/2 &amp; 55/2 &amp; -367/2 \\ 
-1 &amp; 6 &amp; 17 &amp; 41 &amp; -280 \\ 
-1 &amp; 5 &amp; 13 &amp; 31 &amp; -208 \\ 
-1 &amp; 0 &amp; 3 &amp; 12 &amp; -84 \\ 
+1 &amp; -15/4 &amp; 40 &amp; 225 &amp; -2160 \\ 
+1 &amp; -4 &amp; 42 &amp; 234 &amp; -2238 \\ 
+3 &amp; 0 &amp; 70 &amp; 758 &amp; -7594 \\ 
+1 &amp; -3 &amp; 35 &amp; 210 &amp; -2040 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
  L_{2} -  L_{1} \rightarrow L_{2} \\ 
- L_{3} -  L_{1} \rightarrow L_{3} \\ 
+ L_{3} - 3 L_{1} \rightarrow L_{3} \\ 
  L_{4} -  L_{1} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 9/2 &amp; 23/2 &amp; 55/2 &amp; -367/2 \\ 
-0 &amp; 3/2 &amp; 11/2 &amp; 27/2 &amp; -193/2 \\ 
-0 &amp; 1/2 &amp; 3/2 &amp; 7/2 &amp; -49/2 \\ 
-0 &amp; -9/2 &amp; -17/2 &amp; -31/2 &amp; 199/2 \\ 
+1 &amp; -15/4 &amp; 40 &amp; 225 &amp; -2160 \\ 
+0 &amp; -1/4 &amp; 2 &amp; 9 &amp; -78 \\ 
+0 &amp; 45/4 &amp; -50 &amp; 83 &amp; -1114 \\ 
+0 &amp; 3/4 &amp; -5 &amp; -15 &amp; 120 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
-L_{2} \rightarrow L_{4}\\ 
-\\ 
-L_{4} \rightarrow L_{2}\\ 
-\end{array}\\
- \\
-\left[
-\begin{array}{rrrr|r}
-1 &amp; 9/2 &amp; 23/2 &amp; 55/2 &amp; -367/2 \\ 
-0 &amp; -9/2 &amp; -17/2 &amp; -31/2 &amp; 199/2 \\ 
-0 &amp; 1/2 &amp; 3/2 &amp; 7/2 &amp; -49/2 \\ 
-0 &amp; 3/2 &amp; 11/2 &amp; 27/2 &amp; -193/2 \\ 
-\end{array}
-\right]\begin{array}{l}
-\\ 
--2/9 L_{2} \rightarrow L_{2}\\ 
-\\ 
+L_{2} \rightarrow L_{3}\\ 
+L_{3} \rightarrow L_{2}\\ 
 \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 9/2 &amp; 23/2 &amp; 55/2 &amp; -367/2 \\ 
-0 &amp; 1 &amp; 17/9 &amp; 31/9 &amp; -199/9 \\ 
-0 &amp; 1/2 &amp; 3/2 &amp; 7/2 &amp; -49/2 \\ 
-0 &amp; 3/2 &amp; 11/2 &amp; 27/2 &amp; -193/2 \\ 
+1 &amp; -15/4 &amp; 40 &amp; 225 &amp; -2160 \\ 
+0 &amp; 45/4 &amp; -50 &amp; 83 &amp; -1114 \\ 
+0 &amp; -1/4 &amp; 2 &amp; 9 &amp; -78 \\ 
+0 &amp; 3/4 &amp; -5 &amp; -15 &amp; 120 \\ 
 \end{array}
 \right]\begin{array}{l}
- L_{1} - 9/2 L_{2} \rightarrow L_{1} \\ 
 \\ 
- L_{3} - 1/2 L_{2} \rightarrow L_{3} \\ 
- L_{4} - 3/2 L_{2} \rightarrow L_{4} \\ 
+4/45 L_{2} \rightarrow L_{2}\\ 
+\\ 
+\\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 0 &amp; 3 &amp; 12 &amp; -84 \\ 
-0 &amp; 1 &amp; 17/9 &amp; 31/9 &amp; -199/9 \\ 
-0 &amp; 0 &amp; 5/9 &amp; 16/9 &amp; -121/9 \\ 
-0 &amp; 0 &amp; 8/3 &amp; 25/3 &amp; -190/3 \\ 
+1 &amp; -15/4 &amp; 40 &amp; 225 &amp; -2160 \\ 
+0 &amp; 1 &amp; -40/9 &amp; 332/45 &amp; -4456/45 \\ 
+0 &amp; -1/4 &amp; 2 &amp; 9 &amp; -78 \\ 
+0 &amp; 3/4 &amp; -5 &amp; -15 &amp; 120 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 15/4 L_{2} \rightarrow L_{1} \\ 
+\\ 
+ L_{3} + 1/4 L_{2} \rightarrow L_{3} \\ 
+ L_{4} - 3/4 L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; 0 &amp; 70/3 &amp; 758/3 &amp; -7594/3 \\ 
+0 &amp; 1 &amp; -40/9 &amp; 332/45 &amp; -4456/45 \\ 
+0 &amp; 0 &amp; 8/9 &amp; 488/45 &amp; -4624/45 \\ 
+0 &amp; 0 &amp; -5/3 &amp; -308/15 &amp; 2914/15 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
@@ -889,66 +876,66 @@ L_{4} \rightarrow L_{3}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 0 &amp; 3 &amp; 12 &amp; -84 \\ 
-0 &amp; 1 &amp; 17/9 &amp; 31/9 &amp; -199/9 \\ 
-0 &amp; 0 &amp; 8/3 &amp; 25/3 &amp; -190/3 \\ 
-0 &amp; 0 &amp; 5/9 &amp; 16/9 &amp; -121/9 \\ 
+1 &amp; 0 &amp; 70/3 &amp; 758/3 &amp; -7594/3 \\ 
+0 &amp; 1 &amp; -40/9 &amp; 332/45 &amp; -4456/45 \\ 
+0 &amp; 0 &amp; -5/3 &amp; -308/15 &amp; 2914/15 \\ 
+0 &amp; 0 &amp; 8/9 &amp; 488/45 &amp; -4624/45 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
 \\ 
-3/8 L_{3} \rightarrow L_{3}\\ 
+-3/5 L_{3} \rightarrow L_{3}\\ 
 \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 0 &amp; 3 &amp; 12 &amp; -84 \\ 
-0 &amp; 1 &amp; 17/9 &amp; 31/9 &amp; -199/9 \\ 
-0 &amp; 0 &amp; 1 &amp; 25/8 &amp; -95/4 \\ 
-0 &amp; 0 &amp; 5/9 &amp; 16/9 &amp; -121/9 \\ 
+1 &amp; 0 &amp; 70/3 &amp; 758/3 &amp; -7594/3 \\ 
+0 &amp; 1 &amp; -40/9 &amp; 332/45 &amp; -4456/45 \\ 
+0 &amp; 0 &amp; 1 &amp; 308/25 &amp; -2914/25 \\ 
+0 &amp; 0 &amp; 8/9 &amp; 488/45 &amp; -4624/45 \\ 
 \end{array}
 \right]\begin{array}{l}
- L_{1} - 3 L_{3} \rightarrow L_{1} \\ 
- L_{2} - 17/9 L_{3} \rightarrow L_{2} \\ 
+ L_{1} - 70/3 L_{3} \rightarrow L_{1} \\ 
+ L_{2} + 40/9 L_{3} \rightarrow L_{2} \\ 
 \\ 
- L_{4} - 5/9 L_{3} \rightarrow L_{4} \\ 
+ L_{4} - 8/9 L_{3} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 0 &amp; 0 &amp; 21/8 &amp; -51/4 \\ 
-0 &amp; 1 &amp; 0 &amp; -59/24 &amp; 91/4 \\ 
-0 &amp; 0 &amp; 1 &amp; 25/8 &amp; -95/4 \\ 
-0 &amp; 0 &amp; 0 &amp; 1/24 &amp; -1/4 \\ 
+1 &amp; 0 &amp; 0 &amp; -174/5 &amp; 942/5 \\ 
+0 &amp; 1 &amp; 0 &amp; 932/15 &amp; -9256/15 \\ 
+0 &amp; 0 &amp; 1 &amp; 308/25 &amp; -2914/25 \\ 
+0 &amp; 0 &amp; 0 &amp; -8/75 &amp; 64/75 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
 \\ 
 \\ 
-24 L_{4} \rightarrow L_{4}\\ 
+-75/8 L_{4} \rightarrow L_{4}\\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 0 &amp; 0 &amp; 21/8 &amp; -51/4 \\ 
-0 &amp; 1 &amp; 0 &amp; -59/24 &amp; 91/4 \\ 
-0 &amp; 0 &amp; 1 &amp; 25/8 &amp; -95/4 \\ 
-0 &amp; 0 &amp; 0 &amp; 1 &amp; -6 \\ 
+1 &amp; 0 &amp; 0 &amp; -174/5 &amp; 942/5 \\ 
+0 &amp; 1 &amp; 0 &amp; 932/15 &amp; -9256/15 \\ 
+0 &amp; 0 &amp; 1 &amp; 308/25 &amp; -2914/25 \\ 
+0 &amp; 0 &amp; 0 &amp; 1 &amp; -8 \\ 
 \end{array}
 \right]\begin{array}{l}
- L_{1} - 21/8 L_{4} \rightarrow L_{1} \\ 
- L_{2} + 59/24 L_{4} \rightarrow L_{2} \\ 
- L_{3} - 25/8 L_{4} \rightarrow L_{3} \\ 
+ L_{1} + 174/5 L_{4} \rightarrow L_{1} \\ 
+ L_{2} - 932/15 L_{4} \rightarrow L_{2} \\ 
+ L_{3} - 308/25 L_{4} \rightarrow L_{3} \\ 
 \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 0 &amp; 0 &amp; 0 &amp; 3 \\ 
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 8 \\ 
-0 &amp; 0 &amp; 1 &amp; 0 &amp; -5 \\ 
-0 &amp; 0 &amp; 0 &amp; 1 &amp; -6 \\ 
+1 &amp; 0 &amp; 0 &amp; 0 &amp; -90 \\ 
+0 &amp; 1 &amp; 0 &amp; 0 &amp; -120 \\ 
+0 &amp; 0 &amp; 1 &amp; 0 &amp; -18 \\ 
+0 &amp; 0 &amp; 0 &amp; 1 &amp; -8 \\ 
 \end{array}
 \right]
 \end{array}
@@ -956,80 +943,80 @@ L_{4} \rightarrow L_{3}\\
 \begin{array}{l}
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 5 &amp; 13 &amp; 31 &amp; -208 \\ 
-1 &amp; 6 &amp; 17 &amp; 41 &amp; -280 \\ 
--2 &amp; -9 &amp; -23 &amp; -55 &amp; 367 \\ 
-1 &amp; 0 &amp; 3 &amp; 12 &amp; -84 \\ 
+3 &amp; 0 &amp; 70 &amp; 758 &amp; -7594 \\ 
+1 &amp; -4 &amp; 42 &amp; 234 &amp; -2238 \\ 
+-4 &amp; 15 &amp; -160 &amp; -900 &amp; 8640 \\ 
+1 &amp; -3 &amp; 35 &amp; 210 &amp; -2040 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
- L_{2} -  L_{1} \rightarrow L_{2} \\ 
- L_{3} + 2 L_{1} \rightarrow L_{3} \\ 
- L_{4} -  L_{1} \rightarrow L_{4} \\ 
+3 L_{2} -  L_{1} \rightarrow L_{2} \\ 
+3 L_{3} + 4 L_{1} \rightarrow L_{3} \\ 
+3 L_{4} -  L_{1} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 5 &amp; 13 &amp; 31 &amp; -208 \\ 
-0 &amp; 1 &amp; 4 &amp; 10 &amp; -72 \\ 
-0 &amp; 1 &amp; 3 &amp; 7 &amp; -49 \\ 
-0 &amp; -5 &amp; -10 &amp; -19 &amp; 124 \\ 
+3 &amp; 0 &amp; 70 &amp; 758 &amp; -7594 \\ 
+0 &amp; -12 &amp; 56 &amp; -56 &amp; 880 \\ 
+0 &amp; 45 &amp; -200 &amp; 332 &amp; -4456 \\ 
+0 &amp; -9 &amp; 35 &amp; -128 &amp; 1474 \\ 
 \end{array}
 \right]\begin{array}{l}
- L_{1} - 5 L_{2} \rightarrow L_{1} \\ 
 \\ 
- L_{3} -  L_{2} \rightarrow L_{3} \\ 
- L_{4} + 5 L_{2} \rightarrow L_{4} \\ 
+\\ 
+4 L_{3} + 15 L_{2} \rightarrow L_{3} \\ 
+4 L_{4} - 3 L_{2} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 0 &amp; -7 &amp; -19 &amp; 152 \\ 
-0 &amp; 1 &amp; 4 &amp; 10 &amp; -72 \\ 
-0 &amp; 0 &amp; -1 &amp; -3 &amp; 23 \\ 
-0 &amp; 0 &amp; 10 &amp; 31 &amp; -236 \\ 
+3 &amp; 0 &amp; 70 &amp; 758 &amp; -7594 \\ 
+0 &amp; -12 &amp; 56 &amp; -56 &amp; 880 \\ 
+0 &amp; 0 &amp; 40 &amp; 488 &amp; -4624 \\ 
+0 &amp; 0 &amp; -28 &amp; -344 &amp; 3256 \\ 
 \end{array}
 \right]\begin{array}{l}
- L_{1} - 7 L_{3} \rightarrow L_{1} \\ 
- L_{2} + 4 L_{3} \rightarrow L_{2} \\ 
+4 L_{1} - 7 L_{3} \rightarrow L_{1} \\ 
+5 L_{2} - 7 L_{3} \rightarrow L_{2} \\ 
 \\ 
- L_{4} + 10 L_{3} \rightarrow L_{4} \\ 
+10 L_{4} + 7 L_{3} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 0 &amp; 0 &amp; 2 &amp; -9 \\ 
-0 &amp; 1 &amp; 0 &amp; -2 &amp; 20 \\ 
-0 &amp; 0 &amp; -1 &amp; -3 &amp; 23 \\ 
-0 &amp; 0 &amp; 0 &amp; 1 &amp; -6 \\ 
+12 &amp; 0 &amp; 0 &amp; -384 &amp; 1992 \\ 
+0 &amp; -60 &amp; 0 &amp; -3696 &amp; 36768 \\ 
+0 &amp; 0 &amp; 40 &amp; 488 &amp; -4624 \\ 
+0 &amp; 0 &amp; 0 &amp; -24 &amp; 192 \\ 
 \end{array}
 \right]\begin{array}{l}
- L_{1} - 2 L_{4} \rightarrow L_{1} \\ 
- L_{2} + 2 L_{4} \rightarrow L_{2} \\ 
- L_{3} + 3 L_{4} \rightarrow L_{3} \\ 
-\\ 
-\end{array}\\
- \\
-\left[
-\begin{array}{rrrr|r}
-1 &amp; 0 &amp; 0 &amp; 0 &amp; 3 \\ 
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 8 \\ 
-0 &amp; 0 &amp; -1 &amp; 0 &amp; 5 \\ 
-0 &amp; 0 &amp; 0 &amp; 1 &amp; -6 \\ 
-\end{array}
-\right]\begin{array}{l}
-\\ 
-\\ 
-- L_{3} \rightarrow L_{3}\\ 
+ L_{1} - 16 L_{4} \rightarrow L_{1} \\ 
+ L_{2} - 154 L_{4} \rightarrow L_{2} \\ 
+3 L_{3} + 61 L_{4} \rightarrow L_{3} \\ 
 \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 0 &amp; 0 &amp; 0 &amp; 3 \\ 
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 8 \\ 
-0 &amp; 0 &amp; 1 &amp; 0 &amp; -5 \\ 
-0 &amp; 0 &amp; 0 &amp; 1 &amp; -6 \\ 
+12 &amp; 0 &amp; 0 &amp; 0 &amp; -1080 \\ 
+0 &amp; -60 &amp; 0 &amp; 0 &amp; 7200 \\ 
+0 &amp; 0 &amp; 120 &amp; 0 &amp; -2160 \\ 
+0 &amp; 0 &amp; 0 &amp; -24 &amp; 192 \\ 
+\end{array}
+\right]\begin{array}{l}
+1/12 L_{1} \rightarrow L_{1}\\ 
+-1/60 L_{2} \rightarrow L_{2}\\ 
+1/120 L_{3} \rightarrow L_{3}\\ 
+-1/24 L_{4} \rightarrow L_{4}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; -90 \\ 
+0 &amp; 1 &amp; 0 &amp; 0 &amp; -120 \\ 
+0 &amp; 0 &amp; 1 &amp; 0 &amp; -18 \\ 
+0 &amp; 0 &amp; 0 &amp; 1 &amp; -8 \\ 
 \end{array}
 \right]
 \end{array}
@@ -1043,33 +1030,117 @@ rref(E$A,E$B,style = &quot;inline&quot;)
 rref_entier(E$A,E$B,style = &quot;inline&quot;)</code></pre>
 <p><span class="math display">\[
 \begin{array}{rrrrrrrrr}
-x_{1} &amp; - &amp; 7 x_{2} &amp; + &amp; 10 x_{3} &amp; + &amp; 10 x_{4} &amp; = &amp; 9 \\ 
--x_{1} &amp; + &amp; 7 x_{2} &amp; - &amp; 10 x_{3} &amp; - &amp; 10 x_{4} &amp; = &amp; 0 \\ 
-x_{1} &amp; - &amp; 7 x_{2} &amp; + &amp; 10 x_{3} &amp; + &amp; 10 x_{4} &amp; = &amp; 0 \\ 
-x_{1} &amp; - &amp; 7 x_{2} &amp; + &amp; 10 x_{3} &amp; + &amp; 10 x_{4} &amp; = &amp; 0 \\ 
+-x_{1} &amp; + &amp; 3 x_{2} &amp; + &amp; 12 x_{3} &amp; + &amp; x_{4} &amp; = &amp; -35 \\ 
+-x_{1} &amp; - &amp; 6 x_{2} &amp; + &amp; 38 x_{3} &amp; + &amp; 640 x_{4} &amp; = &amp; 512 \\ 
+5 x_{1} &amp; - &amp; 11 x_{2} &amp; - &amp; 5 x_{3} &amp; + &amp; 310 x_{4} &amp; = &amp; 560 \\ 
+x_{1} &amp; - &amp; 2 x_{2} &amp; - &amp; 2 x_{3} &amp; + &amp; 44 x_{4} &amp; = &amp; 96 \\ 
 \end{array}
 \]</span><span class="math display">\[
 \begin{array}{l}
 \left[
 \begin{array}{rrrr|r}
-1 &amp; -7 &amp; 10 &amp; 10 &amp; 9 \\ 
--1 &amp; 7 &amp; -10 &amp; -10 &amp; 0 \\ 
-1 &amp; -7 &amp; 10 &amp; 10 &amp; 0 \\ 
-1 &amp; -7 &amp; 10 &amp; 10 &amp; 0 \\ 
+-1 &amp; 3 &amp; 12 &amp; 1 &amp; -35 \\ 
+-1 &amp; -6 &amp; 38 &amp; 640 &amp; 512 \\ 
+5 &amp; -11 &amp; -5 &amp; 310 &amp; 560 \\ 
+1 &amp; -2 &amp; -2 &amp; 44 &amp; 96 \\ 
+\end{array}
+\right]\begin{array}{l}
+L_{1} \rightarrow L_{3}\\ 
+\\ 
+L_{3} \rightarrow L_{1}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+5 &amp; -11 &amp; -5 &amp; 310 &amp; 560 \\ 
+-1 &amp; -6 &amp; 38 &amp; 640 &amp; 512 \\ 
+-1 &amp; 3 &amp; 12 &amp; 1 &amp; -35 \\ 
+1 &amp; -2 &amp; -2 &amp; 44 &amp; 96 \\ 
+\end{array}
+\right]\begin{array}{l}
+1/5 L_{1} \rightarrow L_{1}\\ 
+\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; -11/5 &amp; -1 &amp; 62 &amp; 112 \\ 
+-1 &amp; -6 &amp; 38 &amp; 640 &amp; 512 \\ 
+-1 &amp; 3 &amp; 12 &amp; 1 &amp; -35 \\ 
+1 &amp; -2 &amp; -2 &amp; 44 &amp; 96 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
  L_{2} + L_{1} \rightarrow L_{2} \\ 
- L_{3} -  L_{1} \rightarrow L_{3} \\ 
+ L_{3} + L_{1} \rightarrow L_{3} \\ 
  L_{4} -  L_{1} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; -7 &amp; 10 &amp; 10 &amp; 9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; -9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; -9 \\ 
+1 &amp; -11/5 &amp; -1 &amp; 62 &amp; 112 \\ 
+0 &amp; -41/5 &amp; 37 &amp; 702 &amp; 624 \\ 
+0 &amp; 4/5 &amp; 11 &amp; 63 &amp; 77 \\ 
+0 &amp; 1/5 &amp; -1 &amp; -18 &amp; -16 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+-5/41 L_{2} \rightarrow L_{2}\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; -11/5 &amp; -1 &amp; 62 &amp; 112 \\ 
+0 &amp; 1 &amp; -185/41 &amp; -3510/41 &amp; -3120/41 \\ 
+0 &amp; 4/5 &amp; 11 &amp; 63 &amp; 77 \\ 
+0 &amp; 1/5 &amp; -1 &amp; -18 &amp; -16 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 11/5 L_{2} \rightarrow L_{1} \\ 
+\\ 
+ L_{3} - 4/5 L_{2} \rightarrow L_{3} \\ 
+ L_{4} - 1/5 L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; 0 &amp; -448/41 &amp; -5180/41 &amp; -2272/41 \\ 
+0 &amp; 1 &amp; -185/41 &amp; -3510/41 &amp; -3120/41 \\ 
+0 &amp; 0 &amp; 599/41 &amp; 5391/41 &amp; 5653/41 \\ 
+0 &amp; 0 &amp; -4/41 &amp; -36/41 &amp; -32/41 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+41/599 L_{3} \rightarrow L_{3}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; 0 &amp; -448/41 &amp; -5180/41 &amp; -2272/41 \\ 
+0 &amp; 1 &amp; -185/41 &amp; -3510/41 &amp; -3120/41 \\ 
+0 &amp; 0 &amp; 1 &amp; 9 &amp; 5653/599 \\ 
+0 &amp; 0 &amp; -4/41 &amp; -36/41 &amp; -32/41 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 448/41 L_{3} \rightarrow L_{1} \\ 
+ L_{2} + 185/41 L_{3} \rightarrow L_{2} \\ 
+\\ 
+ L_{4} + 4/41 L_{3} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; 0 &amp; 0 &amp; -28 &amp; 28576/599 \\ 
+0 &amp; 1 &amp; 0 &amp; -45 &amp; -20075/599 \\ 
+0 &amp; 0 &amp; 1 &amp; 9 &amp; 5653/599 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 84/599 \\ 
 \end{array}
 \right]
 \end{array}
@@ -1077,38 +1148,66 @@ x_{1} &amp; - &amp; 7 x_{2} &amp; + &amp; 10 x_{3} &amp; + &amp; 10 x_{4} &amp; 
 \begin{array}{l}
 \left[
 \begin{array}{rrrr|r}
-1 &amp; -7 &amp; 10 &amp; 10 &amp; 9 \\ 
--1 &amp; 7 &amp; -10 &amp; -10 &amp; 0 \\ 
-1 &amp; -7 &amp; 10 &amp; 10 &amp; 0 \\ 
-1 &amp; -7 &amp; 10 &amp; 10 &amp; 0 \\ 
+-1 &amp; 3 &amp; 12 &amp; 1 &amp; -35 \\ 
+-1 &amp; -6 &amp; 38 &amp; 640 &amp; 512 \\ 
+5 &amp; -11 &amp; -5 &amp; 310 &amp; 560 \\ 
+1 &amp; -2 &amp; -2 &amp; 44 &amp; 96 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
- L_{2} + L_{1} \rightarrow L_{2} \\ 
- L_{3} -  L_{1} \rightarrow L_{3} \\ 
- L_{4} -  L_{1} \rightarrow L_{4} \\ 
+ L_{2} -  L_{1} \rightarrow L_{2} \\ 
+ L_{3} + 5 L_{1} \rightarrow L_{3} \\ 
+ L_{4} + L_{1} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; -7 &amp; 10 &amp; 10 &amp; 9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; -9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; -9 \\ 
+-1 &amp; 3 &amp; 12 &amp; 1 &amp; -35 \\ 
+0 &amp; -9 &amp; 26 &amp; 639 &amp; 547 \\ 
+0 &amp; 4 &amp; 55 &amp; 315 &amp; 385 \\ 
+0 &amp; 1 &amp; 10 &amp; 45 &amp; 61 \\ 
 \end{array}
 \right]\begin{array}{l}
+3 L_{1} + L_{2} \rightarrow L_{1} \\ 
 \\ 
+9 L_{3} + 4 L_{2} \rightarrow L_{3} \\ 
+9 L_{4} + L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+-3 &amp; 0 &amp; 62 &amp; 642 &amp; 442 \\ 
+0 &amp; -9 &amp; 26 &amp; 639 &amp; 547 \\ 
+0 &amp; 0 &amp; 599 &amp; 5391 &amp; 5653 \\ 
+0 &amp; 0 &amp; 116 &amp; 1044 &amp; 1096 \\ 
+\end{array}
+\right]\begin{array}{l}
+599 L_{1} - 62 L_{3} \rightarrow L_{1} \\ 
+599 L_{2} - 26 L_{3} \rightarrow L_{2} \\ 
 \\ 
-\\ 
+599 L_{4} - 116 L_{3} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+-1797 &amp; 0 &amp; 0 &amp; 50316 &amp; -85728 \\ 
+0 &amp; -5391 &amp; 0 &amp; 242595 &amp; 180675 \\ 
+0 &amp; 0 &amp; 599 &amp; 5391 &amp; 5653 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 756 \\ 
+\end{array}
+\right]\begin{array}{l}
+-1/1797 L_{1} \rightarrow L_{1}\\ 
+-1/5391 L_{2} \rightarrow L_{2}\\ 
+1/599 L_{3} \rightarrow L_{3}\\ 
 \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; -7 &amp; 10 &amp; 10 &amp; 9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; -9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; -9 \\ 
+1 &amp; 0 &amp; 0 &amp; -28 &amp; 28576/599 \\ 
+0 &amp; 1 &amp; 0 &amp; -45 &amp; -20075/599 \\ 
+0 &amp; 0 &amp; 1 &amp; 9 &amp; 5653/599 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 756 \\ 
 \end{array}
 \right]
 \end{array}
@@ -1122,32 +1221,116 @@ rref(E$A,E$B,style = &quot;inline&quot;)
 rref_entier(E$A,E$B,style = &quot;inline&quot;)</code></pre>
 <p><span class="math display">\[
 \begin{array}{rrrrrrrrr}
-x_{1} &amp; + &amp; 10 x_{2} &amp; + &amp; 7 x_{3} &amp; - &amp; 3 x_{4} &amp; = &amp; 9 \\ 
-x_{1} &amp; + &amp; 10 x_{2} &amp; + &amp; 7 x_{3} &amp; - &amp; 3 x_{4} &amp; = &amp; 9 \\ 
--x_{1} &amp; - &amp; 10 x_{2} &amp; - &amp; 7 x_{3} &amp; + &amp; 3 x_{4} &amp; = &amp; -9 \\ 
--x_{1} &amp; - &amp; 10 x_{2} &amp; - &amp; 7 x_{3} &amp; + &amp; 3 x_{4} &amp; = &amp; -9 \\ 
+5 x_{1} &amp; - &amp; 57 x_{2} &amp; - &amp; 363 x_{3} &amp; - &amp; 1158 x_{4} &amp; = &amp; 1272 \\ 
+5 x_{1} &amp; - &amp; 44 x_{2} &amp; - &amp; 311 x_{3} &amp; - &amp; 960 x_{4} &amp; = &amp; 999 \\ 
+x_{1} &amp; - &amp; 9 x_{2} &amp; - &amp; 63 x_{3} &amp; - &amp; 195 x_{4} &amp; = &amp; 204 \\ 
+3 x_{1} &amp; - &amp; 23 x_{2} &amp; - &amp; 173 x_{3} &amp; - &amp; 541 x_{4} &amp; = &amp; 528 \\ 
 \end{array}
 \]</span><span class="math display">\[
 \begin{array}{l}
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 10 &amp; 7 &amp; -3 &amp; 9 \\ 
-1 &amp; 10 &amp; 7 &amp; -3 &amp; 9 \\ 
--1 &amp; -10 &amp; -7 &amp; 3 &amp; -9 \\ 
--1 &amp; -10 &amp; -7 &amp; 3 &amp; -9 \\ 
+5 &amp; -57 &amp; -363 &amp; -1158 &amp; 1272 \\ 
+5 &amp; -44 &amp; -311 &amp; -960 &amp; 999 \\ 
+1 &amp; -9 &amp; -63 &amp; -195 &amp; 204 \\ 
+3 &amp; -23 &amp; -173 &amp; -541 &amp; 528 \\ 
 \end{array}
 \right]\begin{array}{l}
+1/5 L_{1} \rightarrow L_{1}\\ 
 \\ 
- L_{2} -  L_{1} \rightarrow L_{2} \\ 
- L_{3} + L_{1} \rightarrow L_{3} \\ 
- L_{4} + L_{1} \rightarrow L_{4} \\ 
+\\ 
+\\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 10 &amp; 7 &amp; -3 &amp; 9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 
+1 &amp; -57/5 &amp; -363/5 &amp; -1158/5 &amp; 1272/5 \\ 
+5 &amp; -44 &amp; -311 &amp; -960 &amp; 999 \\ 
+1 &amp; -9 &amp; -63 &amp; -195 &amp; 204 \\ 
+3 &amp; -23 &amp; -173 &amp; -541 &amp; 528 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+ L_{2} - 5 L_{1} \rightarrow L_{2} \\ 
+ L_{3} -  L_{1} \rightarrow L_{3} \\ 
+ L_{4} - 3 L_{1} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; -57/5 &amp; -363/5 &amp; -1158/5 &amp; 1272/5 \\ 
+0 &amp; 13 &amp; 52 &amp; 198 &amp; -273 \\ 
+0 &amp; 12/5 &amp; 48/5 &amp; 183/5 &amp; -252/5 \\ 
+0 &amp; 56/5 &amp; 224/5 &amp; 769/5 &amp; -1176/5 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+1/13 L_{2} \rightarrow L_{2}\\ 
+\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; -57/5 &amp; -363/5 &amp; -1158/5 &amp; 1272/5 \\ 
+0 &amp; 1 &amp; 4 &amp; 198/13 &amp; -21 \\ 
+0 &amp; 12/5 &amp; 48/5 &amp; 183/5 &amp; -252/5 \\ 
+0 &amp; 56/5 &amp; 224/5 &amp; 769/5 &amp; -1176/5 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 57/5 L_{2} \rightarrow L_{1} \\ 
+\\ 
+ L_{3} - 12/5 L_{2} \rightarrow L_{3} \\ 
+ L_{4} - 56/5 L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; 0 &amp; -27 &amp; -3768/65 &amp; 15 \\ 
+0 &amp; 1 &amp; 4 &amp; 198/13 &amp; -21 \\ 
+0 &amp; 0 &amp; 0 &amp; 3/65 &amp; 0 \\ 
+0 &amp; 0 &amp; 0 &amp; -1091/65 &amp; 0 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+L_{3} \rightarrow L_{4}\\ 
+L_{4} \rightarrow L_{3}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; 0 &amp; -27 &amp; -3768/65 &amp; 15 \\ 
+0 &amp; 1 &amp; 4 &amp; 198/13 &amp; -21 \\ 
+0 &amp; 0 &amp; 0 &amp; -1091/65 &amp; 0 \\ 
+0 &amp; 0 &amp; 0 &amp; 3/65 &amp; 0 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+\\ 
+-65/1091 L_{3} \rightarrow L_{3}\\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; 0 &amp; -27 &amp; -3768/65 &amp; 15 \\ 
+0 &amp; 1 &amp; 4 &amp; 198/13 &amp; -21 \\ 
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 
+0 &amp; 0 &amp; 0 &amp; 3/65 &amp; 0 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 3768/65 L_{3} \rightarrow L_{1} \\ 
+ L_{2} - 198/13 L_{3} \rightarrow L_{2} \\ 
+\\ 
+ L_{4} - 3/65 L_{3} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+1 &amp; 0 &amp; -27 &amp; 0 &amp; 15 \\ 
+0 &amp; 1 &amp; 4 &amp; 0 &amp; -21 \\ 
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 
 \end{array}
 \right]
@@ -1156,43 +1339,226 @@ x_{1} &amp; + &amp; 10 x_{2} &amp; + &amp; 7 x_{3} &amp; - &amp; 3 x_{4} &amp; =
 \begin{array}{l}
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 10 &amp; 7 &amp; -3 &amp; 9 \\ 
-1 &amp; 10 &amp; 7 &amp; -3 &amp; 9 \\ 
--1 &amp; -10 &amp; -7 &amp; 3 &amp; -9 \\ 
--1 &amp; -10 &amp; -7 &amp; 3 &amp; -9 \\ 
+5 &amp; -57 &amp; -363 &amp; -1158 &amp; 1272 \\ 
+5 &amp; -44 &amp; -311 &amp; -960 &amp; 999 \\ 
+1 &amp; -9 &amp; -63 &amp; -195 &amp; 204 \\ 
+3 &amp; -23 &amp; -173 &amp; -541 &amp; 528 \\ 
 \end{array}
 \right]\begin{array}{l}
 \\ 
  L_{2} -  L_{1} \rightarrow L_{2} \\ 
- L_{3} + L_{1} \rightarrow L_{3} \\ 
- L_{4} + L_{1} \rightarrow L_{4} \\ 
+5 L_{3} -  L_{1} \rightarrow L_{3} \\ 
+5 L_{4} - 3 L_{1} \rightarrow L_{4} \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 10 &amp; 7 &amp; -3 &amp; 9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 
+5 &amp; -57 &amp; -363 &amp; -1158 &amp; 1272 \\ 
+0 &amp; 13 &amp; 52 &amp; 198 &amp; -273 \\ 
+0 &amp; 12 &amp; 48 &amp; 183 &amp; -252 \\ 
+0 &amp; 56 &amp; 224 &amp; 769 &amp; -1176 \\ 
+\end{array}
+\right]\begin{array}{l}
+13 L_{1} + 57 L_{2} \rightarrow L_{1} \\ 
+\\ 
+13 L_{3} - 12 L_{2} \rightarrow L_{3} \\ 
+13 L_{4} - 56 L_{2} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+65 &amp; 0 &amp; -1755 &amp; -3768 &amp; 975 \\ 
+0 &amp; 13 &amp; 52 &amp; 198 &amp; -273 \\ 
+0 &amp; 0 &amp; 0 &amp; 3 &amp; 0 \\ 
+0 &amp; 0 &amp; 0 &amp; -1091 &amp; 0 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 1256 L_{3} \rightarrow L_{1} \\ 
+ L_{2} - 66 L_{3} \rightarrow L_{2} \\ 
+\\ 
+3 L_{4} + 1091 L_{3} \rightarrow L_{4} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrr|r}
+65 &amp; 0 &amp; -1755 &amp; 0 &amp; 975 \\ 
+0 &amp; 13 &amp; 52 &amp; 0 &amp; -273 \\ 
+0 &amp; 0 &amp; 0 &amp; 3 &amp; 0 \\ 
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 
 \end{array}
 \right]\begin{array}{l}
-\\ 
-\\ 
-\\ 
+1/65 L_{1} \rightarrow L_{1}\\ 
+1/13 L_{2} \rightarrow L_{2}\\ 
+1/3 L_{3} \rightarrow L_{3}\\ 
 \\ 
 \end{array}\\
  \\
 \left[
 \begin{array}{rrrr|r}
-1 &amp; 10 &amp; 7 &amp; -3 &amp; 9 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 
+1 &amp; 0 &amp; -27 &amp; 0 &amp; 15 \\ 
+0 &amp; 1 &amp; 4 &amp; 0 &amp; -21 \\ 
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 
 \end{array}
 \right]
 \end{array}
 \]</span></p>
 </section>
+</section>
+<section id="autres-essais" class="level1">
+<h1>Autres essais</h1>
+<pre class="r"><code>E &lt;- create_sel(6,6, type = &quot;unique&quot;, solution = c(1,2,3,4,5,6))
+sel2latex(E$A, E$B, variables = &quot;xi&quot;)
+rref_entier(E$A,E$B,style = &quot;inline&quot;)</code></pre>
+<p><span class="math display">\[
+\begin{array}{rrrrrrrrrrrrr}
+-x_{1} &amp; - &amp; 4 x_{2} &amp; + &amp; 20 x_{3} &amp; + &amp; 102 x_{4} &amp; + &amp; 1535 x_{5} &amp; + &amp; 6974 x_{6} &amp; = &amp; 6353 \\ 
+x_{1} &amp; + &amp; 5 x_{2} &amp; - &amp; 30 x_{3} &amp; - &amp; 130 x_{4} &amp; - &amp; 2025 x_{5} &amp; - &amp; 8940 x_{6} &amp; = &amp; -6855 \\ 
+-3 x_{1} &amp; - &amp; 11 x_{2} &amp; + &amp; 62 x_{3} &amp; + &amp; 318 x_{4} &amp; + &amp; 4835 x_{5} &amp; + &amp; 21836 x_{6} &amp; = &amp; 19457 \\ 
+-2 x_{1} &amp; - &amp; 14 x_{2} &amp; + &amp; 97 x_{3} &amp; + &amp; 372 x_{4} &amp; + &amp; 5989 x_{5} &amp; + &amp; 25750 x_{6} &amp; = &amp; 16309 \\ 
+x_{1} &amp; + &amp; 10 x_{2} &amp; - &amp; 65 x_{3} &amp; - &amp; 250 x_{4} &amp; - &amp; 4045 x_{5} &amp; - &amp; 17310 x_{6} &amp; = &amp; -10600 \\ 
+-x_{1} &amp; + &amp; 5 x_{2} &amp; - &amp; 65 x_{3} &amp; - &amp; 135 x_{4} &amp; - &amp; 2600 x_{5} &amp; - &amp; 9635 x_{6} &amp; = &amp; 2080 \\ 
+\end{array}
+\]</span><span class="math display">\[
+\begin{array}{l}
+\left[
+\begin{array}{rrrrrr|r}
+-1 &amp; -4 &amp; 20 &amp; 102 &amp; 1535 &amp; 6974 &amp; 6353 \\ 
+1 &amp; 5 &amp; -30 &amp; -130 &amp; -2025 &amp; -8940 &amp; -6855 \\ 
+-3 &amp; -11 &amp; 62 &amp; 318 &amp; 4835 &amp; 21836 &amp; 19457 \\ 
+-2 &amp; -14 &amp; 97 &amp; 372 &amp; 5989 &amp; 25750 &amp; 16309 \\ 
+1 &amp; 10 &amp; -65 &amp; -250 &amp; -4045 &amp; -17310 &amp; -10600 \\ 
+-1 &amp; 5 &amp; -65 &amp; -135 &amp; -2600 &amp; -9635 &amp; 2080 \\ 
+\end{array}
+\right]\begin{array}{l}
+\\ 
+ L_{2} + L_{1} \rightarrow L_{2} \\ 
+ L_{3} - 3 L_{1} \rightarrow L_{3} \\ 
+ L_{4} - 2 L_{1} \rightarrow L_{4} \\ 
+ L_{5} + L_{1} \rightarrow L_{5} \\ 
+ L_{6} -  L_{1} \rightarrow L_{6} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrrrr|r}
+-1 &amp; -4 &amp; 20 &amp; 102 &amp; 1535 &amp; 6974 &amp; 6353 \\ 
+0 &amp; 1 &amp; -10 &amp; -28 &amp; -490 &amp; -1966 &amp; -502 \\ 
+0 &amp; 1 &amp; 2 &amp; 12 &amp; 230 &amp; 914 &amp; 398 \\ 
+0 &amp; -6 &amp; 57 &amp; 168 &amp; 2919 &amp; 11802 &amp; 3603 \\ 
+0 &amp; 6 &amp; -45 &amp; -148 &amp; -2510 &amp; -10336 &amp; -4247 \\ 
+0 &amp; 9 &amp; -85 &amp; -237 &amp; -4135 &amp; -16609 &amp; -4273 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 4 L_{2} \rightarrow L_{1} \\ 
+\\ 
+ L_{3} -  L_{2} \rightarrow L_{3} \\ 
+ L_{4} + 6 L_{2} \rightarrow L_{4} \\ 
+ L_{5} - 6 L_{2} \rightarrow L_{5} \\ 
+ L_{6} - 9 L_{2} \rightarrow L_{6} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrrrr|r}
+-1 &amp; 0 &amp; -20 &amp; -10 &amp; -425 &amp; -890 &amp; 4345 \\ 
+0 &amp; 1 &amp; -10 &amp; -28 &amp; -490 &amp; -1966 &amp; -502 \\ 
+0 &amp; 0 &amp; 12 &amp; 40 &amp; 720 &amp; 2880 &amp; 900 \\ 
+0 &amp; 0 &amp; -3 &amp; 0 &amp; -21 &amp; 6 &amp; 591 \\ 
+0 &amp; 0 &amp; 15 &amp; 20 &amp; 430 &amp; 1460 &amp; -1235 \\ 
+0 &amp; 0 &amp; 5 &amp; 15 &amp; 275 &amp; 1085 &amp; 245 \\ 
+\end{array}
+\right]\begin{array}{l}
+3 L_{1} + 5 L_{3} \rightarrow L_{1} \\ 
+6 L_{2} + 5 L_{3} \rightarrow L_{2} \\ 
+\\ 
+4 L_{4} + L_{3} \rightarrow L_{4} \\ 
+4 L_{5} - 5 L_{3} \rightarrow L_{5} \\ 
+12 L_{6} - 5 L_{3} \rightarrow L_{6} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrrrr|r}
+-3 &amp; 0 &amp; 0 &amp; 170 &amp; 2325 &amp; 11730 &amp; 17535 \\ 
+0 &amp; 6 &amp; 0 &amp; 32 &amp; 660 &amp; 2604 &amp; 1488 \\ 
+0 &amp; 0 &amp; 12 &amp; 40 &amp; 720 &amp; 2880 &amp; 900 \\ 
+0 &amp; 0 &amp; 0 &amp; 40 &amp; 636 &amp; 2904 &amp; 3264 \\ 
+0 &amp; 0 &amp; 0 &amp; -120 &amp; -1880 &amp; -8560 &amp; -9440 \\ 
+0 &amp; 0 &amp; 0 &amp; -20 &amp; -300 &amp; -1380 &amp; -1560 \\ 
+\end{array}
+\right]\begin{array}{l}
+4 L_{1} - 17 L_{4} \rightarrow L_{1} \\ 
+5 L_{2} - 4 L_{4} \rightarrow L_{2} \\ 
+ L_{3} -  L_{4} \rightarrow L_{3} \\ 
+\\ 
+ L_{5} + 3 L_{4} \rightarrow L_{5} \\ 
+2 L_{6} + L_{4} \rightarrow L_{6} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrrrr|r}
+-12 &amp; 0 &amp; 0 &amp; 0 &amp; -1512 &amp; -2448 &amp; 14652 \\ 
+0 &amp; 30 &amp; 0 &amp; 0 &amp; 756 &amp; 1404 &amp; -5616 \\ 
+0 &amp; 0 &amp; 12 &amp; 0 &amp; 84 &amp; -24 &amp; -2364 \\ 
+0 &amp; 0 &amp; 0 &amp; 40 &amp; 636 &amp; 2904 &amp; 3264 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 28 &amp; 152 &amp; 352 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 36 &amp; 144 &amp; 144 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 54 L_{5} \rightarrow L_{1} \\ 
+ L_{2} - 27 L_{5} \rightarrow L_{2} \\ 
+ L_{3} - 3 L_{5} \rightarrow L_{3} \\ 
+7 L_{4} - 159 L_{5} \rightarrow L_{4} \\ 
+\\ 
+7 L_{6} - 9 L_{5} \rightarrow L_{6} \\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrrrr|r}
+-12 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 5760 &amp; 33660 \\ 
+0 &amp; 30 &amp; 0 &amp; 0 &amp; 0 &amp; -2700 &amp; -15120 \\ 
+0 &amp; 0 &amp; 12 &amp; 0 &amp; 0 &amp; -480 &amp; -3420 \\ 
+0 &amp; 0 &amp; 0 &amp; 280 &amp; 0 &amp; -3840 &amp; -33120 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 28 &amp; 152 &amp; 352 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -360 &amp; -2160 \\ 
+\end{array}
+\right]\begin{array}{l}
+ L_{1} + 16 L_{6} \rightarrow L_{1} \\ 
+2 L_{2} - 15 L_{6} \rightarrow L_{2} \\ 
+3 L_{3} - 4 L_{6} \rightarrow L_{3} \\ 
+3 L_{4} - 32 L_{6} \rightarrow L_{4} \\ 
+45 L_{5} + 19 L_{6} \rightarrow L_{5} \\ 
+\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrrrr|r}
+-12 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -900 \\ 
+0 &amp; 60 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2160 \\ 
+0 &amp; 0 &amp; 36 &amp; 0 &amp; 0 &amp; 0 &amp; -1620 \\ 
+0 &amp; 0 &amp; 0 &amp; 840 &amp; 0 &amp; 0 &amp; -30240 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1260 &amp; 0 &amp; -25200 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -360 &amp; -2160 \\ 
+\end{array}
+\right]\begin{array}{l}
+-1/12 L_{1} \rightarrow L_{1}\\ 
+1/60 L_{2} \rightarrow L_{2}\\ 
+1/36 L_{3} \rightarrow L_{3}\\ 
+1/840 L_{4} \rightarrow L_{4}\\ 
+1/1260 L_{5} \rightarrow L_{5}\\ 
+-1/360 L_{6} \rightarrow L_{6}\\ 
+\end{array}\\
+ \\
+\left[
+\begin{array}{rrrrrr|r}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 75 \\ 
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 36 \\ 
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; -45 \\ 
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; -36 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; -20 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 6 \\ 
+\end{array}
+\right]
+\end{array}
+\]</span></p>
 </section>
 
 
