@@ -20,7 +20,6 @@
 #'   pour la fonction \code{sel2latex}.
 #' @param tolatex Si \code{TRUE} nous encadrons le resultat par "$$ resultat $$".
 #' @return Le vecteur de caracteres contenant le code LaTeX de la matrice
-#' @importFrom MASS fractions
 #' @export
 #' @examples
 #' A <- matrix(c(2, -4, 5,
